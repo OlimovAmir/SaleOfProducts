@@ -1,6 +1,7 @@
 ﻿namespace SaleOfProducts.Models
 {
-    public class Employee
+    public class Employee : Person
     {
+
     }
 }

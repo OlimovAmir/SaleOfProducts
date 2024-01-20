@@ -15,6 +15,11 @@
             Birthday = birthday;
         }
 
+        public Person()
+        {
+            
+        }
+
         public override string ToString()
         {
             return $"{Id}, {Name}, {LastName}, {Birthday.ToShortDateString()}";
