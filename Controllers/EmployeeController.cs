@@ -26,12 +26,16 @@ namespace SaleOfProducts.Controllers
         };
 
         [HttpGet]
+        [SwaggerOperation(Summary = "Get a list of employees", Description = "Returns a list of all employees.")]
         public IEnumerable<Employee> Get()
         {
             return workers;
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Get an employee by ID", Description = "Returns an employee by their ID.")]
+        [SwaggerResponse(200, "Success", typeof(Employee))]
+        [SwaggerResponse(404, "Not Found")]
         public ActionResult<Employee> GetById(int id)
         {
             var employee = workers.Find(e => e.Id == id);
@@ -43,6 +47,8 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Create a new employee", Description = "Adds a new employee to the system.")]
+        [SwaggerResponse(201, "Created", typeof(Employee))]
         public ActionResult<Employee> Create(Employee employee)
         {
             employee.Id = workers.Count + 1;
@@ -51,6 +57,9 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Update an employee", Description = "Updates an existing employee.")]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(404, "Not Found")]
         public IActionResult Update(int id, Employee updatedEmployee)
         {
             var existingEmployee = workers.Find(e => e.Id == id);
@@ -64,6 +73,9 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Delete an employee", Description = "Removes an employee from the system.")]
+        [SwaggerResponse(204, "No Content")]
+        [SwaggerResponse(404, "Not Found")]
         public IActionResult Delete(int id)
         {
             var employee = workers.Find(e => e.Id == id);
