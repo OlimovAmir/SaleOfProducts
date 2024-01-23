@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
