@@ -18,6 +18,11 @@ namespace SaleOfProducts.Models
             Password = password;
         }
 
+        public User()
+        {
+            
+        }
+
         public override string ToString()
         {
             return $"{Login} {Password}";
