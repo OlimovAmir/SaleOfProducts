@@ -2,7 +2,7 @@
 
 namespace SaleOfProducts.Models.BaseClassModels
 {
-    public class Company
+    public abstract class Company
     {
         public int Id { get; set; }
 
@@ -16,6 +16,8 @@ namespace SaleOfProducts.Models.BaseClassModels
         public int Phone { get; set; }
         [Required]
         public int INN { get; set; }
+
+
 
 
         public Company(string name, string status, string address, int phone, int inn)
