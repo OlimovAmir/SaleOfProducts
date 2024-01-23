@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SaleOfProducts.Models
+namespace SaleOfProducts.Models.BaseClassModels
 {
     public abstract class Person
     {
@@ -14,7 +14,7 @@ namespace SaleOfProducts.Models
 
         public Person(int id, string name, string lastName, DateTime birthday)
         {
-            Id  = id;
+            Id = id;
             Name = name;
             LastName = lastName;
             Birthday = birthday;
@@ -22,7 +22,7 @@ namespace SaleOfProducts.Models
 
         public Person()
         {
-            
+
         }
 
         public override string ToString()
