@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Controllers
 {
@@ -7,9 +8,10 @@ namespace SaleOfProducts.Controllers
     [Route("[controller]")]
     public class SupplierController : Controller
     {
-        public IActionResult Index()
+        private static List<Supplier> supplier = new List<Supplier>
         {
-            return View();
-        }
+            new Supplier { Id = 1,}
+        };
+        
     }
 }
