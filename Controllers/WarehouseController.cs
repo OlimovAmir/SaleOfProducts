@@ -12,9 +12,9 @@ namespace SaleOfProducts.Controllers
         private static List<Warehouse> warehouse = new List<Warehouse>
         
         {
-            new Warehouse { Id = 1, Name = "Main warehouse"},
-            new Warehouse { Id = 2, Name = "Spare parts warehouse"},
-            new Warehouse { Id = 3, Name = "Lumber warehouse"}
+            new Warehouse { Id = 1, Name = "Main warehouse", Address = "Tadjikistan"},
+            new Warehouse { Id = 2, Name = "Spare parts warehouse", Address = "Tadjikistan"},
+            new Warehouse { Id = 3, Name = "Lumber warehouse", Address = "Tadjikistan"}
         };
 
         [HttpGet]

@@ -1,9 +1,15 @@
-﻿namespace SaleOfProducts.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SaleOfProducts.Models
 {
     public class Warehouse
     {
         public int Id { get; set; }
+
+        [Required]
         public string Name { get; set; }
+
+        [Required]
         public string Address { get; set; }
 
 
