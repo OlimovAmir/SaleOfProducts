@@ -13,12 +13,12 @@ namespace SaleOfProducts.Models.BaseClassModels
         [Required]
         public string Address { get; set; }
         [Required]
-        public string Phone { get; set; }
+        public int Phone { get; set; }
         [Required]
         public int INN { get; set; }
 
 
-        public Company(string name, string status, string address, string phone, int inn)
+        public Company(string name, string status, string address, int phone, int inn)
         {
 
         }

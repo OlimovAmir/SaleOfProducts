@@ -1,6 +1,8 @@
-﻿namespace SaleOfProducts.Models
+﻿using SaleOfProducts.Models.BaseClassModels;
+
+namespace SaleOfProducts.Models
 {
-    public class Customer
+    public class Customer : Company
     {
     }
 }
