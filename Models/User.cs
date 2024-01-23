@@ -10,5 +10,17 @@ namespace SaleOfProducts.Models
         public string Login { get; set; }
         [Required]
         public string Password { get; set; }
+
+
+        public User(string login, string password)
+        {
+            Login = login;
+            Password = password;
+        }
+
+        public override string ToString()
+        {
+            return $"{Login} {Password}";
+        }
     }
 }
