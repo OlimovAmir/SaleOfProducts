@@ -16,7 +16,7 @@ namespace SaleOfProducts
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ISupplierService, SupplierService>();
-
+            builder.Services.AddSingleton<ICustomerService, CustomerService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
