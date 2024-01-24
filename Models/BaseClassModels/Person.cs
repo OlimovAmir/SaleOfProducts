@@ -10,6 +10,8 @@ namespace SaleOfProducts.Models.BaseClassModels
         public string Name { get; set; }
         [Required]
         public string LastName { get; set; }
+
+        public string FullName => $"{Name} {LastName}";
         public DateTime Birthday { get; set; }
 
         public Person(int id, string name, string lastName, DateTime birthday)
@@ -28,6 +30,12 @@ namespace SaleOfProducts.Models.BaseClassModels
         public override string ToString()
         {
             return $"{Id}, {Name}, {LastName}, {Birthday.ToShortDateString()}";
+        }
+
+
+        public virtual void DoWork()
+        {
+            Console.WriteLine("I am done " + GetType().Name);
         }
     }
 }
