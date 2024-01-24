@@ -10,8 +10,8 @@ namespace SaleOfProducts.Controllers
     {
         private static List<Supplier> supplier = new List<Supplier>
         {
-            new Supplier { 
-                Id = 1, 
+            new Supplier {
+                State = SupplierStatus.Orginization,
                 Name = "Analitic", 
                 Status = "LLC", 
                 Address = "Tadjikistan", 
@@ -20,7 +20,7 @@ namespace SaleOfProducts.Controllers
             },
 
             new Supplier {
-                Id = 2,
+                State = SupplierStatus.Orginization,
                 Name = "7Gang",
                 Status = "LLC",
                 Address = "Tadjikistan",

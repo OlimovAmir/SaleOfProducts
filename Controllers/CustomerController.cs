@@ -10,7 +10,7 @@ namespace SaleOfProducts.Controllers
         private static List<Customer> customer = new List<Customer>
         {
             new Customer {
-                Id = 1,
+                
                 Name = "A client from Russia",
                 Status = "LLC",
                 Address = "Russia",
@@ -19,7 +19,7 @@ namespace SaleOfProducts.Controllers
             },
 
             new Customer {
-                Id = 2,
+                
                 Name = "A client from Uzbekistan",
                 Status = "LLC",
                 Address = "Uzbekistan",
