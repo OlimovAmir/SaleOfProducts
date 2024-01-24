@@ -5,6 +5,12 @@ namespace SaleOfProducts.Models
 {
     public class Supplier : Company
     {
-       
+        public SupplierStatus State { get; set; }
+    }
+
+    public enum SupplierStatus
+    {
+        Orginization,
+        Persion
     }
 }
