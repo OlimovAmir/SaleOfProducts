@@ -4,7 +4,7 @@ namespace SaleOfProducts.Models.BaseClassModels
 {
     public abstract class Company
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
         public string Name { get; set; }
@@ -20,9 +20,14 @@ namespace SaleOfProducts.Models.BaseClassModels
 
 
 
-        public Company(string name, string status, string address, int phone, int inn)
+        public Company(Guid  id ,string name, string status, string address, int phone, int inn)
         {
-
+            Id = id;
+            Name = name;
+            Status = status;
+            Address = address;
+            Phone = phone;
+            INN = inn;
         }
 
         public Company()
