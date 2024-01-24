@@ -2,10 +2,10 @@
 
 namespace SaleOfProducts.Services
 {
-    public class SupplierService : ISupplierService
+    public class CustomerService : ICustomerService
     {
-        static Dictionary<Guid, Supplier> Items = new Dictionary<Guid, Supplier>();
-        public string Create(Supplier item)
+        static Dictionary<Guid, Customer> Items = new Dictionary<Guid, Customer>();
+        public string Create(Customer item)
         {
             if (string.IsNullOrEmpty(item.Name))
             {
@@ -30,17 +30,17 @@ namespace SaleOfProducts.Services
             return "Item deleted";
         }
 
-        public IEnumerable<Supplier> GetAll()
+        public IEnumerable<Customer> GetAll()
         {
             return Items.Values;
         }
 
-        public Supplier GetById(Guid id)
+        public Customer GetById(Guid id)
         {
             return Items.SingleOrDefault(w => w.Key == id).Value;
         }
 
-        public string Update(Guid id, Supplier item)
+        public string Update(Guid id, Customer item)
         {
             var _item = Items.SingleOrDefault(w => w.Key == id).Value;
             if (_item is null)
