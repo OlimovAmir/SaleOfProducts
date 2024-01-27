@@ -27,7 +27,15 @@ namespace SaleOfProducts.Repositories
 
         public bool Update(T item)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _items[item.Id] = item;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 
