@@ -22,7 +22,7 @@ namespace SaleOfProducts.Repositories
 
         public T GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _items.SingleOrDefault(w => w.Key == id).Value;
         }
 
         public bool Update(T item)
