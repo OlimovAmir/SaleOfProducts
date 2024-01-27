@@ -7,7 +7,7 @@ namespace SaleOfProducts.Repositories
         Dictionary<Guid, T> _items = new Dictionary<Guid, T>();
         public bool Create(T item)
         {
-            throw new NotImplementedException();
+            return _items.TryAdd(item.Id, item);
         }
 
         public bool Delete(Guid id)
