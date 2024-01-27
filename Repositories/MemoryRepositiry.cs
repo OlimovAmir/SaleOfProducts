@@ -12,7 +12,7 @@ namespace SaleOfProducts.Repositories
 
         public bool Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return _items.Remove(id);
         }
 
         public IEnumerable<T> GetAll()
