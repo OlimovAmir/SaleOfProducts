@@ -2,7 +2,7 @@
 
 namespace SaleOfProducts.Repositories
 {
-    public class MemoryRepositiry<T> : IMemoryRepositiry<T> where T : BaseEntity
+    public class MemoryRepository<T> : IMemoryRepository<T> where T : BaseEntity
     {
         Dictionary<Guid, T> _items = new Dictionary<Guid, T>();
         public bool Create(T item)

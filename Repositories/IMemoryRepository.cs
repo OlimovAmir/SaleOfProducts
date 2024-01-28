@@ -2,7 +2,7 @@
 
 namespace SaleOfProducts.Repositories
 {
-    public interface IMemoryRepositiry<T> where T : BaseEntity
+    public interface IMemoryRepository<T> where T : BaseEntity
     {
         IEnumerable<T> GetAll();
         T GetById(Guid id);

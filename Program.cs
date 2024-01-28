@@ -1,4 +1,5 @@
 
+using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
 
 namespace SaleOfProducts
@@ -17,6 +18,8 @@ namespace SaleOfProducts
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ISupplierService, SupplierService>();
             builder.Services.AddSingleton<ICustomerService, CustomerService>();
+            builder.Services.AddSingleton(typeof(IMemoryRepository<>), typeof(MemoryRepository<>));
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
