@@ -21,6 +21,11 @@
             UnitId = unit.Id; // Assuming you want to set the foreign key based on the Unit's Id
         }
 
+        public Product()
+        {
+            
+        }
+
 
         public override string ToString()
         {
