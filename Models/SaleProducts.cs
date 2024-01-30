@@ -21,8 +21,10 @@
         public double Quantity { get; set; }
 
         // Constructor
-        public SaleProducts(Product product, Customer customer, double quantity)
+        public SaleProducts(DateTime saleTime ,Product product, Customer customer, double quantity)
         {
+            SaleDate = saleTime;
+
             Product = product;
             ProductId = product.Id; // Assuming you want to set the foreign key based on the Product's Id
 
@@ -39,7 +41,7 @@
 
         public override string ToString()
         {
-            return $"{Id} {SaleDate} {ProductId} {CustomerId} {Quantity}";
+            return $"{Id} {SaleDate.ToShortDateString()} {ProductId} {CustomerId} {Quantity}";
         }
     }
 }
