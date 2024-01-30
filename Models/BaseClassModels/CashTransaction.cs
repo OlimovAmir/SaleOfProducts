@@ -1,6 +1,6 @@
 ﻿namespace SaleOfProducts.Models.BaseClassModels
 {
-    public class CashTransaction
+    public abstract class CashTransaction
     {
     }
 }
