@@ -18,10 +18,10 @@
         public Guid CustomerId { get; set; }
 
         // Additional properties for sale information, such as quantity, etc.
-        public int Quantity { get; set; }
+        public double Quantity { get; set; }
 
         // Constructor
-        public SaleProducts(Product product, Customer customer, int quantity)
+        public SaleProducts(Product product, Customer customer, double quantity)
         {
             Product = product;
             ProductId = product.Id; // Assuming you want to set the foreign key based on the Product's Id
