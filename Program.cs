@@ -18,6 +18,7 @@ namespace SaleOfProducts
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ISupplierService, SupplierService>();
             builder.Services.AddSingleton<ICustomerService, CustomerService>();
+            builder.Services.AddSingleton<ICashExpenseService, CashExpenseService>();
             builder.Services.AddSingleton(typeof(IMemoryRepository<>), typeof(MemoryRepository<>));
 
             var app = builder.Build();
