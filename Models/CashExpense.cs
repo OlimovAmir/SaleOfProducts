@@ -11,6 +11,9 @@ namespace SaleOfProducts.Models
         public CashExpense(double amount, string description, string category)
             : base(amount, description)
         {
+            Amount = amount;
+            Category = category;
+            Description = description;
             Category = category;
         }
 
