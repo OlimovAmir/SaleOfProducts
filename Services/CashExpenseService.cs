@@ -5,10 +5,11 @@ namespace SaleOfProducts.Services
 {
     public class CashExpenseService : ICashExpenseService
     {
-        static Dictionary<Guid, CashExpenseService> Items = new Dictionary<Guid, CashExpenseService>();
-        public string Create(CashExpenseService item)
+        static Dictionary<Guid, CashExpense> Items = new Dictionary<Guid, CashExpense>();
+
+        public string Create(CashExpense item)
         {
-            if (string.IsNullOrEmpty(item))
+            if (string.IsNullOrEmpty(item.Description))
             {
                 return "The name cannot be empty";
             }
@@ -19,22 +20,24 @@ namespace SaleOfProducts.Services
             }
         }
 
+        
+
         public string Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<CashExpenseService> GetAll()
+        public IEnumerable<CashExpense> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public CashExpenseService GetById(Guid id)
+        public CashExpense GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public string Update(Guid id, CashExpenseService item)
+        public string Update(Guid id, CashExpense item)
         {
             throw new NotImplementedException();
         }

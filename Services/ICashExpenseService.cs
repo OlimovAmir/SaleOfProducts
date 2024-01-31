@@ -4,10 +4,10 @@ namespace SaleOfProducts.Services
 {
     public interface ICashExpenseService
     {
-        IEnumerable<CashExpenseService> GetAll();
-        CashExpenseService GetById(Guid id);
-        string Create(CashExpenseService worker);
-        string Update(Guid id, CashExpenseService item);
+        IEnumerable<CashExpense> GetAll();
+        CashExpense GetById(Guid id);
+        string Create(CashExpense worker);
+        string Update(Guid id, CashExpense item);
         string Delete(Guid id);
     }
 }
