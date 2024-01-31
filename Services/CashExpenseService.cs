@@ -24,22 +24,39 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
+            if (_item is null)
+            {
+                return "Item not found";
+            }
+            Items.Remove(id);
+
+            return "Item deleted";
         }
 
         public IEnumerable<CashExpense> GetAll()
         {
-            throw new NotImplementedException();
+            return Items.Values;
         }
 
         public CashExpense GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return Items.SingleOrDefault(w => w.Key == id).Value;
         }
 
         public string Update(Guid id, CashExpense item)
         {
-            throw new NotImplementedException();
+            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
+            if (_item is null)
+            {
+                return "Item not found";
+            }
+            _item.TransactionDate = item.TransactionDate;
+            _item.Category = item.Category;
+            _item.Description = item.Description;
+            _item.Amount = item.Amount;
+           
+            return "Item updated";
         }
     }
 }
