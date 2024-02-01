@@ -28,5 +28,10 @@ namespace SaleOfProducts.Controllers
             return _service.GetById(id);
         }
 
+        [HttpPost("Create")]
+        public string Post([FromBody] CashExpense item)
+        {
+            return _service.Create(item);
+        }
     }
 }
