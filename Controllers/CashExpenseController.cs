@@ -22,6 +22,11 @@ namespace SaleOfProducts.Controllers
             return _service.GetAll();
         }
 
+        [HttpGet("GetItemById")]
+        public CashExpense Get(Guid id)
+        {
+            return _service.GetById(id);
+        }
 
     }
 }
