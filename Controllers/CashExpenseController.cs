@@ -34,6 +34,16 @@ namespace SaleOfProducts.Controllers
             return _service.Create(item);
         }
 
+        [HttpPut("Update")]
+        public string Put([FromQuery] Guid id, [FromBody] CashExpense item)
+        {
+            return _service.Update(id, item);
+        }
 
+        [HttpDelete("Delete")]
+        public string Delete([FromQuery] Guid id)
+        {
+            return _service.Delete(id);
+        }
     }
 }
