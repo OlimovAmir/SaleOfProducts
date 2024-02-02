@@ -37,7 +37,7 @@ namespace SaleOfProducts.Services
 
         public CashIncome GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return Items.SingleOrDefault(w => w.Key == id).Value;
         }
 
         public string Update(Guid id, CashIncome item)
