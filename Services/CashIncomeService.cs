@@ -42,7 +42,17 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, CashIncome item)
         {
-            throw new NotImplementedException();
+            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
+            if (_item is null)
+            {
+                return "Item not found";
+            }
+            _item.TransactionDate = item.TransactionDate;
+            _item.Source = item.Source;
+            _item.Description = item.Description;
+            _item.Amount = item.Amount;
+
+            return "Item updated";
         }
     }
 }
