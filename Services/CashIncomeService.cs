@@ -20,7 +20,14 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
+            if (_item is null)
+            {
+                return "Item not found";
+            }
+            Items.Remove(id);
+
+            return "Item deleted";
         }
 
         public IEnumerable<CashIncome> GetAll()
