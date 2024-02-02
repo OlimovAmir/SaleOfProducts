@@ -32,7 +32,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<CashIncome> GetAll()
         {
-            throw new NotImplementedException();
+            return Items.Values;
         }
 
         public CashIncome GetById(Guid id)
