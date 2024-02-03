@@ -1,4 +1,6 @@
 
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
 
@@ -13,6 +15,9 @@ namespace SaleOfProducts
             // Add services to the container.
 
             builder.Services.AddControllers();
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<MemoryContext>(o=>o.UseSqlServer(connectionString));
+            builder.Services.AddScoped<MemoryContext>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
