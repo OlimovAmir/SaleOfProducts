@@ -8,6 +8,7 @@ namespace SaleOfProducts.Repositories
         public MemoryContext(DbContextOptions<MemoryContext> options)
             : base(options)
         {
+            Database.Migrate();
             Database.EnsureCreated();
         }
         public DbSet<Client> Clients { get; set; }

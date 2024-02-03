@@ -12,11 +12,15 @@ namespace SaleOfProducts
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            builder.Services.AddDbContext<MemoryContext>(o => o.UseSqlServer(connectionString));
+
             // Add services to the container.
 
-            builder.Services.AddControllers();
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<MemoryContext>(o=>o.UseSqlServer(connectionString));
+            builder.Services.AddControllersWithViews();
+            
+
             builder.Services.AddScoped<MemoryContext>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
