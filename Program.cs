@@ -12,9 +12,7 @@ namespace SaleOfProducts
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-
-            builder.Services.AddDbContext<MemoryContext>(o => o.UseSqlServer(connectionString));
+            builder.Services.AddDbContext<MemoryContext>(o => o.UseNpgsql(builder.Configuration.GetConnectionString("DbPostgres")));
 
             // Add services to the container.
 

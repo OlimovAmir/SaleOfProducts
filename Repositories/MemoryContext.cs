@@ -14,5 +14,15 @@ namespace SaleOfProducts.Repositories
         }
         public DbSet<Client> Clients { get; set; }
         public DbSet<CashExpense> CashExpenses { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CashExpense>()
+                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
+
+            // Другие настройки модели
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
