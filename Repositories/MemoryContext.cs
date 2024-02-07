@@ -20,9 +20,7 @@ namespace SaleOfProducts.Repositories
             modelBuilder.Entity<CashExpense>()
                 .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
-            // Другие настройки модели
-
-            base.OnModelCreating(modelBuilder);
+           base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -1,15 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using SaleOfProducts.Models;
+﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class CashExpenseService : ICashExpenseService
     {
-        static Dictionary<Guid, CashExpense> Items = new Dictionary<Guid, CashExpense>();
+        //static Dictionary<Guid, CashExpense> Items = new Dictionary<Guid, CashExpense>();
         private readonly MemoryContext _dbContext;
 
         public CashExpenseService(MemoryContext dbContext)
