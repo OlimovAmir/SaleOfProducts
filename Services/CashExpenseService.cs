@@ -58,16 +58,19 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, CashExpense item)
         {
-            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
-            if (_item is null)
+            var existingItem = _dbContext.CashExpenses.Find(id);
+            if (existingItem == null)
             {
                 return "Item not found";
             }
-            _item.TransactionDate = item.TransactionDate;
-            _item.Category = item.Category;
-            _item.Description = item.Description;
-            _item.Amount = item.Amount;
-           
+
+            existingItem.TransactionDate = item.TransactionDate;
+            existingItem.Category = item.Category;
+            existingItem.Description = item.Description;
+            existingItem.Amount = item.Amount;
+
+            _dbContext.SaveChanges();
+
             return "Item updated";
         }
     }
