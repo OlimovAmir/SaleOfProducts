@@ -1,26 +1,36 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class CashExpenseService : ICashExpenseService
     {
         static Dictionary<Guid, CashExpense> Items = new Dictionary<Guid, CashExpense>();
+        private readonly MemoryContext _dbContext;
+
+        public CashExpenseService(MemoryContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
 
         public string Create(CashExpense item)
         {
             if (string.IsNullOrEmpty(item.Description))
             {
-                return "The name cannot be empty";
+                return "The description cannot be empty";
             }
-            else
-            {
-                Items.Add(item.Id, item);
-                return $"Created new item with this ID: {item.Id}";
-            }
+
+            _dbContext.CashExpenses.Add(item);
+            _dbContext.SaveChanges();
+
+            return $"Created new item with this ID: {item.Id}";
         }
 
-        
+
 
         public string Delete(Guid id)
         {
