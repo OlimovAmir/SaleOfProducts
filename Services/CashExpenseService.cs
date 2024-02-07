@@ -46,7 +46,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<CashExpense> GetAll()
         {
-            return Items.Values;
+            return _dbContext.CashExpenses.ToList();
         }
 
         public CashExpense GetById(Guid id)
