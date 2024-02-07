@@ -53,7 +53,7 @@ namespace SaleOfProducts.Services
 
         public CashExpense GetById(Guid id)
         {
-            return Items.SingleOrDefault(w => w.Key == id).Value;
+            return _dbContext.CashExpenses.Find(id);
         }
 
         public string Update(Guid id, CashExpense item)
