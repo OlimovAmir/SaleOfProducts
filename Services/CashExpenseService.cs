@@ -34,12 +34,14 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
-            if (_item is null)
+            var itemToDelete = _dbContext.CashExpenses.Find(id);
+            if (itemToDelete == null)
             {
                 return "Item not found";
             }
-            Items.Remove(id);
+
+            _dbContext.CashExpenses.Remove(itemToDelete);
+            _dbContext.SaveChanges();
 
             return "Item deleted";
         }
