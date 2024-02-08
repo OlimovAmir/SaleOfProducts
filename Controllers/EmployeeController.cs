@@ -57,20 +57,10 @@ namespace SaleOfProducts.Controllers
             return _service.Create(item);
         }
 
-        [HttpPut("{id}")]
-        [SwaggerOperation(Summary = "Update an employee", Description = "Updates an existing employee.")]
-        [SwaggerResponse(204, "No Content")]
-        [SwaggerResponse(404, "Not Found")]
-        public IActionResult Update(int id, Employee updatedEmployee)
+        [HttpPut("Update")]
+        public string Put([FromQuery] Guid id, [FromBody] Employee item)
         {
-            var existingEmployee = workers.Find(e => e.Id == id);
-            if (existingEmployee == null)
-            {
-                return NotFound();
-            }
-
-            existingEmployee.Name = updatedEmployee.Name;
-            return NoContent();
+            return _service.Update(id, item);
         }
 
         [HttpDelete("{id}")]
