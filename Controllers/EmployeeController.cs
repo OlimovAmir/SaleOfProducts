@@ -33,11 +33,11 @@ namespace SaleOfProducts.Controllers
             new Employee { Id = 3, Name = "Muborak", LastName = "Olimova" }
         };
 
-        [HttpGet]
+        [HttpGet("AllItems")]
         [SwaggerOperation(Summary = "Get a list of employees", Description = "Returns a list of all employees.")]
         public IEnumerable<Employee> Get()
         {
-            return workers;
+            return _service.GetAll();
         }
 
         [HttpGet("{id}")]
