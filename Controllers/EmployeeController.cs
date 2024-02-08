@@ -3,6 +3,7 @@ using SaleOfProducts.Models;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using SaleOfProducts.Services;
 
 namespace SaleOfProducts.Controllers
 {
@@ -11,7 +12,7 @@ namespace SaleOfProducts.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly ILogger<EmployeeController> _logger;
-
+        
         public EmployeeController(ILogger<EmployeeController> logger)
         {
             _logger = logger;

@@ -10,7 +10,7 @@ namespace SaleOfProducts.Controllers
     public class CashExpenseController : Controller
     {
         readonly ICashExpenseService _service;
-        // POST: CashExpenseController/Create
+        
         public CashExpenseController(ICashExpenseService service)
         {
             _service = service;
