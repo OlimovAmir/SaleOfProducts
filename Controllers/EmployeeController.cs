@@ -11,6 +11,14 @@ namespace SaleOfProducts.Controllers
     [Route("[controller]")]
     public class EmployeeController : ControllerBase
     {
+        readonly IEmployeeService _service;
+
+        public EmployeeController(IEmployeeService service)
+        {
+            _service = service;
+        }
+
+
         private readonly ILogger<EmployeeController> _logger;
         
         public EmployeeController(ILogger<EmployeeController> logger)
