@@ -1,9 +1,17 @@
 ﻿using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class EmployeeService : IEmployeeService
     {
+        private readonly MemoryContext _dbContext;
+
+        public EmployeeService(MemoryContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public string Create(Employee worker)
         {
             throw new NotImplementedException();
