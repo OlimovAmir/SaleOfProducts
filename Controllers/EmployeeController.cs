@@ -40,18 +40,13 @@ namespace SaleOfProducts.Controllers
             return _service.GetAll();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetItemById")]
         [SwaggerOperation(Summary = "Get an employee by ID", Description = "Returns an employee by their ID.")]
         [SwaggerResponse(200, "Success", typeof(Employee))]
         [SwaggerResponse(404, "Not Found")]
-        public ActionResult<Employee> GetById(int id)
+        public Employee Get(Guid id)
         {
-            var employee = workers.Find(e => e.Id == id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-            return employee;
+            return _service.GetById(id);
         }
 
         [HttpPost]
