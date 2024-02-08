@@ -63,20 +63,10 @@ namespace SaleOfProducts.Controllers
             return _service.Update(id, item);
         }
 
-        [HttpDelete("{id}")]
-        [SwaggerOperation(Summary = "Delete an employee", Description = "Removes an employee from the system.")]
-        [SwaggerResponse(204, "No Content")]
-        [SwaggerResponse(404, "Not Found")]
-        public IActionResult Delete(int id)
+        [HttpDelete("Delete")]
+        public string Delete([FromQuery] Guid id)
         {
-            var employee = workers.Find(e => e.Id == id);
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            workers.Remove(employee);
-            return NoContent();
+            return _service.Delete(id);
         }
 
     }
