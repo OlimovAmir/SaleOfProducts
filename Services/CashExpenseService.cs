@@ -5,7 +5,7 @@ namespace SaleOfProducts.Services
 {
     public class CashExpenseService : ICashExpenseService
     {
-        //static Dictionary<Guid, CashExpense> Items = new Dictionary<Guid, CashExpense>();
+        
         private readonly MemoryContext _dbContext;
 
         public CashExpenseService(MemoryContext dbContext)
