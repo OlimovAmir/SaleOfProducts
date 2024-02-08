@@ -19,20 +19,6 @@ namespace SaleOfProducts.Controllers
         }
 
 
-        private readonly ILogger<EmployeeController> _logger;
-        
-        public EmployeeController(ILogger<EmployeeController> logger)
-        {
-            _logger = logger;
-        }
-
-        private static List<Employee> workers = new List<Employee>
-        {
-            new Employee { Id = 1, Name = "Amir", LastName = "Olimov" },
-            new Employee { Id = 2, Name = "Parvina", LastName = "Olimova" },
-            new Employee { Id = 3, Name = "Muborak", LastName = "Olimova" }
-        };
-
         [HttpGet("AllItems")]
         [SwaggerOperation(Summary = "Get a list of employees", Description = "Returns a list of all employees.")]
         public IEnumerable<Employee> Get()
