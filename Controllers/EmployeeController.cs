@@ -49,14 +49,12 @@ namespace SaleOfProducts.Controllers
             return _service.GetById(id);
         }
 
-        [HttpPost]
+        [HttpPost("Create")]
         [SwaggerOperation(Summary = "Create a new employee", Description = "Adds a new employee to the system.")]
         [SwaggerResponse(201, "Created", typeof(Employee))]
-        public ActionResult<Employee> Create(Employee employee)
+        public string Post([FromBody] Employee item)
         {
-            employee.Id = workers.Count + 1;
-            workers.Add(employee);
-            return CreatedAtAction(nameof(GetById), new { id = employee.Id }, employee);
+            return _service.Create(item);
         }
 
         [HttpPut("{id}")]
