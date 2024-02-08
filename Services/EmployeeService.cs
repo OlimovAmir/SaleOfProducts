@@ -27,7 +27,16 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var itemToDelete = _dbContext.Employees.Find(id);
+            if (itemToDelete == null)
+            {
+                return "Item not found";
+            }
+
+            _dbContext.Employees.Remove(itemToDelete);
+            _dbContext.SaveChanges();
+
+            return "Item deleted";
         }
 
         public IEnumerable<Employee> GetAll()
