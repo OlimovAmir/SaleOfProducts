@@ -12,9 +12,17 @@ namespace SaleOfProducts.Services
             _dbContext = dbContext;
         }
 
-        public string Create(Employee worker)
+        public string Create(Employee item)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(item.Name))
+            {
+                return "The description cannot be empty";
+            }
+
+            _dbContext.Employees.Add(item);
+            _dbContext.SaveChanges();
+
+            return $"Created new item with this ID: {item.Id}";
         }
 
         public string Delete(Guid id)
