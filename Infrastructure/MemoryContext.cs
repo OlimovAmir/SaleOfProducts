@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaleOfProducts.Models;
 
-namespace SaleOfProducts.Repositories
+namespace SaleOfProducts.Infrastructure
 {
-    public class MemoryContext:DbContext
+    public class MemoryContext : DbContext
     {
 
         public MemoryContext(DbContextOptions<MemoryContext> options)
@@ -12,7 +12,6 @@ namespace SaleOfProducts.Repositories
             Database.Migrate();
             Database.EnsureCreated();
         }
-        public DbSet<Client> Clients { get; set; }
         public DbSet<CashExpense> CashExpenses { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -21,7 +20,7 @@ namespace SaleOfProducts.Repositories
             modelBuilder.Entity<CashExpense>()
                 .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
-           base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

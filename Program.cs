@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
 

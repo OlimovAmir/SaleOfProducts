@@ -1,5 +1,5 @@
-﻿using SaleOfProducts.Models;
-using SaleOfProducts.Repositories;
+﻿using SaleOfProducts.Infrastructure;
+using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Services
 {
