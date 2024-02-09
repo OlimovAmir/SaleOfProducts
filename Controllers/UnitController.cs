@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.Models;
 using SaleOfProducts.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -15,36 +16,34 @@ namespace SaleOfProducts.Controllers
         {
             _service = service;
         }
-        // GET: api/<UnitController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("AllItems")]
+        public IEnumerable<Unit> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _service.GetAll();
         }
 
-        // GET api/<UnitController>/5
-        [HttpGet("{id}")]
-        public string Get(Guid id)
+        [HttpGet("GetItemById")]
+        public Unit Get(Guid id)
         {
-            return "value";
+            return _service.GetById(id);
         }
 
-        // POST api/<UnitController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("Create")]
+        public string Post([FromBody] Unit item)
         {
+            return _service.Create(item);
         }
 
-        // PUT api/<UnitController>/5
-        [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] string value)
+        [HttpPut("Update")]
+        public string Put([FromQuery] Guid id, [FromBody] Unit  item)
         {
+            return _service.Update(id, item);
         }
 
-        // DELETE api/<UnitController>/5
-        [HttpDelete("{id}")]
-        public void Delete(Guid id)
+        [HttpDelete("Delete")]
+        public string Delete([FromQuery] Guid id)
         {
+            return _service.Delete(id);
         }
     }
 }
