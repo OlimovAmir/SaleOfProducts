@@ -2,7 +2,7 @@
 {
     public class Unit
     {
-        public int Id { get; set; }
+        public Guid Id { get; }
         public string Name { get; set; }
 
 

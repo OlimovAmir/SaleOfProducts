@@ -4,7 +4,8 @@ namespace SaleOfProducts.Models.BaseClassModels
 {
     public abstract class Person
     {
-        public int Id { get; set; }
+        [Key]
+        public Guid Id { get; }
 
         [Required]
         public string Name { get; set; }
@@ -14,7 +15,7 @@ namespace SaleOfProducts.Models.BaseClassModels
         public string FullName => $"{Name} {LastName}";
         public DateTime Birthday { get; set; }
 
-        public Person(int id, string name, string lastName, DateTime birthday)
+        public Person(Guid id, string name, string lastName, DateTime birthday)
         {
             Id = id;
             Name = name;
@@ -31,11 +32,6 @@ namespace SaleOfProducts.Models.BaseClassModels
         {
             return $"{Id}, {Name}, {LastName}, {Birthday.ToShortDateString()}";
         }
-
-
-        public virtual void DoWork()
-        {
-            Console.WriteLine("I am done " + GetType().Name);
-        }
+              
     }
 }

@@ -17,7 +17,7 @@ namespace SaleOfProducts.Controllers
 
         // GET api/<UnitController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(Guid id)
         {
             return "value";
         }
@@ -30,13 +30,13 @@ namespace SaleOfProducts.Controllers
 
         // PUT api/<UnitController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(Guid id, [FromBody] string value)
         {
         }
 
         // DELETE api/<UnitController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
         }
     }

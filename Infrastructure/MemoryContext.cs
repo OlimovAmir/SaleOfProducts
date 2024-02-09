@@ -20,6 +20,10 @@ namespace SaleOfProducts.Infrastructure
         {
             modelBuilder.Entity<CashExpense>()
                 .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
+            modelBuilder.Entity<Employee>()
+                .HasKey(e => e.Id); // Указание первичного ключа для Employee
+            modelBuilder.Entity<Unit>()
+                .HasKey(u => u.Id); // Указание первичного ключа для сущности Unit
 
             base.OnModelCreating(modelBuilder);
         }
