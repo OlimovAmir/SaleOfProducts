@@ -46,7 +46,7 @@ namespace SaleOfProducts.Services
 
         public Unit GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Units.Find(id);
         }
 
         public string Update(Guid id, Unit item)
