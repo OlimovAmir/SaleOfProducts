@@ -15,6 +15,7 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<CashExpense> CashExpenses { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Unit> Units { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CashExpense>()
