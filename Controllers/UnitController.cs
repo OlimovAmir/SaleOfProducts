@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +9,12 @@ namespace SaleOfProducts.Controllers
     [ApiController]
     public class UnitController : ControllerBase
     {
+        readonly IUnitService _service;
+
+        public UnitController(IUnitService service)
+        {
+            _service = service;
+        }
         // GET: api/<UnitController>
         [HttpGet]
         public IEnumerable<string> Get()
