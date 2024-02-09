@@ -41,7 +41,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Unit> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Units.ToList();
         }
 
         public Unit GetById(Guid id)
