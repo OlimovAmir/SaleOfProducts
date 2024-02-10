@@ -10,16 +10,16 @@ namespace SaleOfProducts.Models.BaseClassModels
         [Required]
         public string Name { get; set; }
         [Required]
-        public string LastName { get; set; }
+        public string SurName { get; set; }
 
-        public string FullName => $"{Name} {LastName}";
+        public string FullName => $"{Name} {SurName}";
         public DateTime Birthday { get; set; }
 
-        public Person(Guid id, string name, string lastName, DateTime birthday)
+        public Person(Guid id, string name, string surName, DateTime birthday)
         {
             Id = id;
             Name = name;
-            LastName = lastName;
+            SurName = surName;
             Birthday = birthday;
         }
 
@@ -30,7 +30,7 @@ namespace SaleOfProducts.Models.BaseClassModels
 
         public override string ToString()
         {
-            return $"{Id}, {Name}, {LastName}, {Birthday.ToShortDateString()}";
+            return $"{Id}, {Name}, {SurName}, {Birthday.ToShortDateString()}";
         }
               
     }

@@ -6,6 +6,6 @@ namespace SaleOfProducts.Models
     {
         public string Role { get; set; }
 
-        
+        public string Position { get; set; }
     }
 }

@@ -58,7 +58,7 @@ namespace SaleOfProducts.Services
             }
 
             existingItem.Name = item.Name;
-            existingItem.LastName = item.LastName;
+            existingItem.SurName = item.SurName;
             existingItem.Birthday = item.Birthday;
             existingItem.Role = item.Role;
 
