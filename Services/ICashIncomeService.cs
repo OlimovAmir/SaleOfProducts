@@ -6,7 +6,7 @@ namespace SaleOfProducts.Services
     {
         IEnumerable<CashIncome> GetAll();
         CashIncome GetById(Guid id);
-        string Create(CashIncome worker);
+        string Create(CashIncome item);
         string Update(Guid id, CashIncome item);
         string Delete(Guid id);
     }

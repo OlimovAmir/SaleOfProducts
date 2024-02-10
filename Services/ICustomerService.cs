@@ -6,7 +6,7 @@ namespace SaleOfProducts.Services
     {
         IEnumerable<Customer> GetAll();
         Customer GetById(Guid id);
-        string Create(Customer worker);
+        string Create(Customer item);
         string Update(Guid id, Customer item);
         string Delete(Guid id);
     }
