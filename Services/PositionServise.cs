@@ -1,9 +1,16 @@
-﻿using SaleOfProducts.Models;
+﻿using SaleOfProducts.Infrastructure;
+using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Services
 {
     public class PositionServise : IPositionServise
     {
+        private readonly MemoryContext _dbContext;
+
+        public PositionServise(MemoryContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public string Create(Position item)
         {
             throw new NotImplementedException();
