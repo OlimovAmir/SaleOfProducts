@@ -40,7 +40,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Position> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Positions.ToList();
         }
 
         public Position GetById(Guid id)
