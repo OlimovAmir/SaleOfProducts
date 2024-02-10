@@ -3,11 +3,11 @@ using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Services
 {
-    public class PositionServise : IPositionServise
+    public class PositionService : IPositionService
     {
         private readonly MemoryContext _dbContext;
 
-        public PositionServise(MemoryContext dbContext)
+        public PositionService(MemoryContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -2,7 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface IPositionServise
+    public interface IPositionService
     {
         IEnumerable<Position> GetAll();
         Position GetById(Guid id);
