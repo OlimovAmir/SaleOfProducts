@@ -45,7 +45,7 @@ namespace SaleOfProducts.Services
 
         public Position GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Positions.Find(id);
         }
 
         public string Update(Guid id, Position item)
