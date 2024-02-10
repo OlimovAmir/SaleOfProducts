@@ -7,7 +7,7 @@ namespace SaleOfProducts.Models
         public Guid Id { get; }
 
         [Required]
-        public string Title { get; set; } 
+        public string Title { get; set; }
         public string Description { get; set; }
 
         public Position(string title, string description)
