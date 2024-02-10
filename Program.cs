@@ -28,7 +28,7 @@ namespace SaleOfProducts
                 options.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000") // Замените на ваш фронтенд домен
+                        builder.WithOrigins("http://localhost:3000") // Разрешение запроса от фронтенд домен
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });
@@ -38,6 +38,7 @@ namespace SaleOfProducts
             builder.Services.AddScoped<ICashExpenseService, CashExpenseService>();
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IUnitService, UnitService>();
+            builder.Services.AddScoped<IPositionService, PositionService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ISupplierService, SupplierService>();
