@@ -13,7 +13,15 @@ namespace SaleOfProducts.Services
         }
         public string Create(Position item)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(item.Title))
+            {
+                return "The description cannot be empty";
+            }
+
+            _dbContext.Positions.Add(item);
+            _dbContext.SaveChanges();
+
+            return $"Created new item with this ID: {item.Id}";
         }
 
         public string Delete(Guid id)

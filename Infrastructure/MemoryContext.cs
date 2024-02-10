@@ -16,6 +16,7 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Unit> Units { get; set; }
+        public DbSet<Position> Positions { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CashExpense>()
@@ -24,6 +25,8 @@ namespace SaleOfProducts.Infrastructure
                 .HasKey(e => e.Id); // Указание первичного ключа для Employee
             modelBuilder.Entity<Unit>()
                 .HasKey(u => u.Id); // Указание первичного ключа для сущности Unit
+            modelBuilder.Entity<Position>()
+                .HasKey(u => u.Id); // Указание первичного ключа для сущности Position
 
             base.OnModelCreating(modelBuilder);
         }
