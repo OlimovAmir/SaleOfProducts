@@ -26,7 +26,10 @@ namespace SaleOfProducts.Models
 
         public Employee() { }
 
-
+        public override string ToString()
+        {
+            return $"{Name} {SurName} {Role} {HireDate} {TerminationDate} {IsHired}";
+        }
 
     }
 }
