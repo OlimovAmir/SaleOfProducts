@@ -12,12 +12,11 @@ namespace SaleOfProducts.Models
         public bool IsHired { get; set; } // Флаг указывающий, принят ли на работу (true - принят, false - уволен)
 
         // Конструктор класса
-        public Employee(string name, string surName, Position position, Guid positionId, DateTime? hireDate, DateTime? terminationDate, bool isHired)
+        public Employee(string name, string surName, Position position, DateTime? hireDate, DateTime? terminationDate, bool isHired)
         {
             Name = name;
             SurName = surName;
             Position = position;
-            PositionId = positionId;
             HireDate = hireDate;
             TerminationDate = terminationDate;
             IsHired = isHired;
