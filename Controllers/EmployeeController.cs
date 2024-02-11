@@ -18,16 +18,12 @@ namespace SaleOfProducts.Controllers
 
 
         [HttpGet("AllItems")]
-        [SwaggerOperation(Summary = "Get a list of employees", Description = "Returns a list of all employees.")]
         public IEnumerable<Employee> Get()
         {
-            return _service.GetAll();
+            return _service.GetAllWithPosition();
         }
 
         [HttpGet("GetItemById")]
-        [SwaggerOperation(Summary = "Get an employee by ID", Description = "Returns an employee by their ID.")]
-        [SwaggerResponse(200, "Success", typeof(Employee))]
-        [SwaggerResponse(404, "Not Found")]
         public Employee Get(Guid id)
         {
             return _service.GetById(id);
