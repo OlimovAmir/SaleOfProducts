@@ -13,7 +13,7 @@ namespace SaleOfProducts.Controllers
 
         public EmployeeController(IEmployeeService service)
         {
-            _service = service;
+            _service = service; 
         }
 
 
@@ -30,8 +30,6 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost("Create")]
-        [SwaggerOperation(Summary = "Create a new employee", Description = "Adds a new employee to the system.")]
-        [SwaggerResponse(201, "Created", typeof(Employee))]
         public string Post([FromBody] Employee item)
         {
             return _service.Create(item);
