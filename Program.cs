@@ -11,9 +11,6 @@ namespace SaleOfProducts
     {
         public static void Main(string[] args)
         {
-
-
-
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<MemoryContext>(options =>
