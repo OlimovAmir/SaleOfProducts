@@ -60,7 +60,10 @@ namespace SaleOfProducts.Services
             existingItem.Name = item.Name;
             existingItem.SurName = item.SurName;
             existingItem.Birthday = item.Birthday;
-            existingItem.Role = item.Role;
+            existingItem.Position = item.Position;
+            existingItem.IsHired = item.IsHired;
+            existingItem.TerminationDate = item.TerminationDate;
+
 
             _dbContext.SaveChanges();
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SaleOfProducts.Infrastructure;
@@ -11,9 +12,11 @@ using SaleOfProducts.Infrastructure;
 namespace SaleOfProducts.Migrations
 {
     [DbContext(typeof(MemoryContext))]
-    partial class MemoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240211062130_EmployeeMigration")]
+    partial class EmployeeMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,7 +104,10 @@ namespace SaleOfProducts.Migrations
                     b.Property<Guid>("PositionId")
                         .HasColumnType("uuid");
 
-                    
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("SurName")
                         .IsRequired()
                         .HasColumnType("text");

@@ -4,7 +4,7 @@ namespace SaleOfProducts.Models
 {
     public class Employee : Person
     {
-        public string Role { get; set; }
+        
         public Guid PositionId { get; set; } // Идентификатор должности
         public Position Position { get; set; } // Ссылка на должность
         public DateTime? HireDate { get; set; } // Дата принятия на работу (может быть пустой)
@@ -12,11 +12,11 @@ namespace SaleOfProducts.Models
         public bool IsHired { get; set; } // Флаг указывающий, принят ли на работу (true - принят, false - уволен)
 
         // Конструктор класса
-        public Employee(string name, string surName, string role, Guid positionId, DateTime? hireDate, DateTime? terminationDate, bool isHired)
+        public Employee(string name, string surName, Guid positionId, DateTime? hireDate, DateTime? terminationDate, bool isHired)
         {
             Name = name;
             SurName = surName;
-            Role = role;
+            
             PositionId = positionId;
             HireDate = hireDate;
             TerminationDate = terminationDate;
@@ -28,7 +28,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{Name} {SurName} {Role} {HireDate} {TerminationDate} {IsHired}";
+            return $"{Name} {SurName} {HireDate} {TerminationDate} {IsHired}";
         }
 
     }
