@@ -60,7 +60,8 @@ namespace SaleOfProducts.Services
             existingItem.Name = item.Name;
             existingItem.Unit = item.Unit;
             existingItem.Price = item.Price;
-           
+            existingItem.Quantity = item.Quantity;
+
 
             _dbContext.SaveChanges();
 
