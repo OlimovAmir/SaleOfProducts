@@ -41,7 +41,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            return _dbContext.Products.ToList();
         }
 
         public Product GetById(Guid id)
