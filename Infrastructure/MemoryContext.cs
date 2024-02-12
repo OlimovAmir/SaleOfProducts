@@ -29,6 +29,7 @@ namespace SaleOfProducts.Infrastructure
            .HasOne(e => e.Position)
            .WithMany()
            .HasForeignKey(e => e.PositionId);
+
             
             modelBuilder.Entity<Unit>()
                 .HasKey(u => u.Id); // Указание первичного ключа для сущности Unit

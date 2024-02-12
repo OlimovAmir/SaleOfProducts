@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.Models;
-using Swashbuckle.AspNetCore.Annotations;
 using SaleOfProducts.Services;
 
 namespace SaleOfProducts.Controllers
