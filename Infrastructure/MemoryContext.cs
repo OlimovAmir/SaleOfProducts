@@ -22,20 +22,29 @@ namespace SaleOfProducts.Infrastructure
         {
             modelBuilder.Entity<CashExpense>()
                 .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
-            modelBuilder.Entity<Employee>()
-                
-                .HasKey(e => e.Id); // Указание первичного ключа для Employee
-            modelBuilder.Entity<Employee>()
-           .HasOne(e => e.Position)
-           .WithMany()
-           .HasForeignKey(e => e.PositionId);
 
-            
+            modelBuilder.Entity<Employee>()
+                .HasKey(e => e.Id); // Указание первичного ключа для Employee
+
+            modelBuilder.Entity<Employee>()
+                .HasOne(e => e.Position)
+                .WithMany()
+                .HasForeignKey(e => e.PositionId);
+
+
             modelBuilder.Entity<Unit>()
                 .HasKey(u => u.Id); // Указание первичного ключа для сущности Unit
+
             modelBuilder.Entity<Position>()
                 .HasKey(u => u.Id); // Указание первичного ключа для сущности Position
-           
+
+            modelBuilder.Entity<Product>()
+                .HasKey(e => e.Id); // Указание первичного ключа для Product
+
+            modelBuilder.Entity<Product>()
+                .HasOne(e => e.Unit)
+                .WithMany()
+                .HasForeignKey(e => e.UnitId);
 
             base.OnModelCreating(modelBuilder);
         }
