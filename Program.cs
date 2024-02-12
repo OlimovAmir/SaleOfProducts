@@ -36,6 +36,7 @@ namespace SaleOfProducts
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IUnitService, UnitService>();
             builder.Services.AddScoped<IPositionService, PositionService>();
+            builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ISupplierService, SupplierService>();
