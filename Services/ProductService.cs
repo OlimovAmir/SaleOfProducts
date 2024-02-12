@@ -51,7 +51,20 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Product item)
         {
-            throw new NotImplementedException();
+            var existingItem = _dbContext.Products.Find(id);
+            if (existingItem == null)
+            {
+                return "Item not found";
+            }
+
+            existingItem.Name = item.Name;
+            existingItem.Unit = item.Unit;
+            existingItem.Price = item.Price;
+           
+
+            _dbContext.SaveChanges();
+
+            return "Item updated";
         }
     }
 }
