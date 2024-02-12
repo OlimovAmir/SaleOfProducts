@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Services
@@ -42,6 +43,12 @@ namespace SaleOfProducts.Services
         public IEnumerable<Product> GetAll()
         {
             return _dbContext.Products.ToList();
+        }
+
+        public IEnumerable<Product> GetAllWithUnit()
+        {
+            // Загрузка данных должности вместе с данными сотрудников
+            return _dbContext.Products.Include(e => e.Unit).ToList();
         }
 
         public Product GetById(Guid id)
