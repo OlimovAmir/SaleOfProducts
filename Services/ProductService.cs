@@ -14,7 +14,15 @@ namespace SaleOfProducts.Services
 
         public string Create(Product item)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(item.Name))
+            {
+                return "The description cannot be empty";
+            }
+
+            _dbContext.Products.Add(item);
+            _dbContext.SaveChanges();
+
+            return $"Created new item with this ID: {item.Id}";
         }
 
         public string Delete(Guid id)
