@@ -1,9 +1,17 @@
-﻿using SaleOfProducts.Models;
+﻿using SaleOfProducts.Infrastructure;
+using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Services
 {
     public class ProductService : IProductService
     {
+        private readonly MemoryContext _dbContext;
+
+        public ProductService(MemoryContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public string Create(Product item)
         {
             throw new NotImplementedException();
