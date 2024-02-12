@@ -46,7 +46,7 @@ namespace SaleOfProducts.Services
 
         public Product GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Products.Find(id);
         }
 
         public string Update(Guid id, Product item)
