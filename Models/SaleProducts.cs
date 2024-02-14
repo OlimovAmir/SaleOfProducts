@@ -18,10 +18,10 @@
         public Guid CustomerId { get; set; }
 
         // Additional properties for sale information, such as quantity, etc.
-        public double Quantity { get; set; }
+        
 
         // Constructor
-        public SaleProducts(DateTime saleTime ,Product product, Customer customer, double quantity)
+        public SaleProducts(DateTime saleTime ,Product product, Customer customer)
         {
             SaleDate = saleTime;
 
@@ -31,7 +31,7 @@
             Customer = customer;
             CustomerId = customer.Id; // Assuming you want to set the foreign key based on the Customer's Id
 
-            Quantity = quantity;
+            
         }
 
         public SaleProducts()
@@ -41,7 +41,7 @@
 
         public override string ToString()
         {
-            return $"{Id} {SaleDate.ToShortDateString()} {ProductId} {CustomerId} {Quantity}";
+            return $"{Id} {SaleDate.ToShortDateString()} {ProductId} {CustomerId}";
         }
     }
 }
