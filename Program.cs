@@ -37,9 +37,10 @@ namespace SaleOfProducts
             builder.Services.AddScoped<IUnitService, UnitService>();
             builder.Services.AddScoped<IPositionService, PositionService>();
             builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ISupplierService, SupplierService>();
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddSingleton<ISupplierService, SupplierService>();
             builder.Services.AddSingleton<ICustomerService, CustomerService>();
             
             builder.Services.AddSingleton(typeof(IMemoryRepository<>), typeof(MemoryRepository<>));
