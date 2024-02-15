@@ -48,6 +48,9 @@ namespace SaleOfProducts.Infrastructure
                 .WithMany()
                 .HasForeignKey(e => e.UnitId);
 
+            modelBuilder.Entity<Supplier>()
+               .HasKey(e => e.Id); // Указание первичного ключа для Supplier
+
             base.OnModelCreating(modelBuilder);
         }
     }
