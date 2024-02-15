@@ -51,16 +51,21 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Supplier item)
         {
-            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
-            if (_item is null)
+            var existingItem = _dbContext.Suppliers.Find(id);
+            if (existingItem == null)
             {
                 return "Item not found";
             }
-            _item.Name = item.Name;
-            _item.INN = item.INN;
-            _item.Address = item.Address;
-            _item.State = item.State;
-            _item.Phone = item.Phone;
+
+            existingItem.Name = item.Name;
+            existingItem.Address = item.Address;
+            existingItem.State = item.State;
+            existingItem.Status = item.Status;
+            existingItem.INN = item.INN;
+            existingItem.Phone = item.Phone;
+
+            _dbContext.SaveChanges();
+
             return "Item updated";
         }
     }
