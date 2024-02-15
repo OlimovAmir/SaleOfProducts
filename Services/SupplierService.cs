@@ -1,21 +1,28 @@
-﻿using SaleOfProducts.Models;
+﻿using SaleOfProducts.Infrastructure;
+using SaleOfProducts.Models;
 
 namespace SaleOfProducts.Services
 {
     public class SupplierService : ISupplierService
     {
-        static Dictionary<Guid, Supplier> Items = new Dictionary<Guid, Supplier>();
+        private readonly MemoryContext _dbContext;
+
+        public SupplierService(MemoryContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+
         public string Create(Supplier item)
         {
-            if (string.IsNullOrEmpty(item.Name))
+            if (string.IsNullOrEmpty(item.))
             {
-                return "The name cannot be empty";
+                return "The description cannot be empty";
             }
-            else
-            {
-                Items.Add(item.Id, item);
-                return $"Created new item with this ID: {item.Id}";
-            }
+
+            _dbContext.Suppliers.Add(item);
+            _dbContext.SaveChanges();
+
+            return $"Created new item with this ID: {item.Id}";
         }
 
         public string Delete(Guid id)

@@ -18,6 +18,8 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<Unit> Units { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Supplier> Suppliers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CashExpense>()
