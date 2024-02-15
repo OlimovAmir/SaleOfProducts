@@ -14,7 +14,7 @@ namespace SaleOfProducts.Services
 
         public string Create(Supplier item)
         {
-            if (string.IsNullOrEmpty(item.))
+            if (string.IsNullOrEmpty(item.Name))
             {
                 return "The description cannot be empty";
             }
