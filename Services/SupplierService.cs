@@ -46,7 +46,7 @@ namespace SaleOfProducts.Services
 
         public Supplier GetById(Guid id)
         {
-            return Items.SingleOrDefault(w => w.Key == id).Value;
+            return _dbContext.Suppliers.Find(id);
         }
 
         public string Update(Guid id, Supplier item)
