@@ -13,13 +13,13 @@ namespace SaleOfProducts.Services
         }
         public string Create(CashIncome item)
         {
-            if (string.IsNullOrEmpty(item.Description))
+            if (string.IsNullOrEmpty(item.Source))
             {
                 return "The name cannot be empty";
             }
             else
             {
-                Items.Add(item.Id, item);
+                _repository.Create(item);
                 return $"Created new item with this ID: {item.Id}";
             }
         }
