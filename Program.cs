@@ -43,7 +43,7 @@ namespace SaleOfProducts
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ICustomerService, CustomerService>();
             
-            builder.Services.AddSingleton(typeof(IMemoryRepository<>), typeof(MemoryRepository<>));
+            builder.Services.AddSingleton(typeof(IPostgreSQLRepository<>), typeof(PostgreSQLRepository<>));
 
             var app = builder.Build();
 
