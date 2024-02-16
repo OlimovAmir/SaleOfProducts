@@ -44,7 +44,7 @@ namespace SaleOfProducts.Services
 
         public CashExpense GetById(Guid id)
         {
-            return _dbContext.CashExpenses.Find(id);
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, CashExpense item)
