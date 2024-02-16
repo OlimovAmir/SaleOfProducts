@@ -1,16 +1,16 @@
 ﻿using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class CashExpenseService : ICashExpenseService
     {
-        
-        private readonly MemoryContext _dbContext;
+        IPostgreSQLRepository<CashExpense> _repository;
 
-        public CashExpenseService(MemoryContext dbContext)
+        public CashExpenseService(IPostgreSQLRepository<CashExpense> repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public string Create(CashExpense item)

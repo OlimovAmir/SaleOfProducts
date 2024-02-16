@@ -1,6 +1,6 @@
 ﻿namespace SaleOfProducts.Models.BaseClassModels
 {
-    public abstract class CashTransaction
+    public abstract class CashTransaction : BaseEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime TransactionDate { get; set; } = DateTime.Now;
