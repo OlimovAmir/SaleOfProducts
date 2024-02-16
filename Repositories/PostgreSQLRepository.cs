@@ -7,7 +7,7 @@ namespace SaleOfProducts.Repositories
     public class PostgreSQLRepository<T> : IPostgreSQLRepository<T> where T : BaseEntity
     {
         readonly MemoryContext _context;
-        public PostgreSQLRepository(BankContext bankContext)
+        public PostgreSQLRepository(MemoryContext bankContext)
         {
             _context = bankContext;
         }
