@@ -26,14 +26,11 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
-            if (_item is null)
-            {
+            var result = _repository.Delete(id);
+            if (result)
+                return "Item deleted";
+            else
                 return "Item not found";
-            }
-            Items.Remove(id);
-
-            return "Item deleted";
         }
 
         public IEnumerable<CashIncome> GetAll()
