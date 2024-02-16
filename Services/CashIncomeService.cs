@@ -40,7 +40,7 @@ namespace SaleOfProducts.Services
 
         public CashIncome GetById(Guid id)
         {
-            return Items.SingleOrDefault(w => w.Key == id).Value;
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, CashIncome item)
