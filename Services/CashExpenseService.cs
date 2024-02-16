@@ -15,15 +15,15 @@ namespace SaleOfProducts.Services
 
         public string Create(CashExpense item)
         {
-            if (string.IsNullOrEmpty(item.Description))
+            if (string.IsNullOrEmpty(item.Category))
             {
-                return "The description cannot be empty";
+                return "The name cannot be empty";
             }
-
-            _dbContext.CashExpenses.Add(item);
-            _dbContext.SaveChanges();
-
-            return $"Created new item with this ID: {item.Id}";
+            else
+            {
+                _repository.Create(item);
+                return $"Created new item with this ID: {item.Id}";
+            }
         }
 
 
