@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
+using System.Text.Json.Serialization;
 
 namespace SaleOfProducts
 {
@@ -21,7 +22,8 @@ namespace SaleOfProducts
           .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
             // Add services to the container.
 
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllers()
+            .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddCors(options =>
             {
