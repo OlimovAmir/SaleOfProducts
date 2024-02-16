@@ -50,7 +50,7 @@ namespace SaleOfProducts.Repositories
 
         public T GetById(Guid id)
         {
-            return _items.SingleOrDefault(w => w.Key == id).Value;
+            return _context.Set<T>().SingleOrDefault(w => w.Id == id);
         }
 
         public bool Update(T item)
