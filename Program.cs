@@ -14,8 +14,11 @@ namespace SaleOfProducts
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<MemoryContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DbPostgres")));
+            options.UseNpgsql(builder.Configuration.GetConnectionString("DbPostgres"))
 
+            //.UseLazyLoadingProxies()
+          .LogTo(Console.Write, LogLevel.Information)
+          .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
             // Add services to the container.
 
             builder.Services.AddControllersWithViews();
@@ -42,7 +45,7 @@ namespace SaleOfProducts
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<ICustomerService, CustomerService>();
-            
+
             builder.Services.AddSingleton(typeof(IPostgreSQLRepository<>), typeof(PostgreSQLRepository<>));
 
             var app = builder.Build();
