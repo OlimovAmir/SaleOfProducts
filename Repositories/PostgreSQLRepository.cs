@@ -57,13 +57,14 @@ namespace SaleOfProducts.Repositories
         {
             try
             {
-                _items[item.Id] = item;
+                _context.Update(item);
+                var result = _context.SaveChanges();
+                return result > 0;
             }
-            catch (Exception)
+            catch
             {
                 return false;
             }
-            return true;
         }
     }
 
