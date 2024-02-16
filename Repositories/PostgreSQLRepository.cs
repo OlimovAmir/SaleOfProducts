@@ -13,7 +13,16 @@ namespace SaleOfProducts.Repositories
         }
         public bool Create(T item)
         {
-            return _items.TryAdd(item.Id, item);
+            try
+            {
+                _context.Add(item);
+                var result = _context.SaveChanges();
+                return result > 0;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public bool Delete(Guid id)
