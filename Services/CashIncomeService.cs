@@ -1,10 +1,16 @@
 ﻿using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class CashIncomeService : ICashIncomeService
     {
-        
+        IPostgreSQLRepository<CashIncome> _repository;
+
+        public CashIncomeService(IPostgreSQLRepository<CashIncome> repository)
+        {
+            _repository = repository;
+        }
         public string Create(CashIncome item)
         {
             if (string.IsNullOrEmpty(item.Description))
