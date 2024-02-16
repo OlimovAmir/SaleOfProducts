@@ -35,7 +35,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<CashIncome> GetAll()
         {
-            return Items.Values;
+            return _repository.GetAll();
         }
 
         public CashIncome GetById(Guid id)
