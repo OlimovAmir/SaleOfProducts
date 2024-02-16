@@ -1,10 +1,15 @@
-﻿using SaleOfProducts.Models.BaseClassModels;
+﻿using Microsoft.AspNetCore.Authentication;
+using SaleOfProducts.Models.BaseClassModels;
 
 namespace SaleOfProducts.Repositories
 {
     public class PostgreSQLRepository<T> : IPostgreSQLRepository<T> where T : BaseEntity
     {
-        Dictionary<Guid, T> _items = new Dictionary<Guid, T>();
+        readonly  _context;
+        public PostgreSQLRepository(BankContext bankContext)
+        {
+            _context = bankContext;
+        }
         public bool Create(T item)
         {
             return _items.TryAdd(item.Id, item);

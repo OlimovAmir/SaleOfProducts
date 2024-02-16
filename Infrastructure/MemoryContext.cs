@@ -1,17 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaleOfProducts.Models;
+using SaleOfProducts.Models.BaseClassModels;
 
 namespace SaleOfProducts.Infrastructure
 {
     public class MemoryContext : DbContext
     {
 
-        public MemoryContext(DbContextOptions<MemoryContext> options)
-            : base(options)
+        public MemoryContext(DbContextOptions<MemoryContext> options) : base(options)
         {
             Database.Migrate();
             Database.EnsureCreated();
         }
+
+
         public DbSet<CashExpense> CashExpenses { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
@@ -22,6 +24,8 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<Supplier> Suppliers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<BaseEntity>();
+
             modelBuilder.Entity<CashExpense>()
                 .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
