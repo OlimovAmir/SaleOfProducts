@@ -4,7 +4,7 @@ namespace SaleOfProducts.Services
 {
     public class CashIncomeService : ICashIncomeService
     {
-        static Dictionary<Guid, CashIncome> Items = new Dictionary<Guid, CashIncome>();
+        
         public string Create(CashIncome item)
         {
             if (string.IsNullOrEmpty(item.Description))
