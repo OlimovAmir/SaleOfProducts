@@ -26,8 +26,6 @@ namespace SaleOfProducts.Services
             }
         }
 
-
-
         public string Delete(Guid id)
         {
             var result = _repository.Delete(id);
@@ -49,20 +47,20 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, CashExpense item)
         {
-            var existingItem = _dbContext.CashExpenses.Find(id);
-            if (existingItem == null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
+                _item.TransactionDate = item.TransactionDate;
+                _item.Category = item.Category;
+                _item.Description = item.Description;
+                _item.Amount = item.Amount;
+
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
             }
 
-            existingItem.TransactionDate = item.TransactionDate;
-            existingItem.Category = item.Category;
-            existingItem.Description = item.Description;
-            existingItem.Amount = item.Amount;
-
-            _dbContext.SaveChanges();
-
-            return "Item updated";
+           return "Item updated";
         }
     }
 }
