@@ -27,7 +27,20 @@ namespace SaleOfProducts.Repositories
 
         public bool Delete(Guid id)
         {
-            return _items.Remove(id);
+            try
+            {
+                var item = _context.Set<T>().SingleOrDefault(w => w.Id == id);
+                if (item is not null)
+                {
+                    _context.Remove(item);
+                    var result = _context.SaveChanges();
+                    return result > 0;
+                }
+            }
+            catch
+            { }
+
+            return false;
         }
 
         public IEnumerable<T> GetAll()
