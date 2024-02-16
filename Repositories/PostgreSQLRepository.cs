@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models.BaseClassModels;
 
 namespace SaleOfProducts.Repositories
 {
     public class PostgreSQLRepository<T> : IPostgreSQLRepository<T> where T : BaseEntity
     {
-        readonly  _context;
+        readonly MemoryContext _context;
         public PostgreSQLRepository(BankContext bankContext)
         {
             _context = bankContext;
