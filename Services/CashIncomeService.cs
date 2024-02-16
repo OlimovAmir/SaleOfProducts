@@ -45,15 +45,18 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, CashIncome item)
         {
-            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
-            if (_item is null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
+                _item.TransactionDate = item.TransactionDate;
+                _item.Source = item.Source;
+                _item.Description = item.Description;
+                _item.Amount = item.Amount;
+
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
             }
-            _item.TransactionDate = item.TransactionDate;
-            _item.Source = item.Source;
-            _item.Description = item.Description;
-            _item.Amount = item.Amount;
 
             return "Item updated";
         }
