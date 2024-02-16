@@ -45,7 +45,7 @@ namespace SaleOfProducts.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            return _items.Values;
+            return _context.Set<T>();
         }
 
         public T GetById(Guid id)
