@@ -27,16 +27,11 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            var itemToDelete = _dbContext.Positions.Find(id);
-            if (itemToDelete == null)
-            {
+            var result = _repository.Delete(id);
+            if (result)
+                return "Item deleted";
+            else
                 return "Item not found";
-            }
-
-            _dbContext.Positions.Remove(itemToDelete);
-            _dbContext.SaveChanges();
-
-            return "Item deleted";
         }
 
         public IEnumerable<Position> GetAll()
