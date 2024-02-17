@@ -2,7 +2,7 @@
 
 namespace SaleOfProducts.Models.BaseClassModels
 {
-    public abstract class Person
+    public abstract class Person : BaseEntity
     {
         [Key]
         public Guid Id { get; }

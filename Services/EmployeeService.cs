@@ -1,16 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly MemoryContext _dbContext;
+        IPostgreSQLRepository<Employee> _repository;
 
-        public EmployeeService(MemoryContext dbContext)
+        public EmployeeService(IPostgreSQLRepository<Employee> repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public string Create(Employee item)
