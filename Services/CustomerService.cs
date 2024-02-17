@@ -41,17 +41,22 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Customer item)
         {
-            var _item = Items.SingleOrDefault(w => w.Key == id).Value;
-            if (_item is null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
+                _item.Name = item.Name;
+                _item.INN = item.INN;
+                _item.Address = item.Address;
+                _item.State = item.State;
+                _item.Phone = item.Phone;
+
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
             }
-            _item.Name = item.Name;
-            _item.INN = item.INN;
-            _item.Address = item.Address;
-            _item.State = item.State;
-            _item.Phone = item.Phone;
-            return "Item updated";
+
+            return "Item updated";           
+           
         }
     }
 }
