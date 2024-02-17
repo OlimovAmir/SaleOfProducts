@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SaleOfProducts.Models.BaseClassModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace SaleOfProducts.Models
 {
-    public class Position
+    public class Position : BaseEntity
     {
         public Guid Id { get; }
 

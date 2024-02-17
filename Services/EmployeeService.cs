@@ -44,8 +44,12 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Employee> GetAllWithPosition()
         {
-            // Загрузка данных должности вместе с данными сотрудников
-            return _dbContext.Employees.Include(e => e.Position).ToList();
+            var employees = _repository.GetAll().ToList();
+            foreach (var employee in employees)
+            {
+                employee.Position = _positionRepository.GetById(employee.PositionId); // Предполагается, что есть метод GetById в репозитории должностей (_positionRepository)
+            }
+            return employees;
         }
 
         public Employee GetById(Guid id)

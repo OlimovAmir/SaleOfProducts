@@ -1,15 +1,16 @@
 ﻿using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class PositionService : IPositionService
     {
-        private readonly MemoryContext _dbContext;
+        IPostgreSQLRepository<Position> _repository;
 
-        public PositionService(MemoryContext dbContext)
+        public PositionService(IPostgreSQLRepository<Position> repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
         public string Create(Position item)
         {
