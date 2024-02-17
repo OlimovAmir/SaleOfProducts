@@ -31,7 +31,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Customer> GetAll()
         {
-            return Items.Values;
+            return _repository.GetAll();
         }
 
         public Customer GetById(Guid id)
