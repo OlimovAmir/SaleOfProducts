@@ -36,7 +36,7 @@ namespace SaleOfProducts.Services
 
         public Customer GetById(Guid id)
         {
-            return Items.SingleOrDefault(w => w.Key == id).Value;
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, Customer item)
