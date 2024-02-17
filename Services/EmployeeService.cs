@@ -55,21 +55,20 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Employee item)
         {
-            var existingItem = _dbContext.Employees.Find(id);
-            if (existingItem == null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
-            }
+                _item.Name = item.Name;
+                _item.SurName = item.SurName;
+                _item.Birthday = item.Birthday;
+                _item.Position = item.Position;
+                _item.IsHired = item.IsHired;
+                _item.TerminationDate = item.TerminationDate;
 
-            existingItem.Name = item.Name;
-            existingItem.SurName = item.SurName;
-            existingItem.Birthday = item.Birthday;
-            existingItem.Position = item.Position;
-            existingItem.IsHired = item.IsHired;
-            existingItem.TerminationDate = item.TerminationDate;
-
-
-            _dbContext.SaveChanges();
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
+            }         
 
             return "Item updated";
         }
