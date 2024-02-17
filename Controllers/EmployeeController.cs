@@ -12,7 +12,7 @@ namespace SaleOfProducts.Controllers
 
         public EmployeeController(IEmployeeService service)
         {
-            _service = service; 
+            _service = service;
         }
 
 
