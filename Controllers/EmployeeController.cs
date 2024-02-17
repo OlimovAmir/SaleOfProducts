@@ -17,7 +17,7 @@ namespace SaleOfProducts.Controllers
 
 
         [HttpGet("AllItems")]
-        public IEnumerable<Employee> Get()
+        public IEnumerable<object> Get()
         {
             return _service.GetAllWithPosition();
         }

@@ -5,7 +5,7 @@ namespace SaleOfProducts.Services
     public interface IEmployeeService
     {
         
-        IEnumerable<Employee> GetAllWithPosition(); // Добавленный метод
+        IEnumerable<object> GetAllWithPosition(); // Добавленный метод
         IEnumerable<Employee> GetAll();
         Employee GetById(Guid id);
         string Create(Employee item);

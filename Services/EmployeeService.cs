@@ -42,15 +42,22 @@ namespace SaleOfProducts.Services
             return _repository.GetAll();
         }
 
-        public IEnumerable<Employee> GetAllWithPosition()
+        public IEnumerable<object> GetAllWithPosition()
         {
             var employees = _repository.GetAll().ToList();
-            foreach (var employee in employees)
-            {
-                // Предполагается, что у вас есть метод GetPositionById в вашем репозитории, который возвращает должность по её Id
-                employee.PositionId = employee.Id;
-            }
-            return employees;
+            var result = employees.Select(employee => new {
+                employee.PositionId,
+                employee.HireDate,
+                employee.TerminationDate,
+                employee.IsHired,
+                employee.Id,
+                employee.Name,
+                employee.SurName,
+                employee.FullName,
+                employee.Birthday
+            });
+
+            return result;
         }
 
         public Employee GetById(Guid id)
