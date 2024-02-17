@@ -5,7 +5,8 @@ namespace SaleOfProducts.Services
 {
     public class CustomerService : ICustomerService
     {
-        IPostgreSQLRepository<CashExpense> _repository;
+        IPostgreSQLRepository<Customer> _repository;
+
         public string Create(Customer item)
         {
             if (string.IsNullOrEmpty(item.Name))
