@@ -15,7 +15,7 @@ namespace SaleOfProducts.Services
             }
             else
             {
-                Items.Add(item.Id, item);
+                _repository.Create(item);
                 return $"Created new item with this ID: {item.Id}";
             }
         }
