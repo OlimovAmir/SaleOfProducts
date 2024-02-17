@@ -7,6 +7,11 @@ namespace SaleOfProducts.Services
     {
         IPostgreSQLRepository<Customer> _repository;
 
+        public CustomerService(IPostgreSQLRepository<Customer> repository)
+        {
+            _repository = repository;
+        }
+
         public string Create(Customer item)
         {
             if (string.IsNullOrEmpty(item.Name))
