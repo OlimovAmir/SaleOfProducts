@@ -36,7 +36,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Position> GetAll()
         {
-            return _dbContext.Positions.ToList();
+            return _repository.GetAll();
         }
 
         public Position GetById(Guid id)
