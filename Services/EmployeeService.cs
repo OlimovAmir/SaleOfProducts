@@ -38,7 +38,8 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Employee> GetAll()
         {
-            return _dbContext.Employees.ToList();
+            //return _dbContext.Employees.ToList();
+            return _repository.GetAll();
         }
 
         public IEnumerable<Employee> GetAllWithPosition()
