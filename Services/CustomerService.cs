@@ -1,10 +1,11 @@
 ﻿using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class CustomerService : ICustomerService
     {
-        static Dictionary<Guid, Customer> Items = new Dictionary<Guid, Customer>();
+        IPostgreSQLRepository<CashExpense> _repository;
         public string Create(Customer item)
         {
             if (string.IsNullOrEmpty(item.Name))
