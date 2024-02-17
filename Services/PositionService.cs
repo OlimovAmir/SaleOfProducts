@@ -46,16 +46,18 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Position item)
         {
-            var existingItem = _dbContext.Positions.Find(id);
-            if (existingItem == null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
-            }
+               
+                _item.Title = item.Title;
+                _item.Description = item.Description;
+                
 
-            existingItem.Title = item.Title;
-            existingItem.Description = item.Description;
-            
-            _dbContext.SaveChanges();
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
+            }
 
             return "Item updated";
         }
