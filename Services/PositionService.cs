@@ -41,7 +41,7 @@ namespace SaleOfProducts.Services
 
         public Position GetById(Guid id)
         {
-            return _dbContext.Positions.Find(id);
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, Position item)
