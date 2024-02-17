@@ -50,7 +50,7 @@ namespace SaleOfProducts.Services
 
         public Employee GetById(Guid id)
         {
-            return _dbContext.Employees.Find(id);
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, Employee item)
