@@ -47,7 +47,7 @@ namespace SaleOfProducts.Services
             var employees = _repository.GetAll().ToList();
             foreach (var employee in employees)
             {
-                employee.Position = _positionRepository.GetById(employee.PositionId); // Предполагается, что есть метод GetById в репозитории должностей (_positionRepository)
+                employee.Position = _repository.GetById(employee.PositionId); // Предполагается, что есть метод GetById в репозитории должностей (_positionRepository)
             }
             return employees;
         }
