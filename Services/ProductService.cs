@@ -55,21 +55,20 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Product item)
         {
-            var existingItem = _dbContext.Products.Find(id);
-            if (existingItem == null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
+                _item.Name = item.Name;
+                _item.Unit = item.Unit;
+                _item.Price = item.Price;
+                _item.Quantity = item.Quantity;
+
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
             }
 
-            existingItem.Name = item.Name;
-            existingItem.Unit = item.Unit;
-            existingItem.Price = item.Price;
-            existingItem.Quantity = item.Quantity;
-
-
-            _dbContext.SaveChanges();
-
-            return "Item updated";
+            return "Item updated";         
         }
     }
 }
