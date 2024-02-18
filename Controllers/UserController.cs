@@ -9,9 +9,9 @@ namespace SaleOfProducts.Controllers
     public class UserController : Controller
     {
 
-        readonly ICashExpenseService _service;
+        readonly IUserService _service;
 
-        public UserController(ICashExpenseService service)
+        public UserController(IUserService service)
         {
             _service = service;
         }
