@@ -1,6 +1,8 @@
-﻿namespace SaleOfProducts.Models
+﻿using SaleOfProducts.Models.BaseClassModels;
+
+namespace SaleOfProducts.Models
 {
-    public class Product
+    public class Product : BaseEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
