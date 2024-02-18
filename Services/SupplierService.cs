@@ -8,9 +8,9 @@ namespace SaleOfProducts.Services
     {
         IPostgreSQLRepository<Supplier> _repository;
 
-        public SupplierService(MemoryContext dbContext)
+        public SupplierService(IPostgreSQLRepository<Supplier> repository)
         {
-            _dbContext = dbContext;
+            _repository = repository;
         }
 
         public string Create(Supplier item)
