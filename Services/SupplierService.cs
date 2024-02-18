@@ -47,22 +47,30 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, Supplier item)
         {
-            var existingItem = _dbContext.Suppliers.Find(id);
-            if (existingItem == null)
+            var _item = _repository.GetById(id);
+            if (_item is not null)
             {
-                return "Item not found";
+                _item.Name = item.Name;
+                _item.Address = item.Address;
+                _item.State = item.State;
+                _item.Status = item.Status;
+                _item.INN = item.INN;
+                _item.Phone = item.Phone;
+
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
             }
 
-            existingItem.Name = item.Name;
-            existingItem.Address = item.Address;
-            existingItem.State = item.State;
-            existingItem.Status = item.Status;
-            existingItem.INN = item.INN;
-            existingItem.Phone = item.Phone;
-
-            _dbContext.SaveChanges();
-
             return "Item updated";
+
+            
+            
+            
+            
+            
+
+           
         }
     }
 }
