@@ -28,16 +28,11 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            var itemToDelete = _dbContext.Units.Find(id);
-            if (itemToDelete == null)
-            {
+            var result = _repository.Delete(id);
+            if (result)
+                return "Item deleted";
+            else
                 return "Item not found";
-            }
-
-            _dbContext.Units.Remove(itemToDelete);
-            _dbContext.SaveChanges();
-
-            return "Item deleted";
         }
 
         public IEnumerable<Unit> GetAll()
