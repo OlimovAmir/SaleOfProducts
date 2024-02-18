@@ -39,7 +39,7 @@ namespace SaleOfProducts.Services
 
         public User GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, User item)
