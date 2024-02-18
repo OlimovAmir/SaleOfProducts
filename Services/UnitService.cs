@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 
@@ -37,7 +38,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Unit> GetAll()
         {
-            return _dbContext.Units.ToList();
+            return _repository.GetAll();
         }
 
         public Unit GetById(Guid id)
