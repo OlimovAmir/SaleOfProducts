@@ -50,7 +50,7 @@ namespace SaleOfProducts.Services
 
         public Product GetById(Guid id)
         {
-            return _dbContext.Products.Find(id);
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, Product item)
