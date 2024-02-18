@@ -38,13 +38,14 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Product> GetAll()
         {
-            return _dbContext.Products.ToList();
+            return _repository.GetAll();
         }
 
         public IEnumerable<Product> GetAllWithUnit()
         {
             // Загрузка данных должности вместе с данными сотрудников
-            return _dbContext.Products.Include(e => e.Unit).ToList();
+            //return _dbContext.Products.Include(e => e.Unit).ToList();
+            return _repository.GetAll();
         }
 
         public Product GetById(Guid id)
