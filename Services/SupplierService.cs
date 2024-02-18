@@ -42,7 +42,7 @@ namespace SaleOfProducts.Services
 
         public Supplier GetById(Guid id)
         {
-            return _dbContext.Suppliers.Find(id);
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, Supplier item)
