@@ -56,6 +56,9 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<Supplier>()
                .HasKey(e => e.Id); // Указание первичного ключа для Supplier
 
+            modelBuilder.Entity<User>()
+               .HasKey(e => e.Id); // Указание первичного ключа для User
+
             base.OnModelCreating(modelBuilder);
         }
     }
