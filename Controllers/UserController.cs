@@ -29,7 +29,7 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost("Create")]
-        public string Post([FromBody] CashExpense item)
+        public string Post([FromBody] User item)
         {
             return _service.Create(item);
         }
