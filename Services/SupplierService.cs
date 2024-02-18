@@ -1,11 +1,12 @@
 ﻿using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class SupplierService : ISupplierService
     {
-        private readonly MemoryContext _dbContext;
+        IPostgreSQLRepository<Supplier> _repository;
 
         public SupplierService(MemoryContext dbContext)
         {
