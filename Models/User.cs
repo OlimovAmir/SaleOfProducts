@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SaleOfProducts.Models.BaseClassModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace SaleOfProducts.Models
 {
-    public class User
+    public class User : BaseEntity
     {
         public Guid Id { get; set; } = Guid.NewGuid();
 
