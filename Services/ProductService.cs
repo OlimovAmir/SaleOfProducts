@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class ProductService : IProductService
     {
-        private readonly MemoryContext _dbContext;
+        IPostgreSQLRepository<CashExpense> _repository;
 
         public ProductService(MemoryContext dbContext)
         {
