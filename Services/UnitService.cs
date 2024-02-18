@@ -43,7 +43,7 @@ namespace SaleOfProducts.Services
 
         public Unit GetById(Guid id)
         {
-            return _dbContext.Units.Find(id);
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, Unit item)
