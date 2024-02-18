@@ -17,7 +17,7 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpGet("AllItems")]
-        public IEnumerable<CashExpense> Get()
+        public IEnumerable<User> Get()
         {
             return _service.GetAll();
         }
