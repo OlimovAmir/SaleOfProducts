@@ -51,7 +51,7 @@ namespace SaleOfProducts.Services
             var _item = _repository.GetById(id);
             if (_item is not null)
             {
-                _item.Name = item.Name
+                _item.Name = item.Name;
                 
 
                 var result = _repository.Update(_item);
