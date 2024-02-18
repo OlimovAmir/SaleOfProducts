@@ -34,7 +34,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<User> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public User GetById(Guid id)
