@@ -5,9 +5,9 @@ namespace SaleOfProducts.Services
     public interface IUserService
     {
         IEnumerable<User> GetAll();
-        CashExpense GetById(Guid id);
-        string Create(CashExpense item);
-        string Update(Guid id, CashExpense item);
+        User GetById(Guid id);
+        string Create(User item);
+        string Update(Guid id, User item);
         string Delete(Guid id);
     }
 }
