@@ -37,7 +37,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<Supplier> GetAll()
         {
-            return _dbContext.Suppliers.ToList();
+            return _repository.GetAll();
         }
 
         public Supplier GetById(Guid id)
