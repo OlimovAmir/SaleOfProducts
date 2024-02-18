@@ -13,27 +13,7 @@ namespace SaleOfProducts.Controllers
         {
             _service = service;
         }
-        private static List<Customer> customer = new List<Customer>
-        {
-            new Customer {
-                
-                Name = "A client from Russia",
-                Status = "LLC",
-                Address = "Russia",
-                INN = 533328140,
-                Phone = 928790000
-            },
-
-            new Customer {
-                
-                Name = "A client from Uzbekistan",
-                Status = "LLC",
-                Address = "Uzbekistan",
-                INN = 519928145,
-                Phone = 927722241
-            },
-
-        };
+       
 
         [HttpGet("AllItems")]
         public IEnumerable<Customer> Get()
