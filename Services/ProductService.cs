@@ -7,7 +7,7 @@ namespace SaleOfProducts.Services
 {
     public class ProductService : IProductService
     {
-        IPostgreSQLRepository<CashExpense> _repository;
+        IPostgreSQLRepository<Product> _repository;
 
         public ProductService(MemoryContext dbContext)
         {
