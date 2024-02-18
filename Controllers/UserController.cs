@@ -35,7 +35,7 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] CashExpense item)
+        public string Put([FromQuery] Guid id, [FromBody] User item)
         {
             return _service.Update(id, item);
         }
