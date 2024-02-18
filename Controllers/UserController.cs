@@ -11,7 +11,7 @@ namespace SaleOfProducts.Controllers
 
         readonly ICashExpenseService _service;
 
-        public CashExpenseController(ICashExpenseService service)
+        public UserController(ICashExpenseService service)
         {
             _service = service;
         }
