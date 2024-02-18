@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SaleOfProducts.Infrastructure;
-using SaleOfProducts.Models;
+﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
