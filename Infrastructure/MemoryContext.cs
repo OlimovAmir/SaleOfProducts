@@ -23,6 +23,8 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<User> Users { get; set; }
+
+        public DbSet<ExpenseItem> ExpenseItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
