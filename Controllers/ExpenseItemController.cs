@@ -8,33 +8,33 @@ namespace SaleOfProducts.Controllers
     [Route("[controller]")]
     public class ExpenseItemController : Controller
     {
-        readonly ICashExpenseService _service;
+        readonly IExpenseItemService _service;
 
-        public CashExpenseController(ICashExpenseService service)
+        public ExpenseItemController(IExpenseItemService service)
         {
             _service = service;
         }
 
         [HttpGet("AllItems")]
-        public IEnumerable<CashExpense> Get()
+        public IEnumerable<ExpenseItem> Get()
         {
             return _service.GetAll();
         }
 
         [HttpGet("GetItemById")]
-        public CashExpense Get(Guid id)
+        public ExpenseItem Get(Guid id)
         {
             return _service.GetById(id);
         }
 
         [HttpPost("Create")]
-        public string Post([FromBody] CashExpense item)
+        public string Post([FromBody] ExpenseItem item)
         {
             return _service.Create(item);
         }
 
         [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] CashExpense item)
+        public string Put([FromQuery] Guid id, [FromBody] ExpenseItem item)
         {
             return _service.Update(id, item);
         }
