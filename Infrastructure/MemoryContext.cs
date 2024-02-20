@@ -22,8 +22,9 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
-        public DbSet<User> Users { get; set; }
 
+
+        public DbSet<User> Users { get; set; }
         public DbSet<ExpenseItem> ExpenseItems { get; set; }
         public DbSet<IncomeItem> IncomeItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
