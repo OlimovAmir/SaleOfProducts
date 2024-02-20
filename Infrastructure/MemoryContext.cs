@@ -30,10 +30,7 @@ namespace SaleOfProducts.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
-
-            modelBuilder.Entity<CashExpense>()
-                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
-
+                       
             modelBuilder.Entity<Employee>()
                 .HasKey(e => e.Id); // Указание первичного ключа для Employee
 
@@ -60,18 +57,18 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<Supplier>()
                .HasKey(e => e.Id); // Указание первичного ключа для Supplier
 
-
-            //---------------------------------------------------------------------------
-
-
             modelBuilder.Entity<User>()
                .HasKey(e => e.Id); // Указание первичного ключа для User
+
+            //---------------------------------------------------------------------------
+            modelBuilder.Entity<CashExpense>()
+               .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
             modelBuilder.Entity<ExpenseItem>()
               .HasKey(e => e.Id); // Указание первичного ключа для ExpenseItem
 
-            modelBuilder.Entity<IncomeItem>()
-              .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
+            //modelBuilder.Entity<IncomeItem>()
+            // .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
 
             base.OnModelCreating(modelBuilder);
         }
