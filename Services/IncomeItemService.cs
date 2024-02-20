@@ -1,9 +1,16 @@
 ﻿using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class IncomeItemService : IIncomeItemService
     {
+        IPostgreSQLRepository<IncomeItem> _repository;
+
+        public IncomeItemService(IPostgreSQLRepository<IncomeItem> repository)
+        {
+            _repository = repository;
+        }
         public string Create(IncomeItem item)
         {
             throw new NotImplementedException();
