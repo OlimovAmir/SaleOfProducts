@@ -1,6 +1,9 @@
-﻿namespace SaleOfProducts.Models
+﻿using SaleOfProducts.Models.BaseClassModels;
+
+namespace SaleOfProducts.Models
 {
-    public class IncomeItem
+    public class IncomeItem : BaseEntity
     {
+
     }
 }
