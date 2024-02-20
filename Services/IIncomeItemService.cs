@@ -1,6 +1,6 @@
 ﻿namespace SaleOfProducts.Services
 {
-    public interface IIncomeItem
+    public interface IIncomeItemService
     {
 
     }
