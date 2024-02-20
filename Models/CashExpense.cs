@@ -7,20 +7,16 @@ namespace SaleOfProducts.Models
         // Дополнительные свойства для учета расходов, если необходимо
         
         public Guid PositionId { get; set; } // Идентификатор должности
-        public ExpenseItem ExpenseItem { get; set; } // Ссылка на должность
+        public ICollection<ExpenseItem> ExpenseItems { get; set; } // Ссылка на список групп расходов
 
-        // Конструктор
-        public CashExpense(double amount, string description, ExpenseItem expenseItem)
-            : base(amount, description)
+        public CashExpense(double amount, string description) : base(amount, description)
         {
-            Amount = amount;
-            Description = description;
-            ExpenseItem = expenseItem;
+            ExpenseItems = new List<ExpenseItem>();
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()}, Category: {Description} {ExpenseItem}";
+            return $"{base.ToString()}, Categories: {string.Join(", ", ExpenseItems.Select(e => e.Name))}";
         }
     }
 }

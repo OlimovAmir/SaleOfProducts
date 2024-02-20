@@ -64,9 +64,10 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<CashExpense>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
-            modelBuilder.Entity<ExpenseItem>()
-              .HasKey(e => e.Id); // Указание первичного ключа для ExpenseItem
-
+            modelBuilder.Entity<CashExpense>()
+            .HasMany(c => c.ExpenseItems)
+            .WithMany(); // Устанавливаем связь многие ко многим
+    
             //modelBuilder.Entity<IncomeItem>()
             // .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
 
