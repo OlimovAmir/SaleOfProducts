@@ -35,7 +35,7 @@ namespace SaleOfProducts.Services
 
         public IEnumerable<IncomeItem> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public IncomeItem GetById(Guid id)
