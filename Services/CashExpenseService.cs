@@ -15,7 +15,7 @@ namespace SaleOfProducts.Services
 
         public string Create(CashExpense item)
         {
-            if (string.IsNullOrEmpty(item.Category))
+            if (string.IsNullOrEmpty(item.Description))
             {
                 return "The name cannot be empty";
             }
@@ -51,7 +51,6 @@ namespace SaleOfProducts.Services
             if (_item is not null)
             {
                 _item.TransactionDate = item.TransactionDate;
-                _item.Category = item.Category;
                 _item.Description = item.Description;
                 _item.Amount = item.Amount;
 
