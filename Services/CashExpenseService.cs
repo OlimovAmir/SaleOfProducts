@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 
@@ -35,9 +36,9 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<CashExpense> GetAll()
+        public IQueryable<CashExpense> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAll().Include(o => o.ExpenseItems);
         }
 
         public CashExpense GetById(Guid id)

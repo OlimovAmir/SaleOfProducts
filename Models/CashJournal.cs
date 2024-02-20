@@ -23,7 +23,7 @@
         // Метод для добавления записи о расходе денежных средств
         public void AddExpenseRecord(double amount, string description, string destination)
         {
-            CashExpense expense = new CashExpense(amount, description, destination);
+            CashExpense expense = new CashExpense(amount, description);
             ExpenseRecords.Add(expense);
         }
 

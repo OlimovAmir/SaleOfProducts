@@ -22,6 +22,21 @@ namespace SaleOfProducts.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CashExpenseExpenseItem", b =>
+                {
+                    b.Property<Guid>("CashExpenseId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ExpenseItemsId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("CashExpenseId", "ExpenseItemsId");
+
+                    b.HasIndex("ExpenseItemsId");
+
+                    b.ToTable("CashExpenseExpenseItem");
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.CashExpense", b =>
                 {
                     b.Property<Guid>("Id")
@@ -31,13 +46,12 @@ namespace SaleOfProducts.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("double precision");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid>("PositionId")
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("timestamp with time zone");
@@ -113,6 +127,21 @@ namespace SaleOfProducts.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.ExpenseItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExpenseItem");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Position", b =>
@@ -205,6 +234,40 @@ namespace SaleOfProducts.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Units");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("CashExpenseExpenseItem", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.CashExpense", null)
+                        .WithMany()
+                        .HasForeignKey("CashExpenseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.ExpenseItem", null)
+                        .WithMany()
+                        .HasForeignKey("ExpenseItemsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Employee", b =>

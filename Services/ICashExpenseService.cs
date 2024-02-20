@@ -4,7 +4,7 @@ namespace SaleOfProducts.Services
 {
     public interface ICashExpenseService
     {
-        IEnumerable<CashExpense> GetAll();
+        IQueryable<CashExpense> GetAll();
         CashExpense GetById(Guid id);
         string Create(CashExpense item);
         string Update(Guid id, CashExpense item);

@@ -43,9 +43,10 @@ namespace SaleOfProducts.Repositories
             return false;
         }
 
-        public IEnumerable<T> GetAll()
+        public IQueryable<T> GetAll()
         {
             return _context.Set<T>();
+            // return _context.Set<T>().Include("ExpenseItems").ToList(); // Замените "RelatedEntityName" на ваше связанное свойство
         }
 
         public T GetById(Guid id)

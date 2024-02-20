@@ -6,7 +6,7 @@ namespace SaleOfProducts.Models
     {
         // Дополнительные свойства для учета расходов, если необходимо
         
-        public Guid PositionId { get; set; } // Идентификатор должности
+        public Guid ExpenseItemId { get; set; } // Идентификатор должности
         public ICollection<ExpenseItem> ExpenseItems { get; set; } // Ссылка на список групп расходов
 
         public CashExpense(double amount, string description) : base(amount, description)
