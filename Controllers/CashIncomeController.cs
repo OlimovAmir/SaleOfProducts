@@ -16,25 +16,25 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpGet("AllItems")]
-        public IEnumerable<CashExpense> Get()
+        public IEnumerable<CashIncome> Get()
         {
             return _service.GetAll();
         }
 
         [HttpGet("GetItemById")]
-        public CashExpense Get(Guid id)
+        public CashIncome Get(Guid id)
         {
             return _service.GetById(id);
         }
 
         [HttpPost("Create")]
-        public string Post([FromBody] CashExpense item)
+        public string Post([FromBody] CashIncome item)
         {
             return _service.Create(item);
         }
 
         [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] CashExpense item)
+        public string Put([FromQuery] Guid id, [FromBody] CashIncome item)
         {
             return _service.Update(id, item);
         }
