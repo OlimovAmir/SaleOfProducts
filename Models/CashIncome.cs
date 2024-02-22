@@ -4,19 +4,19 @@ namespace SaleOfProducts.Models
 {
     public class CashIncome : CashTransaction
     {
-        // Дополнительные свойства для учета приходов, если необходимо
-        public string Source { get; set; }
+        public Guid ExpenseItemId { get; set; } // Идентификатор должности
+        public ICollection<IncomeItem> IncomeItems { get; set; } // Ссылка на список групп расходов
 
         // Конструктор
-        public CashIncome(double amount, string description, string source)
+        public CashIncome(double amount, string description)
             : base(amount, description)
         {
-            Source = source;
+            
         }
 
         public override string ToString()
         {
-            return $"{base.ToString()}, Source: {Source}";
+            return $"{base.ToString()}";
         }
     }
 }
