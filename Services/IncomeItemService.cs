@@ -1,5 +1,6 @@
 ﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
+using System.Linq;
 
 namespace SaleOfProducts.Services
 {
@@ -33,7 +34,7 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<IncomeItem> GetAll()
+        public IQueryable<IncomeItem> GetAll()
         {
             return _repository.GetAll();
         }
