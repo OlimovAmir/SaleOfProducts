@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.Services;
 
 namespace SaleOfProducts.Controllers
 {
@@ -6,9 +7,11 @@ namespace SaleOfProducts.Controllers
     [Route("[controller]")]
     public class CashIncomeController : Controller
     {
-        public IActionResult Index()
+        readonly ICashIncomeService _service;
+
+        public CashIncomeController(ICashIncomeService service)
         {
-            return View();
+            _service = service;
         }
     }
 }
