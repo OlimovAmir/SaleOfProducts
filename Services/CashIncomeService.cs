@@ -13,7 +13,7 @@ namespace SaleOfProducts.Services
         }
         public string Create(CashIncome item)
         {
-            if (string.IsNullOrEmpty(item.Source))
+            if (string.IsNullOrEmpty(item.Description))
             {
                 return "The name cannot be empty";
             }
@@ -33,7 +33,7 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<CashIncome> GetAll()
+        public IQueryable<CashIncome> GetAll()
         {
             return _repository.GetAll();
         }
