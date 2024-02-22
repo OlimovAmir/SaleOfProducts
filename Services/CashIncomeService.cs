@@ -50,7 +50,7 @@ namespace SaleOfProducts.Services
             if (_item is not null)
             {
                 _item.TransactionDate = item.TransactionDate;
-                _item.Source = item.Source;
+                _item.IncomeItems = item.IncomeItems;
                 _item.Description = item.Description;
                 _item.Amount = item.Amount;
 
