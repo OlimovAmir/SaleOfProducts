@@ -2,6 +2,8 @@
 
 namespace SaleOfProducts.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class CashIncomeController : Controller
     {
         public IActionResult Index()
