@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
@@ -35,7 +36,7 @@ namespace SaleOfProducts.Services
 
         public IQueryable<CashIncome> GetAll()
         {
-            return _repository.GetAll();
+            return _repository.GetAll().Include(o => o.IncomeItems);
         }
 
         public CashIncome GetById(Guid id)
