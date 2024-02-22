@@ -16,7 +16,7 @@
         // Метод для добавления записи о приходе денежных средств
         public void AddIncomeRecord(double amount, string description, string source)
         {
-            CashIncome income = new CashIncome(amount, description, source);
+            CashIncome income = new CashIncome(amount, description);
             IncomeRecords.Add(income);
         }
 
