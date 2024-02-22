@@ -22,11 +22,9 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
-
-
         public DbSet<User> Users { get; set; }
         public DbSet<ExpenseItem> ExpenseItems { get; set; }
-        //public DbSet<IncomeItem> IncomeItems { get; set; }
+        public DbSet<IncomeItem> IncomeItems { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
@@ -73,8 +71,8 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<ExpenseItem>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
-            //modelBuilder.Entity<IncomeItem>()
-            // .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
+            modelBuilder.Entity<IncomeItem>()
+             .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
 
             base.OnModelCreating(modelBuilder);
         }
