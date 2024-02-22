@@ -15,7 +15,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{base.ToString()}";
+            return $"{base.ToString()}, Categories: {string.Join(", ", IncomeItems.Select(e => e.Name))}";
         }
     }
 }
