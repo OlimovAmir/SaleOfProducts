@@ -13,7 +13,15 @@ namespace SaleOfProducts.Services
         }
         public string Create(CharacteristicProduct item)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(item.Description))
+            {
+                return "The name cannot be empty";
+            }
+            else
+            {
+                _repository.Create(item);
+                return $"Created new item with this ID: {item.Id}";
+            }
         }
 
         public string Delete(Guid id)
