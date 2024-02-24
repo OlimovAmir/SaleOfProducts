@@ -2,7 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface ICharacteristicProduct
+    public interface ICharacteristicProductService
     {
         IQueryable<CharacteristicProduct> GetAll();
         CharacteristicProduct GetById(Guid id);
