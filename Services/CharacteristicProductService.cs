@@ -45,7 +45,19 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, CharacteristicProduct item)
         {
-            throw new NotImplementedException();
+            var _item = _repository.GetById(id);
+            if (_item is not null)
+            {
+                _item.Name = item.Name;
+                _item.Description = item.Description;
+                _item.Price  = item.Price;
+
+                var result = _repository.Update(_item);
+                if (result)
+                    return "Item updated";
+            }
+
+            return "Item updated";
         }
     }
 }
