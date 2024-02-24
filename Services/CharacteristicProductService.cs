@@ -35,7 +35,7 @@ namespace SaleOfProducts.Services
 
         public IQueryable<CharacteristicProduct> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public CharacteristicProduct GetById(Guid id)
