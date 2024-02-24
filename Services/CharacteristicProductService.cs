@@ -1,9 +1,16 @@
 ﻿using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class CharacteristicProductService : ICharacteristicProductService
     {
+        IPostgreSQLRepository<CharacteristicProduct> _repository;
+
+        public CharacteristicProductService(IPostgreSQLRepository<CharacteristicProduct> repository)
+        {
+            _repository = repository;
+        }
         public string Create(CharacteristicProduct item)
         {
             throw new NotImplementedException();
