@@ -40,7 +40,7 @@ namespace SaleOfProducts.Services
 
         public CharacteristicProduct GetById(Guid id)
         {
-            throw new NotImplementedException();
+            return _repository.GetById(id);
         }
 
         public string Update(Guid id, CharacteristicProduct item)
