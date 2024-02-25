@@ -1,9 +1,16 @@
 ﻿using SaleOfProducts.Models;
+using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
     public class GroupProductService : IGroupProductService
     {
+        IPostgreSQLRepository<GroupProduct> _repository;
+
+        public GroupProductService(IPostgreSQLRepository<GroupProduct> repository)
+        {
+            _repository = repository;
+        }
         public string Create(GroupProduct item)
         {
             throw new NotImplementedException();
