@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.Services;
 
 namespace SaleOfProducts.Controllers
 {
@@ -6,9 +7,11 @@ namespace SaleOfProducts.Controllers
     [Route("[controller]")]
     public class CharacteristicProductController : Controller
     {
-        public IActionResult Index()
+        readonly ICharacteristicProductService _service;
+
+        public CharacteristicProductController(ICharacteristicProductService service)
         {
-            return View();
+            _service = service;
         }
     }
 }
