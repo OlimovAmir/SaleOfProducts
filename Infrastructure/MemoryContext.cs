@@ -27,6 +27,7 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<CashIncome> CashIncomes { get; set; }
 
         public DbSet<CharacteristicProduct> CharacteristicProducts { get; set; }
+        public DbSet<GroupProduct> GroupProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -85,6 +86,9 @@ namespace SaleOfProducts.Infrastructure
             .WithMany(); // Устанавливаем связь многие ко многим
 
             modelBuilder.Entity<CharacteristicProduct>()
+               .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
+
+            modelBuilder.Entity<GroupProduct>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
             base.OnModelCreating(modelBuilder);
