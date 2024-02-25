@@ -47,6 +47,8 @@ namespace SaleOfProducts
             builder.Services.AddScoped<ICashExpenseService, CashExpenseService>();
             builder.Services.AddScoped<IExpenseItemService, ExpenseItemService>();
             builder.Services.AddScoped<IIncomeItemService, IncomeItemService>();
+            builder.Services.AddScoped<ICharacteristicProductService, CharacteristicProductService>();
+
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

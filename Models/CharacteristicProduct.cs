@@ -13,10 +13,17 @@ namespace SaleOfProducts.Models
         [Column(TypeName = "jsonb")] // для PostgreSQL, в других СУБД используйте "json"
         public Dictionary<string, string> Specifications { get; set; }
 
-        public CharacteristicProduct()
+        public CharacteristicProduct(string name, string description, decimal price, Dictionary<string, string> specifications)
         {
-            
+            Name = name;
+            Description = description;
+            Price = price;
             Specifications = new Dictionary<string, string>();
+        }
+
+        public override string ToString()
+        {
+            return $"{Name} {Description} {Price} {Specifications}";
         }
     }
 }
