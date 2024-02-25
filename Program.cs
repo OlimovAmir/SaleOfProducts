@@ -50,6 +50,7 @@ namespace SaleOfProducts
             builder.Services.AddScoped<IExpenseItemService, ExpenseItemService>();
             builder.Services.AddScoped<IIncomeItemService, IncomeItemService>();
             builder.Services.AddScoped<ICharacteristicProductService, CharacteristicProductService>();
+            builder.Services.AddScoped<IGroupProductService, GroupProductService>();
 
 
             builder.Services.AddEndpointsApiExplorer();
