@@ -26,6 +26,8 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<IncomeItem> IncomeItems { get; set; }
         public DbSet<CashIncome> CashIncomes { get; set; }
 
+        public DbSet<CharacteristicProduct> CharacteristicProducts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
