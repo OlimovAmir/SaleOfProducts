@@ -46,19 +46,19 @@ namespace SaleOfProducts.Services
         public string Update(Guid id, CharacteristicProduct item)
         {
             var _item = _repository.GetById(id);
-            if (_item is not null)
+            if (_item is not null && item is not null) // Проверяем исходный объект и объект для обновления на null
             {
                 _item.Name = item.Name;
                 _item.Description = item.Description;
-                _item.Price  = item.Price;
-                _item.Specifications = item.Specifications;
+                _item.Price = item.Price;
+                _item.Specifications = item.Specifications ?? _item.Specifications; // Используем либо переданные спецификации, либо оставляем текущие
 
                 var result = _repository.Update(_item);
                 if (result)
                     return "Item updated";
             }
 
-            return "Item updated";
+            return "Item not found or update failed";
         }
     }
 }
