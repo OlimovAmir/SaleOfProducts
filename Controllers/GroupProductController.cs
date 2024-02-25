@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.Models;
+using SaleOfProducts.Services;
 
 namespace SaleOfProducts.Controllers
 {
@@ -6,9 +8,41 @@ namespace SaleOfProducts.Controllers
     [Route("[controller]")]
     public class GroupProductController : Controller
     {
-        public IActionResult Index()
+        readonly IGroupProductService _service;
+
+        public GroupProductController(IGroupProductService service)
         {
-            return View();
+            _service = service;
+        }
+
+        [HttpGet("AllItems")]
+        public IEnumerable<GroupProduct> Get()
+        {
+            return _service.GetAll();
+        }
+
+        [HttpGet("GetItemById")]
+        public GroupProduct Get(Guid id)
+        {
+            return _service.GetById(id);
+        }
+
+        [HttpPost("Create")]
+        public string Post([FromBody] GroupProduct item)
+        {
+            return _service.Create(item);
+        }
+
+        [HttpPut("Update")]
+        public string Put([FromQuery] Guid id, [FromBody] GroupProduct item)
+        {
+            return _service.Update(id, item);
+        }
+
+        [HttpDelete("Delete")]
+        public string Delete([FromQuery] Guid id)
+        {
+            return _service.Delete(id);
         }
     }
 }
