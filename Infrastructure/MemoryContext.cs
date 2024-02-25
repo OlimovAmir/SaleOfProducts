@@ -84,6 +84,8 @@ namespace SaleOfProducts.Infrastructure
             .HasMany(c => c.IncomeItems)
             .WithMany(); // Устанавливаем связь многие ко многим
 
+            modelBuilder.Entity<CharacteristicProduct>()
+               .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
             base.OnModelCreating(modelBuilder);
         }
