@@ -35,7 +35,7 @@ namespace SaleOfProducts.Services
 
         public IQueryable<GroupProduct> GetAll()
         {
-            throw new NotImplementedException();
+            return _repository.GetAll();
         }
 
         public GroupProduct GetById(Guid id)
