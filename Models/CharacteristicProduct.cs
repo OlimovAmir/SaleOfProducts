@@ -8,7 +8,7 @@ namespace SaleOfProducts.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-       
+
 
         [Column(TypeName = "jsonb")] // для PostgreSQL, в других СУБД используйте "json"
         public Dictionary<string, string> Specifications { get; set; }
@@ -18,7 +18,7 @@ namespace SaleOfProducts.Models
             Name = name;
             Description = description;
             Price = price;
-            Specifications = new Dictionary<string, string>();
+            Specifications = specifications;
         }
 
         public override string ToString()

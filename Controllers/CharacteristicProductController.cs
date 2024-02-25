@@ -28,7 +28,7 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost("Create")]
-        public string Post([FromForm] CharacteristicProduct item)
+        public string Post([FromBody] CharacteristicProduct item)
         {
             return _service.Create(item);
         }

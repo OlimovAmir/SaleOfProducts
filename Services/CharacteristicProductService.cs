@@ -51,6 +51,7 @@ namespace SaleOfProducts.Services
                 _item.Name = item.Name;
                 _item.Description = item.Description;
                 _item.Price  = item.Price;
+                _item.Specifications = item.Specifications;
 
                 var result = _repository.Update(_item);
                 if (result)

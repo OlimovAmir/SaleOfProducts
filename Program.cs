@@ -1,6 +1,6 @@
-
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
@@ -13,6 +13,8 @@ namespace SaleOfProducts
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            NpgsqlConnection.GlobalTypeMapper.EnableDynamicJson();
 
             builder.Services.AddDbContext<MemoryContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("DbPostgres"))
