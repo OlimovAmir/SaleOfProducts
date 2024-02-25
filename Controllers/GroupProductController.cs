@@ -2,6 +2,8 @@
 
 namespace SaleOfProducts.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class GroupProductController : Controller
     {
         public IActionResult Index()
