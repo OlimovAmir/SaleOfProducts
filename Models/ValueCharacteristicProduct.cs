@@ -2,16 +2,16 @@
 
 namespace SaleOfProducts.Models
 {
-    public class NameCharacteristicProduct : BaseEntity
+    public class ValueCharacteristicProduct : BaseEntity
     {
         public string Name { get; set; }
 
-        public NameCharacteristicProduct(string name)
+        public ValueCharacteristicProduct(string name)
         {
             Name = name;
         }
 
-        public NameCharacteristicProduct()
+        public ValueCharacteristicProduct()
         {
             
         }
