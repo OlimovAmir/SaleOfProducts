@@ -3,7 +3,7 @@ using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
 {
-    public class NameCharacteristicProductService : ICharacteristicProductService
+    public class NameCharacteristicProductService : INameCharacteristicProductService
     {
         IPostgreSQLRepository<NameCharacteristicProduct> _repository;
 
@@ -11,9 +11,18 @@ namespace SaleOfProducts.Services
         {
             _repository = repository;
         }
-        public string Create(CharacteristicProduct item)
+
+        public string Create(NameCharacteristicProduct item)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(item.Name))
+            {
+                return "The name cannot be empty";
+            }
+            else
+            {
+                _repository.Create(item);
+                return $"Created new item with this ID: {item.Id}";
+            }
         }
 
         public string Delete(Guid id)
@@ -21,17 +30,17 @@ namespace SaleOfProducts.Services
             throw new NotImplementedException();
         }
 
-        public IQueryable<CharacteristicProduct> GetAll()
+        public IQueryable<NameCharacteristicProduct> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public CharacteristicProduct GetById(Guid id)
+        public NameCharacteristicProduct GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public string Update(Guid id, CharacteristicProduct item)
+        public string Update(Guid id, NameCharacteristicProduct item)
         {
             throw new NotImplementedException();
         }
