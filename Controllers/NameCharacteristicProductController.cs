@@ -8,32 +8,32 @@ namespace SaleOfProducts.Controllers
     [ApiController]
     public class NameCharacteristicProductController : Controller
     {
-        readonly IUnitService _service;
+        readonly INameCharacteristicProductService _service;
 
-        public UnitController(IUnitService service)
+        public NameCharacteristicProductController(NameCharacteristicProductService service)
         {
             _service = service;
         }
         [HttpGet("AllItems")]
-        public IEnumerable<Unit> Get()
+        public IQueryable<NameCharacteristicProduct> Get()
         {
             return _service.GetAll();
         }
 
         [HttpGet("GetItemById")]
-        public Unit Get(Guid id)
+        public NameCharacteristicProduct Get(Guid id)
         {
             return _service.GetById(id);
         }
 
         [HttpPost("Create")]
-        public string Post([FromBody] Unit item)
+        public string Post([FromBody] NameCharacteristicProduct item)
         {
             return _service.Create(item);
         }
 
         [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] Unit item)
+        public string Put([FromQuery] Guid id, [FromBody] NameCharacteristicProduct item)
         {
             return _service.Update(id, item);
         }
