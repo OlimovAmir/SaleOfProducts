@@ -2,6 +2,8 @@
 
 namespace SaleOfProducts.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class ValueCharacteristicProductController : Controller
     {
         public IActionResult Index()
