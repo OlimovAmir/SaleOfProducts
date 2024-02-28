@@ -34,12 +34,12 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<Product> GetAll()
+        public IQueryable<Product> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public IEnumerable<Product> GetAllWithUnit()
+        public IQueryable<Product> GetAllWithUnit()
         {
             // Загрузка данных должности вместе с данными сотрудников
             //return _dbContext.Products.Include(e => e.Unit).ToList();

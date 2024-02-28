@@ -36,7 +36,7 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<Unit> GetAll()
+        public IQueryable<Unit> GetAll()
         {
             return _repository.GetAll();
         }

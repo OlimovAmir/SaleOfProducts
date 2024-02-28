@@ -32,7 +32,7 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<User> GetAll()
+        public IQueryable<User> GetAll()
         {
             return _repository.GetAll();
         }

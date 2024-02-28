@@ -34,7 +34,7 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IEnumerable<Position> GetAll()
+        public IQueryable<Position> GetAll()
         {
             return _repository.GetAll();
         }
