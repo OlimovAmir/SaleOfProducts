@@ -2,12 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface ISupplierService
+    public interface ISupplierService : IBaseService<Supplier>
     {
-        IEnumerable<Supplier> GetAll();
-        Supplier GetById(Guid id);
-        string Create(Supplier worker);
-        string Update(Guid id, Supplier item);
-        string Delete(Guid id);
     }
 }
