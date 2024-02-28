@@ -27,7 +27,11 @@ namespace SaleOfProducts.Services
 
         public string Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var result = _repository.Delete(id);
+            if (result)
+                return "Item deleted";
+            else
+                return "Item not found";
         }
 
         public IQueryable<NameCharacteristicProduct> GetAll()
