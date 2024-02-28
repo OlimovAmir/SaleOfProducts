@@ -8,7 +8,7 @@ namespace SaleOfProducts.Services
 
         TEntity GetById(Guid id);
 
-        string Create(TEntity worker);
+        string Create(TEntity item);
 
         string Update(Guid id, TEntity item);
 
