@@ -2,12 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface INameCharacteristicProductService
+    public interface INameCharacteristicProductService : IBaseService<NameCharacteristicProduct>
     {
-        IQueryable<NameCharacteristicProduct> GetAll();
-        NameCharacteristicProduct GetById(Guid id);
-        string Create(NameCharacteristicProduct item);
-        string Update(Guid id, NameCharacteristicProduct item);
-        string Delete(Guid id);
     }
 }
