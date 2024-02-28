@@ -2,12 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface IIncomeItemService
+    public interface IIncomeItemService : IBaseService<IncomeItem>
     {
-        IQueryable<IncomeItem> GetAll();
-        IncomeItem GetById(Guid id);
-        string Create(IncomeItem item);
-        string Update(Guid id, IncomeItem item);
-        string Delete(Guid id);
     }
 }
