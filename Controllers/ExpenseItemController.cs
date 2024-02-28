@@ -16,7 +16,7 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpGet("AllItems")]
-        public IEnumerable<ExpenseItem> Get()
+        public IQueryable<ExpenseItem> Get()
         {
             return _service.GetAll();
         }
