@@ -2,12 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface IGroupProductService
+    public interface IGroupProductService : IBaseService<GroupProduct>
     {
-        IQueryable<GroupProduct> GetAll();
-        GroupProduct GetById(Guid id);
-        string Create(GroupProduct item);
-        string Update(Guid id, GroupProduct item);
-        string Delete(Guid id);
     }
 }
