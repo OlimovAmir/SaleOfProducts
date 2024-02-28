@@ -2,12 +2,7 @@
 
 namespace SaleOfProducts.Services
 {
-    public interface IUnitService
+    public interface IUnitService : IBaseService<Unit>
     {
-        IEnumerable<Unit> GetAll();
-        Unit GetById(Guid id);
-        string Create(Unit item);
-        string Update(Guid id, Unit item);
-        string Delete(Guid id);
     }
 }
