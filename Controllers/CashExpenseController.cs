@@ -6,43 +6,10 @@ namespace SaleOfProducts.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CashExpenseController : Controller
+    public class CashExpenseController : BaseController<CashExpense>
     {
-        readonly ICashExpenseService _service;
-        
-        public CashExpenseController(ICashExpenseService service)
+        public CashExpenseController(ILogger<CashExpenseController> logger, ICashExpenseService service) : base(logger, service)
         {
-            _service = service;
-        }
-
-        [HttpGet("AllItems")]
-        public IEnumerable<CashExpense> Get()
-        {
-            return _service.GetAll();
-        }
-
-        [HttpGet("GetItemById")]
-        public CashExpense Get(Guid id)
-        {
-            return _service.GetById(id);
-        }
-
-        [HttpPost("Create")]
-        public string Post([FromBody] CashExpense item)
-        {
-            return _service.Create(item);
-        }
-
-        [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] CashExpense item)
-        {
-            return _service.Update(id, item);
-        }
-
-        [HttpDelete("Delete")]
-        public string Delete([FromQuery] Guid id)
-        {
-            return _service.Delete(id);
         }
     }
 }
