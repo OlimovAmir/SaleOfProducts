@@ -6,45 +6,10 @@ namespace SaleOfProducts.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : Controller
+    public class UserController : BaseController<User>
     {
-
-        readonly IUserService _service;
-
-        public UserController(IUserService service)
+        public UserController(ILogger<UserController> logger, IUserService service) : base(logger, service)
         {
-            _service = service;
         }
-
-        [HttpGet("AllItems")]
-        public IEnumerable<User> Get()
-        {
-            return _service.GetAll();
-        }
-
-        [HttpGet("GetItemById")]
-        public User Get(Guid id)
-        {
-            return _service.GetById(id);
-        }
-
-        [HttpPost("Create")]
-        public string Post([FromBody] User item)
-        {
-            return _service.Create(item);
-        }
-
-        [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] User item)
-        {
-            return _service.Update(id, item);
-        }
-
-        [HttpDelete("Delete")]
-        public string Delete([FromQuery] Guid id)
-        {
-            return _service.Delete(id);
-        }
-
     }
 }
