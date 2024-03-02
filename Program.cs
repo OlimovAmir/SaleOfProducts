@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
@@ -22,6 +23,12 @@ namespace SaleOfProducts
             //.UseLazyLoadingProxies()
           .LogTo(Console.Write, LogLevel.Information)
           .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+
+            builder.Services.AddLogging(l =>
+            {
+                //l.ClearProviders();
+                //l.AddConsole();
+            });
             // Add services to the container.
 
             builder.Services.AddControllers()
@@ -60,6 +67,35 @@ namespace SaleOfProducts
             builder.Services.AddScoped(typeof(IPostgreSQLRepository<>), typeof(PostgreSQLRepository<>));
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetService<MemoryContext>();
+                context.Database.Migrate();
+
+                //TODO -- NoTracking
+                //var bank = context.Banks.First();
+                //var oldName = bank.Name;
+                //context.Attach(bank);
+                //bank.Name = "Test";
+                ////context.Update(bank);
+                //context.SaveChanges();
+
+                //bank.Name = oldName;
+                //context.SaveChanges();
+
+                //TODO - LazyLoadingProxies
+                //var bank = context.Banks.First();
+                //var name = bank.Name;
+                //var branchs = bank.Branchs;
+
+
+                //TODO: Lazy loading for spesific properties
+                //var branch = context.Branchs.First();
+                //var address = branch.Address;
+                //var bank = branch.Bank;
+                //var bank2 = branch.Bank;
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
