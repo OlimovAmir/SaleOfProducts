@@ -7,7 +7,8 @@ namespace SaleOfProducts.Models
         public string Name { get; set; }
         // Foreign key
         public int NameCharacteristicProductId { get; set; }
-
+        // Navigation property
+        public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
         public ValueCharacteristicProduct(string name)
         {
