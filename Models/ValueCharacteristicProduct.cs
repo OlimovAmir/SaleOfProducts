@@ -5,6 +5,9 @@ namespace SaleOfProducts.Models
     public class ValueCharacteristicProduct : BaseEntity
     {
         public string Name { get; set; }
+        // Foreign key
+        public int NameCharacteristicProductId { get; set; }
+
 
         public ValueCharacteristicProduct(string name)
         {
