@@ -10,9 +10,11 @@ namespace SaleOfProducts.Models
         // Navigation property
         public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
-        public ValueCharacteristicProduct(string name)
+        public ValueCharacteristicProduct(string name, int nameCharacteristicProductId)
         {
             Name = name;
+            NameCharacteristicProductId = nameCharacteristicProductId;
+            
         }
 
         public ValueCharacteristicProduct()
@@ -22,7 +24,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name} {NameCharacteristicProductId}";
         }
     }
 }
