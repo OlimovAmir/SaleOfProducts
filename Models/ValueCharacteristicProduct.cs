@@ -6,11 +6,11 @@ namespace SaleOfProducts.Models
     {
         public string Name { get; set; }
         // Foreign key
-        public int NameCharacteristicProductId { get; set; }
+        public Guid NameCharacteristicProductId { get; set; }
         // Navigation property
         public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
-        public ValueCharacteristicProduct(string name, int nameCharacteristicProductId)
+        public ValueCharacteristicProduct(string name, Guid nameCharacteristicProductId)
         {
             Name = name;
             NameCharacteristicProductId = nameCharacteristicProductId;
