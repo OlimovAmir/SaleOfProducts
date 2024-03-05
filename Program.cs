@@ -58,7 +58,7 @@ namespace SaleOfProducts
             builder.Services.AddScoped<IIncomeItemService, IncomeItemService>();
             builder.Services.AddScoped<ICharacteristicProductService, CharacteristicProductService>();
             builder.Services.AddScoped<IGroupProductService, GroupProductService>();
-
+            builder.Services.AddScoped<INameCharacteristicProductService, NameCharacteristicProductService>();
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
