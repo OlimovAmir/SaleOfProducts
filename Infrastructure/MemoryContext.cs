@@ -101,6 +101,9 @@ namespace SaleOfProducts.Infrastructure
                 .WithOne()
                 .HasForeignKey<ValueCharacteristicProduct>(p => p.NameCharacteristicProductId);
 
+            modelBuilder.Entity<NameCharacteristicProduct>()
+               .HasKey(p => p.Id);
+
             base.OnModelCreating(modelBuilder);
         }
     }
