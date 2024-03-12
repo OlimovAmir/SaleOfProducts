@@ -17,7 +17,10 @@ namespace SaleOfProducts.Controllers
         [HttpGet("AllItems")]
         public virtual IEnumerable<TEntity> Get()
         {
-            return _service.GetAll();
+            using (_service as IDisposable)
+            {
+                return _service.GetAll();
+            }
         }
 
         [HttpGet("GetItemById")]
@@ -29,7 +32,10 @@ namespace SaleOfProducts.Controllers
         [HttpPost("Create")]
         public virtual string Post([FromBody] TEntity item)
         {
-            return _service.Create(item);
+            using (_service as IDisposable)
+            {
+                return _service.Create(item);
+            }
         }
 
         [HttpPut("Update")]
