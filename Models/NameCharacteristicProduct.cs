@@ -5,10 +5,14 @@ namespace SaleOfProducts.Models
     public class NameCharacteristicProduct : BaseEntity
     {
         public string Name { get; set; }
+        // Ссылка на группу продуктов
+        public int GroupProductId { get; set; }
+        public List<GroupProduct> GroupProduct { get; set; }
 
-        public NameCharacteristicProduct(string name)
+        public NameCharacteristicProduct(string name, int groupProductId)
         {
             Name = name;
+            GroupProductId = groupProductId;
         }
 
         public NameCharacteristicProduct()
@@ -18,7 +22,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{Name}";
+            return $"{Name} {GroupProductId}";
         }
     }
 }
