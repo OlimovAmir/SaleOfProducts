@@ -115,17 +115,17 @@ namespace SaleOfProducts.Infrastructure
                .HasKey(p => p.Id);
 
             modelBuilder.Entity<NameCharacteristicProduct>()
-    .HasMany(n => n.GroupProducts) // Один NameCharacteristicProduct может принадлежать нескольким GroupProduct
-    .WithMany(g => g.Characteristics) // Один GroupProduct может иметь несколько NameCharacteristicProduct
-    .UsingEntity<Dictionary<string, object>>(
-        "GroupProductNameCharacteristicProduct",
-        j => j.HasOne<GroupProduct>().WithMany().HasForeignKey("GroupProductId"),
-        j => j.HasOne<NameCharacteristicProduct>().WithMany().HasForeignKey("CharacteristicsId"),
-        j =>
-        {
-            j.HasKey("GroupProductId", "CharacteristicsId");
-            j.ToTable("GroupProductNameCharacteristicProduct");
-        });
+     .HasKey(t => new { t.NameCharacteristicProductId, t.GroupProductId });
+
+            modelBuilder.Entity<NameCharacteristicProduct>()
+                .HasOne(pt => pt.NameCharacteristicProduct)
+                .WithMany(p => p.NameCharacteristicProductGroupProducts)
+                .HasForeignKey(pt => pt.NameCharacteristicProductId);
+
+            modelBuilder.Entity<NameCharacteristicProductGroupProduct>()
+                .HasOne(pt => pt.GroupProduct)
+                .WithMany(t => t.NameCharacteristicProductGroupProducts)
+                .HasForeignKey(pt => pt.GroupProductId);
 
             base.OnModelCreating(modelBuilder);
         }
