@@ -28,7 +28,7 @@ namespace SaleOfProducts.Infrastructure
 
         public DbSet<CharacteristicProduct> CharacteristicProducts { get; set; }
         public DbSet<GroupProduct> GroupProducts { get; set; }
-
+        public DbSet<NameCharacteristicProduct> NameCharacteristicProducts { get; set; }
         public DbSet<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -93,6 +93,8 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<GroupProduct>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
+
+
             modelBuilder.Entity<ValueCharacteristicProduct>()
                .HasKey(p => p.Id);
             // Определение связи один к одному между ValueCharacteristicProduct и NameCharacteristicProduct
@@ -100,6 +102,12 @@ namespace SaleOfProducts.Infrastructure
                 .HasOne(p => p.NameCharacteristicProduct)
                 .WithOne()
                 .HasForeignKey<ValueCharacteristicProduct>(p => p.NameCharacteristicProductId);
+
+            modelBuilder.Entity<NameCharacteristicProduct>()
+               .HasOne(p => p.GroupProduct)
+               .WithOne()
+               .HasForeignKey<NameCharacteristicProduct>(p => p.GroupProductId);
+
 
             modelBuilder.Entity<NameCharacteristicProduct>()
                .HasKey(p => p.Id);
