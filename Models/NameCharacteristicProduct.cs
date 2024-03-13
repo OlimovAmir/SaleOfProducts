@@ -7,7 +7,7 @@ namespace SaleOfProducts.Models
         public string Name { get; set; }
         // Ссылка на группу продуктов
         public int GroupProductId { get; set; }
-        public List<GroupProduct> GroupProduct { get; set; }
+        public List<GroupProduct> GroupProducts { get; set; }
 
         public NameCharacteristicProduct(string name, int groupProductId)
         {
