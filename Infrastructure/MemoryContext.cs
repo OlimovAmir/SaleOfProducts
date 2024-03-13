@@ -104,17 +104,19 @@ namespace SaleOfProducts.Infrastructure
                 .HasForeignKey<ValueCharacteristicProduct>(p => p.NameCharacteristicProductId);
 
             modelBuilder.Entity<NameCharacteristicProduct>()
-               .HasOne(p => p.GroupProduct)
+               .HasOne(p => p.GroupProducts)
                .WithOne()
                .HasForeignKey<NameCharacteristicProduct>(p => p.GroupProductId);
 
+
+            //--------------------------------------------------------------------------------------
 
             modelBuilder.Entity<NameCharacteristicProduct>()
                .HasKey(p => p.Id);
 
             modelBuilder.Entity<NameCharacteristicProduct>()
     .HasMany(n => n.GroupProducts) // Один NameCharacteristicProduct может принадлежать нескольким GroupProduct
-    .WithMany(g => g.NameCharacteristicProducts) // Один GroupProduct может иметь несколько NameCharacteristicProduct
+    .WithMany(g => g.Characteristics) // Один GroupProduct может иметь несколько NameCharacteristicProduct
     .UsingEntity<Dictionary<string, object>>(
         "GroupProductNameCharacteristicProduct",
         j => j.HasOne<GroupProduct>().WithMany().HasForeignKey("GroupProductId"),
