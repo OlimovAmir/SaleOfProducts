@@ -32,10 +32,10 @@ namespace SaleOfProducts.Controllers
         [HttpPost("Create")]
         public virtual string Post([FromBody] TEntity item)
         {
-            using (_service as IDisposable)
-            {
+            
+          
                 return _service.Create(item);
-            }
+            
         }
 
         [HttpPut("Update")]

@@ -14,14 +14,23 @@ namespace SaleOfProducts.Services
 
         public string Create(NameCharacteristicProduct item)
         {
-            if (string.IsNullOrEmpty(item.Name))
+            try
             {
-                return "The name cannot be empty";
+                if (string.IsNullOrEmpty(item.Name))
+                {
+                    return "The name cannot be empty";
+                }
+                else
+                {
+                    _repository.Create(item);
+                    return $"Created new item with this ID: {item.Id}";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _repository.Create(item);
-                return $"Created new item with this ID: {item.Id}";
+                // Здесь можно добавить обработку исключения
+                // Например, можно залогировать ошибку или вернуть сообщение об ошибке пользователю
+                return $"An error occurred while creating the item: {ex.Message}";
             }
         }
 

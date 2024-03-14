@@ -9,9 +9,9 @@ namespace SaleOfProducts.Models
         public Guid NameCharacteristicProductId { get; set; }
         
         public List<GroupProductNameCharacteristicProduct> NameCharacteristicProductGroupProducts { get; set; } // Добавленное свойство
-        public List<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
+        //public List<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
 
-        public NameCharacteristicProduct(string name, Guid groupProductId)
+        public NameCharacteristicProduct(string name)
         {
             Name = name;
             
