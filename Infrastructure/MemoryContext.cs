@@ -31,7 +31,7 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<NameCharacteristicProduct> NameCharacteristicProducts { get; set; }
         public DbSet<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
 
-        public DbSet<GroupProductNameCharacteristicProduct> GroupProductNameCharacteristicProducts { get; set; }
+        public DbSet<GroupProductNameCharacteristicProduct> GroupProductNameCharacteristicProduct { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
@@ -112,25 +112,24 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<NameCharacteristicProduct>()
                .HasKey(p => p.Id);
 
-            modelBuilder.Entity<NameCharacteristicProduct>()
-                .HasKey(t => new { t.Name, t.GroupProductId });
+            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
+         .HasKey(pt => new { pt.GroupProductId, pt.NameCharacteristicProductId });
 
-            modelBuilder.Entity<NameCharacteristicProduct>()
-                .HasMany(pt => pt.NameCharacteristicProductGroupProducts)
-                .WithOne(p => p.NameCharacteristicProduct)
-                .HasForeignKey(pt => pt.NameCharacteristicProductId);
+            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
+    .HasOne(pt => pt.GroupProduct)
+    .WithMany(p => p.GroupProductNameCharacteristicProducts)
+    .HasForeignKey(pt => pt.GroupProductId);
 
             modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
     .HasOne(pt => pt.NameCharacteristicProduct)
-    .WithMany(p => p.NameCharacteristicProductGroupProducts)
-    .HasForeignKey(pt => new { pt.NameCharacteristicProductId, pt.GroupProductId });
+    .WithMany(t => t.NameCharacteristicProductGroupProducts)
+    .HasForeignKey(pt => pt.NameCharacteristicProductId);
+
+
 
             //-----------------------------------------------------------------
 
-            modelBuilder.Entity<ValueCharacteristicProduct>()
-    .HasOne(vp => vp.NameCharacteristicProduct)
-    .WithMany(np => np.ValueCharacteristicProducts)
-    .HasForeignKey(vp => new { vp.Name, vp.GroupProductId });
+
 
             base.OnModelCreating(modelBuilder);
         }

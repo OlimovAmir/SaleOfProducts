@@ -6,15 +6,15 @@ namespace SaleOfProducts.Models
     {
         public string Name { get; set; }
         // Ссылка на группу продуктов
-        public Guid GroupProductId { get; set; }
-        public List<NameCharacteristicProduct> NameCharacteristicProducts { get; set; } // изменение
+        public Guid NameCharacteristicProductId { get; set; }
+        
         public List<GroupProductNameCharacteristicProduct> NameCharacteristicProductGroupProducts { get; set; } // Добавленное свойство
         public List<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
 
         public NameCharacteristicProduct(string name, Guid groupProductId)
         {
             Name = name;
-            GroupProductId = groupProductId;
+            
         }
 
         public NameCharacteristicProduct()
@@ -24,7 +24,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{Name} {GroupProductId}";
+            return $"{Name} ";
         }
     }
 }
