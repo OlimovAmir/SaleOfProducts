@@ -31,6 +31,7 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<NameCharacteristicProduct> NameCharacteristicProducts { get; set; }
         public DbSet<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
 
+        public DbSet<GroupProductNameCharacteristicProduct> GroupProductNameCharacteristicProducts { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
@@ -103,29 +104,24 @@ namespace SaleOfProducts.Infrastructure
                 .WithOne()
                 .HasForeignKey<ValueCharacteristicProduct>(p => p.NameCharacteristicProductId);
 
-            modelBuilder.Entity<NameCharacteristicProduct>()
-               .HasOne(p => p.GroupProducts)
-               .WithOne()
-               .HasForeignKey<NameCharacteristicProduct>(p => p.GroupProductId);
-
-
+            
             //--------------------------------------------------------------------------------------
 
             modelBuilder.Entity<NameCharacteristicProduct>()
                .HasKey(p => p.Id);
 
             modelBuilder.Entity<NameCharacteristicProduct>()
-     .HasKey(t => new { t.NameCharacteristicProductId, t.GroupProductId });
+                .HasKey(t => new { t.Name, t.GroupProductId });
 
             modelBuilder.Entity<NameCharacteristicProduct>()
-                .HasOne(pt => pt.NameCharacteristicProduct)
-                .WithMany(p => p.NameCharacteristicProductGroupProducts)
-                .HasForeignKey(pt => pt.NameCharacteristicProductId);
+    .HasMany(pt => pt.NameCharacteristicProductGroupProducts)
+    .WithOne(p => p.NameCharacteristicProduct)
+    .HasForeignKey(pt => pt.NameCharacteristicProductId);
 
-            modelBuilder.Entity<NameCharacteristicProductGroupProduct>()
-                .HasOne(pt => pt.GroupProduct)
-                .WithMany(t => t.NameCharacteristicProductGroupProducts)
-                .HasForeignKey(pt => pt.GroupProductId);
+modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
+    .HasOne(pt => pt.GroupProduct)
+    .WithMany(t => t.GroupProductNameCharacteristicProducts)
+    .HasForeignKey(pt => pt.GroupProductId);
 
             base.OnModelCreating(modelBuilder);
         }

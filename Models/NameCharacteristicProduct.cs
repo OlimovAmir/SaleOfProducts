@@ -8,6 +8,7 @@ namespace SaleOfProducts.Models
         // Ссылка на группу продуктов
         public int GroupProductId { get; set; }
         public List<NameCharacteristicProduct> NameCharacteristicProducts { get; set; } // изменение
+        public List<GroupProductNameCharacteristicProduct> NameCharacteristicProductGroupProducts { get; set; } // Добавленное свойство
 
         public NameCharacteristicProduct(string name, int groupProductId)
         {
