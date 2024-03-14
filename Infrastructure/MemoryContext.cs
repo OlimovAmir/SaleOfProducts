@@ -104,8 +104,10 @@ namespace SaleOfProducts.Infrastructure
                 .WithOne()
                 .HasForeignKey<ValueCharacteristicProduct>(p => p.NameCharacteristicProductId);
 
-            
+
             //--------------------------------------------------------------------------------------
+            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
+              .HasKey(p => p.Id);
 
             modelBuilder.Entity<NameCharacteristicProduct>()
                .HasKey(p => p.Id);
@@ -122,6 +124,13 @@ namespace SaleOfProducts.Infrastructure
                 .HasOne(pt => pt.GroupProduct)
                 .WithMany(t => t.GroupProductNameCharacteristicProducts)
                 .HasForeignKey(pt => pt.GroupProductId);
+
+            //-----------------------------------------------------------------
+
+            modelBuilder.Entity<ValueCharacteristicProduct>()
+                .HasOne(vp => vp.NameCharacteristicProduct)
+                .WithMany(np => np.ValueCharacteristicProducts)
+                .HasForeignKey(vp => new { vp.NameCharacteristicProductId, vp.GroupProductId });
 
             base.OnModelCreating(modelBuilder);
         }

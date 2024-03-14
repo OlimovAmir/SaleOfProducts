@@ -5,6 +5,7 @@ namespace SaleOfProducts.Models
     public class ValueCharacteristicProduct : BaseEntity
     {
         public string Name { get; set; }
+        public Guid GroupProductId { get; set; }
         // Foreign key
         public Guid NameCharacteristicProductId { get; set; }
         // Navigation property
