@@ -11,9 +11,9 @@ namespace SaleOfProducts.Models
         // Коллекция характеристик продуктов, относящихся к данной группе
         public ICollection<GroupProductNameCharacteristicProduct> GroupProductNameCharacteristicProducts { get; set; }
 
-        public GroupProduct(string name, Guid groupProductId)
+        public GroupProduct(string name)
         {
-            GroupProductId = groupProductId;
+            
             Name = name;
             //NameCharacteristicProducts = new List<NameCharacteristicProduct>(); // Инициализация коллекции
         }

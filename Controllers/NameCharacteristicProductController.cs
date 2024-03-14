@@ -15,7 +15,7 @@ namespace SaleOfProducts.Controllers
             _service = service;
         }
         [HttpGet("AllItems")]
-        public IQueryable<NameCharacteristicProduct> Get()
+        public IQueryable<NameCharacteristicProduct> Get()  
         {
             return _service.GetAll();
         }
