@@ -16,11 +16,8 @@ namespace SaleOfProducts.Controllers
 
         [HttpGet("AllItems")]
         public virtual IEnumerable<TEntity> Get()
-        {
-            using (_service as IDisposable)
-            {
-                return _service.GetAll();
-            }
+        {            
+            return _service.GetAll();            
         }
 
         [HttpGet("GetItemById")]
