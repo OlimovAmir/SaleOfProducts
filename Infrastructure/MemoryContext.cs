@@ -113,17 +113,17 @@ namespace SaleOfProducts.Infrastructure
                .HasKey(p => p.Id);
 
             modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-         .HasKey(pt => new { pt.GroupProductId, pt.NameCharacteristicProductId });
+              .HasKey(pt => new { pt.GroupProductId, pt.NameCharacteristicProductId });
 
             modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-    .HasOne(pt => pt.GroupProduct)
-    .WithMany(p => p.GroupProductNameCharacteristicProducts)
-    .HasForeignKey(pt => pt.GroupProductId);
+             .HasOne(gpc => gpc.GroupProduct)
+             .WithMany(gp => gp.GroupProductCharacteristics)
+             .HasForeignKey(gpc => gpc.GroupProductId);
 
             modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-    .HasOne(pt => pt.NameCharacteristicProduct)
-    .WithMany(t => t.NameCharacteristicProductGroupProducts)
-    .HasForeignKey(pt => pt.NameCharacteristicProductId);
+                .HasOne(gpc => gpc.NameCharacteristicProduct)
+                .WithMany(ncp => ncp.GroupProductCharacteristics)
+                .HasForeignKey(gpc => gpc.NameCharacteristicProductId);
 
 
 
