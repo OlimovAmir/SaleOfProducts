@@ -10,12 +10,7 @@ namespace SaleOfProducts.Models
         public Guid NameCharacteristicProductId { get; set; }
         public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
-        public GroupProductNameCharacteristicProduct()
-        {
-            NameCharacteristicProductId = Guid.NewGuid();
-            NameCharacteristicProduct = new NameCharacteristicProduct();
-
-        }
+        
 
     }
 }

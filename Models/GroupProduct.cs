@@ -1,27 +1,21 @@
 ﻿using SaleOfProducts.Models.BaseClassModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace SaleOfProducts.Models
 {
     public class GroupProduct : BaseEntity
     {
-        public Guid GroupProductId { get; set; }
+        [Required(ErrorMessage = "Пожалуйста, введите название характеристики продукта")]
+        [StringLength(100, MinimumLength = 1, ErrorMessage = "Длина названия должна быть от 1 до 100 символов")]
+        [RegularExpression(@"^[A-Za-z0-9\s]+$", ErrorMessage = "Название должно содержать только буквы, цифры и пробелы")]
         public string Name { get; set; }
-
-        //public List<NameCharacteristicProduct> NameCharacteristicProducts { get; set; }
-        // Коллекция характеристик продуктов, относящихся к данной группе
-        public ICollection<GroupProductNameCharacteristicProduct> GroupProductNameCharacteristicProducts { get; set; }
-
+        public ICollection<GroupProductNameCharacteristicProduct> GroupProductCharacteristics { get; set; }
         public GroupProduct(string name)
-        {
-            
-            Name = name;
-            //NameCharacteristicProducts = new List<NameCharacteristicProduct>(); // Инициализация коллекции
+        {            
+            Name = name;            
         }
 
-        public GroupProduct()
-        {
-            //NameCharacteristicProducts = new List<NameCharacteristicProduct>(); // Инициализация коллекции
-        }
+        public GroupProduct() { }
 
         public override string ToString()
         {
