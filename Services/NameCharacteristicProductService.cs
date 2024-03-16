@@ -48,6 +48,11 @@ namespace SaleOfProducts.Services
             return _repository.GetAll();
         }
 
+        public IQueryable<NameCharacteristicProduct> GetAllWithCharacteristic()
+        {
+            throw new NotImplementedException();
+        }
+
         public NameCharacteristicProduct GetById(Guid id)
         {
             return _repository.GetById(id);
