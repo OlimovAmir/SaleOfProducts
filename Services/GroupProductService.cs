@@ -38,6 +38,11 @@ namespace SaleOfProducts.Services
             return _repository.GetAll();
         }
 
+        public IQueryable<GroupProduct> GetAllWithProduct()
+        {
+            throw new NotImplementedException();
+        }
+
         public GroupProduct GetById(Guid id)
         {
             return _repository.GetById(id);
