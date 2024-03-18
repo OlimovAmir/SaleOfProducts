@@ -41,9 +41,16 @@ namespace SaleOfProducts.Services
 
         public IQueryable<Product> GetAllWithUnit()
         {
-            // Загрузка данных должности вместе с данными сотрудников
-            //return _dbContext.Products.Include(e => e.Unit).ToList();
-            return _repository.GetAll();
+            IQueryable<Product> result = _repository.GetAll()
+                                            .Select(p => new Product
+                                            {
+                                                Id = p.Id,
+                                                Name = p.Name,
+                                                Unit = p.Unit,
+                                                Price = p.Price,
+                                                Quantity = p.Quantity,
+                                            });
+            return result;
         }
 
         public Product GetById(Guid id)
