@@ -40,7 +40,16 @@ namespace SaleOfProducts.Services
 
         public IQueryable<GroupProduct> GetAllWithProduct()
         {
-            throw new NotImplementedException();
+            IQueryable<GroupProduct> result = _repository.GetAll()
+                                           .Select(p => new GroupProduct
+                                           {
+                                               //Id = p.Id,
+                                               Name = p.Name,
+                                               //Unit = p.Unit,
+                                               //Price = p.Price,
+                                               //Quantity = p.Quantity,
+                                           });
+            return result;
         }
 
         public GroupProduct GetById(Guid id)
