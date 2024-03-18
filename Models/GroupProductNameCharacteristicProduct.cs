@@ -8,7 +8,7 @@ namespace SaleOfProducts.Models
         public GroupProduct GroupProduct { get; set; }
 
         public Guid NameCharacteristicProductId { get; set; }
-        public NameCharacteristicProduct NameCharacteristicProduct { get; set; }        
+        public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
     }
 }
