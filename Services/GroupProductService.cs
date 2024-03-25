@@ -42,12 +42,8 @@ namespace SaleOfProducts.Services
         {
             IQueryable<GroupProduct> result = _repository.GetAll()
                                            .Select(p => new GroupProduct
-                                           {
-                                               //Id = p.Id,
-                                               Name = p.Name,
-                                               //Unit = p.Unit,
-                                               //Price = p.Price,
-                                               //Quantity = p.Quantity,
+                                           {                                               
+                                               Name = p.Name,                                               
                                            });
             return result;
         }
