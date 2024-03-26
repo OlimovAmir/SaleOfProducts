@@ -20,7 +20,7 @@ namespace SaleOfProducts.Services
             else
             {
                 _repository.Create(item);
-                return $"Created new item with this ID: {item.Id}";
+                return item.Id.ToString("D");
             }
         }
 
