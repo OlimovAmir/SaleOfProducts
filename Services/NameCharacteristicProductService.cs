@@ -50,7 +50,15 @@ namespace SaleOfProducts.Services
 
         public IQueryable<NameCharacteristicProduct> GetAllWithCharacteristic()
         {
-            throw new NotImplementedException();
+            IQueryable<NameCharacteristicProduct> result = _repository.GetAll()
+                                            .Select(p => new NameCharacteristicProduct
+                                            {
+                                                
+                                                Name = p.Name,
+                                                GroupProductCharacteristics = p.GroupProductCharacteristics,
+                                                
+                                            });
+            return result;
         }
 
         public NameCharacteristicProduct GetById(Guid id)

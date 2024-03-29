@@ -18,7 +18,7 @@ namespace SaleOfProducts.Controllers
         [HttpGet("AllItems")]
         public IEnumerable<GroupProduct> Get()
         {
-            return _service.GetAll();
+            return _service.GetAllWithProduct();
         }
 
         [HttpGet("GetItemById")]

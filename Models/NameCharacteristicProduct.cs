@@ -11,16 +11,18 @@ namespace SaleOfProducts.Models
         public string Name { get; set; }
         public ICollection<GroupProductNameCharacteristicProduct> GroupProductCharacteristics { get; set; }
 
-        public NameCharacteristicProduct(string name)
+        public NameCharacteristicProduct(string name, ICollection<GroupProductNameCharacteristicProduct> groupProductCharacteristics)
         {
-            Name = name;            
+            
+            Name = name;
+            GroupProductCharacteristics = groupProductCharacteristics;
         }
 
         public NameCharacteristicProduct() { }
 
         public override string ToString()
         {
-            return $"{Name} ";
+            return $"{Name} {GroupProductCharacteristics} ";
         }
     }
 }

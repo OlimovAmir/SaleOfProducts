@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 
 namespace SaleOfProducts.Services
@@ -41,10 +42,13 @@ namespace SaleOfProducts.Services
         public IQueryable<GroupProduct> GetAllWithProduct()
         {
             IQueryable<GroupProduct> result = _repository.GetAll()
-                                           .Select(p => new GroupProduct
-                                           {                                               
-                                               Name = p.Name,                                               
-                                           });
+            .Include(p => p.GroupProductCharacteristics) // Включаем связанные характеристики
+            .ThenInclude(pc => pc.NameCharacteristicProduct) // Включаем связанные данные из таблицы NameCharacteristicProducts
+            .Select(p => new GroupProduct
+                {
+                    Name = p.Name,
+                    GroupProductCharacteristics = p.GroupProductCharacteristics // Присваиваем связанные характеристики
+                });
             return result;
         }
 

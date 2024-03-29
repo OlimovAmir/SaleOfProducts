@@ -7,30 +7,43 @@ namespace SaleOfProducts.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NameCharacteristicProductController : BaseController<NameCharacteristicProduct>
+    public class NameCharacteristicProductController : Controller
     {
-        public NameCharacteristicProductController(ILogger<NameCharacteristicProductController> logger, INameCharacteristicProductService service) : base(logger, service)
+        readonly INameCharacteristicProductService _service;
+
+        public NameCharacteristicProductController(INameCharacteristicProductService service)
         {
+            _service = service;
         }
 
-        public override IEnumerable<NameCharacteristicProduct> Get()
+        [HttpGet("AllItems")]
+        public IEnumerable<NameCharacteristicProduct> Get()
         {
-            // Получаем все характеристики продуктов
-            var nameCharacteristicProducts = base.Get();
-
-            // Для каждой характеристики продукта получаем информацию о связанных группах продуктов
-            foreach (var ncp in nameCharacteristicProducts)
-            {
-                // Получаем группы продуктов, связанные с текущей характеристикой продукта
-                var groupProductCharacteristics = _service.GetAll;
-
-                // Добавляем информацию о группах продуктов к текущей характеристике продукта
-                //ncp.GroupProductCharacteristics = groupProductCharacteristics;
-            }
-
-            // Возвращаем список характеристик продуктов с информацией о связанных группах продуктов
-            return nameCharacteristicProducts;
+            return _service.GetAllWithCharacteristic();
         }
 
+        [HttpGet("GetItemById")]
+        public NameCharacteristicProduct Get(Guid id)
+        {
+            return _service.GetById(id);
+        }
+
+        [HttpPost("Create")]
+        public string Post([FromBody] NameCharacteristicProduct item)
+        {
+            return _service.Create(item);
+        }
+
+        [HttpPut("Update")]
+        public string Put([FromQuery] Guid id, [FromBody] NameCharacteristicProduct item)
+        {
+            return _service.Update(id, item);
+        }
+
+        [HttpDelete("Delete")]
+        public string Delete([FromQuery] Guid id)
+        {
+            return _service.Delete(id);
+        }
     }
 }
