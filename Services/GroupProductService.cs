@@ -41,15 +41,9 @@ namespace SaleOfProducts.Services
 
         public IQueryable<GroupProduct> GetAllWithProduct()
         {
-            IQueryable<GroupProduct> result = _repository.GetAll()
-            .Include(p => p.GroupProductCharacteristics) // Включаем связанные характеристики
-            .ThenInclude(pc => pc.NameCharacteristicProduct) // Включаем связанные данные из таблицы NameCharacteristicProducts
-            .Select(p => new GroupProduct
-                {
-                    Name = p.Name,
-                    GroupProductCharacteristics = p.GroupProductCharacteristics // Присваиваем связанные характеристики
-                });
-            return result;
+            return _repository.GetAll()
+                .Include(p => p.GroupProductCharacteristics)
+                .ThenInclude(pc => pc.NameCharacteristicProduct);
         }
 
         public GroupProduct GetById(Guid id)

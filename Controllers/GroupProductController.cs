@@ -21,6 +21,12 @@ namespace SaleOfProducts.Controllers
             return _service.GetAll();
         }
 
+        [HttpGet("AllItemsWithProduct")]
+        public IEnumerable<GroupProduct> GetAllWithProduct()
+        {
+            return _service.GetAllWithProduct();
+        }
+
         [HttpGet("GetItemById")]
         public GroupProduct Get(Guid id)
         {
