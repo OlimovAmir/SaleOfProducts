@@ -7,7 +7,7 @@ namespace SaleOfProducts.Models
 {
     public class GroupProduct : BaseEntity
     {
-        //public Guid GroupProductId { get; set; } // Добавляем идентификатор группы продуктов
+        public Guid GroupProductId { get; set; } // Добавляем идентификатор группы продуктов
 
         [Required(ErrorMessage = "Пожалуйста, введите название характеристики продукта")]
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Длина названия должна быть от 1 до 100 символов")]
@@ -17,11 +17,11 @@ namespace SaleOfProducts.Models
        
         
         public ICollection<GroupProductNameCharacteristicProduct> GroupProductCharacteristics { get; set; }
-        public GroupProduct(string name)
+        public GroupProduct(string name, Guid groupProductId)
         {
             Name = name;
             GroupProductCharacteristics = new List<GroupProductNameCharacteristicProduct>();
-            
+            GroupProductId = groupProductId;
         }
 
         public GroupProduct() 
