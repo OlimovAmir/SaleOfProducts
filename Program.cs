@@ -26,8 +26,8 @@ namespace SaleOfProducts
 
             builder.Services.AddLogging(l =>
             {
-                //l.ClearProviders();
-                //l.AddConsole();
+                
+               
             });
             // Add services to the container.
 
@@ -74,31 +74,9 @@ namespace SaleOfProducts
                 var context = scope.ServiceProvider.GetService<MemoryContext>();
                 context.Database.Migrate();
 
-                //TODO -- NoTracking
-                //var bank = context.Banks.First();
-                //var oldName = bank.Name;
-                //context.Attach(bank);
-                //bank.Name = "Test";
-                ////context.Update(bank);
-                //context.SaveChanges();
-
-                //bank.Name = oldName;
-                //context.SaveChanges();
-
-                //TODO - LazyLoadingProxies
-                //var bank = context.Banks.First();
-                //var name = bank.Name;
-                //var branchs = bank.Branchs;
-
-
-                //TODO: Lazy loading for spesific properties
-                //var branch = context.Branchs.First();
-                //var address = branch.Address;
-                //var bank = branch.Bank;
-                //var bank2 = branch.Bank;
+               
             }
-
-            // Configure the HTTP request pipeline.
+            
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

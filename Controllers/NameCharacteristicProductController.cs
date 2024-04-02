@@ -12,5 +12,7 @@ namespace SaleOfProducts.Controllers
         public NameCharacteristicProductController(ILogger<NameCharacteristicProductController> logger, INameCharacteristicProductService service) : base(logger, service)
         {
         }
+
+       
     }
 }

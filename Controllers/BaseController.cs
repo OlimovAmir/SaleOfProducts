@@ -28,8 +28,9 @@ namespace SaleOfProducts.Controllers
 
         [HttpPost("Create")]
         public virtual string Post([FromBody] TEntity item)
-        {                    
-            return _service.Create(item);            
+        {
+            
+            return _service.Create(item);
         }
 
         [HttpPut("Update")]
