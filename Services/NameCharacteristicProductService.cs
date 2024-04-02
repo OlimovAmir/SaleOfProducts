@@ -28,8 +28,7 @@ namespace SaleOfProducts.Services
             }
             catch (Exception ex)
             {
-                // Здесь можно добавить обработку исключения
-                // Например, можно залогировать ошибку или вернуть сообщение об ошибке пользователю
+                
                 return $"An error occurred while creating the item: {ex.Message}";
             }
         }
