@@ -1,5 +1,6 @@
 ﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
+using SaleOfProducts.Services.IService;
 using System.Linq;
 
 namespace SaleOfProducts.Services

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.Models;
-using SaleOfProducts.Services;
 using Microsoft.Extensions.Logging;
+using SaleOfProducts.Services.IService;
 
 namespace SaleOfProducts.Controllers
 {
