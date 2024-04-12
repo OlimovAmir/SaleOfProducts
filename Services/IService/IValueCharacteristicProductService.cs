@@ -1,7 +1,6 @@
 ﻿using SaleOfProducts.Models;
-using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.IService
 {
     public interface IValueCharacteristicProductService : IBaseService<ValueCharacteristicProduct>
     {
