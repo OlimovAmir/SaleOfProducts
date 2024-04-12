@@ -1,6 +1,6 @@
 ﻿using SaleOfProducts.Models;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.IService
 {
     public interface ICustomerService : IBaseService<Customer>
     {

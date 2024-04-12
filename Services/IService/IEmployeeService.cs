@@ -1,10 +1,10 @@
 ﻿using SaleOfProducts.Models;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.IService
 {
     public interface IEmployeeService
     {
-        
+
         IEnumerable<object> GetAllWithPosition(); // Добавленный метод
         IEnumerable<Employee> GetAll();
         Employee GetById(Guid id);

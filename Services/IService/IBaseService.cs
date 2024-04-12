@@ -1,6 +1,6 @@
 ﻿using SaleOfProducts.Models.BaseClassModels;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.IService
 {
     public interface IBaseService<TEntity> where TEntity : BaseEntity
     {

@@ -5,6 +5,7 @@ using Npgsql;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
+using SaleOfProducts.Services.IService;
 using System.Text.Json.Serialization;
 
 namespace SaleOfProducts

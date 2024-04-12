@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.Models.BaseClassModels;
-using SaleOfProducts.Services;
+using SaleOfProducts.Services.IService;
 
 namespace SaleOfProducts.Controllers
 {
