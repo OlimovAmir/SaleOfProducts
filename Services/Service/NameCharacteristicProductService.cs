@@ -2,7 +2,7 @@
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
     public class NameCharacteristicProductService : INameCharacteristicProductService
     {
@@ -29,7 +29,7 @@ namespace SaleOfProducts.Services
             }
             catch (Exception ex)
             {
-                
+
                 return $"An error occurred while creating the item: {ex.Message}";
             }
         }
@@ -53,10 +53,10 @@ namespace SaleOfProducts.Services
             IQueryable<NameCharacteristicProduct> result = _repository.GetAll()
                                             .Select(p => new NameCharacteristicProduct
                                             {
-                                                
+
                                                 Name = p.Name,
                                                 GroupProductCharacteristics = p.GroupProductCharacteristics,
-                                                
+
                                             });
             return result;
         }

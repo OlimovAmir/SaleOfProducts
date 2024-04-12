@@ -1,21 +1,21 @@
-﻿using SaleOfProducts.Infrastructure;
-using SaleOfProducts.Models;
+﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
-    public class PositionService : IPositionService
+    public class SupplierService : ISupplierService
     {
-        IPostgreSQLRepository<Position> _repository;
+        IPostgreSQLRepository<Supplier> _repository;
 
-        public PositionService(IPostgreSQLRepository<Position> repository)
+        public SupplierService(IPostgreSQLRepository<Supplier> repository)
         {
             _repository = repository;
         }
-        public string Create(Position item)
+
+        public string Create(Supplier item)
         {
-            if (string.IsNullOrEmpty(item.Title))
+            if (string.IsNullOrEmpty(item.Name))
             {
                 return "The name cannot be empty";
             }
@@ -35,25 +35,27 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IQueryable<Position> GetAll()
+        public IQueryable<Supplier> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public Position GetById(Guid id)
+        public Supplier GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
-        public string Update(Guid id, Position item)
+        public string Update(Guid id, Supplier item)
         {
             var _item = _repository.GetById(id);
             if (_item is not null)
             {
-               
-                _item.Title = item.Title;
-                _item.Description = item.Description;
-                
+                _item.Name = item.Name;
+                _item.Address = item.Address;
+                _item.State = item.State;
+                _item.Status = item.Status;
+                _item.INN = item.INN;
+                _item.Phone = item.Phone;
 
                 var result = _repository.Update(_item);
                 if (result)
@@ -61,6 +63,14 @@ namespace SaleOfProducts.Services
             }
 
             return "Item updated";
+
+
+
+
+
+
+
+
         }
     }
 }

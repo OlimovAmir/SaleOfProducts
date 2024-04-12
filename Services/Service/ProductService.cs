@@ -2,7 +2,7 @@
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
     public class ProductService : IProductService
     {
@@ -74,7 +74,7 @@ namespace SaleOfProducts.Services
                     return "Item updated";
             }
 
-            return "Item updated";         
+            return "Item updated";
         }
     }
 }

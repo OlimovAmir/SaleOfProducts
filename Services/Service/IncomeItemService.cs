@@ -1,18 +1,19 @@
 ﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
+using System.Linq;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
-    public class ValueCharacteristicProductService : IValueCharacteristicProductService
+    public class IncomeItemService : IIncomeItemService
     {
-        IPostgreSQLRepository<ValueCharacteristicProduct> _repository;
+        IPostgreSQLRepository<IncomeItem> _repository;
 
-        public ValueCharacteristicProductService(IPostgreSQLRepository<ValueCharacteristicProduct> repository)
+        public IncomeItemService(IPostgreSQLRepository<IncomeItem> repository)
         {
             _repository = repository;
         }
-        public string Create(ValueCharacteristicProduct item)
+        public string Create(IncomeItem item)
         {
             if (string.IsNullOrEmpty(item.Name))
             {
@@ -34,17 +35,17 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IQueryable<ValueCharacteristicProduct> GetAll()
+        public IQueryable<IncomeItem> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public ValueCharacteristicProduct GetById(Guid id)
+        public IncomeItem GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
-        public string Update(Guid id, ValueCharacteristicProduct item)
+        public string Update(Guid id, IncomeItem item)
         {
             var _item = _repository.GetById(id);
             if (_item is not null)

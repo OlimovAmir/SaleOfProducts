@@ -1,19 +1,23 @@
-﻿using SaleOfProducts.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Infrastructure;
+using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
-    public class UserService : IUserService
+    public class UnitService : IUnitService
     {
-        IPostgreSQLRepository<User> _repository;
-        public UserService(IPostgreSQLRepository<User> repository)
+        IPostgreSQLRepository<Unit> _repository;
+
+        public UnitService(IPostgreSQLRepository<Unit> repository)
         {
             _repository = repository;
         }
-        public string Create(User item)
+
+        public string Create(Unit item)
         {
-            if (string.IsNullOrEmpty(item.Login))
+            if (string.IsNullOrEmpty(item.Name))
             {
                 return "The name cannot be empty";
             }
@@ -33,24 +37,23 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IQueryable<User> GetAll()
+        public IQueryable<Unit> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public User GetById(Guid id)
+        public Unit GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
-        public string Update(Guid id, User item)
+        public string Update(Guid id, Unit item)
         {
             var _item = _repository.GetById(id);
             if (_item is not null)
             {
-                _item.Login = item.Login;
-                _item.Id = item.Id;
-                
+                _item.Name = item.Name;
+
 
                 var result = _repository.Update(_item);
                 if (result)

@@ -2,20 +2,18 @@
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
-    public class SupplierService : ISupplierService
+    public class UserService : IUserService
     {
-        IPostgreSQLRepository<Supplier> _repository;
-
-        public SupplierService(IPostgreSQLRepository<Supplier> repository)
+        IPostgreSQLRepository<User> _repository;
+        public UserService(IPostgreSQLRepository<User> repository)
         {
             _repository = repository;
         }
-
-        public string Create(Supplier item)
+        public string Create(User item)
         {
-            if (string.IsNullOrEmpty(item.Name))
+            if (string.IsNullOrEmpty(item.Login))
             {
                 return "The name cannot be empty";
             }
@@ -35,27 +33,24 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IQueryable<Supplier> GetAll()
+        public IQueryable<User> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public Supplier GetById(Guid id)
+        public User GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
-        public string Update(Guid id, Supplier item)
+        public string Update(Guid id, User item)
         {
             var _item = _repository.GetById(id);
             if (_item is not null)
             {
-                _item.Name = item.Name;
-                _item.Address = item.Address;
-                _item.State = item.State;
-                _item.Status = item.Status;
-                _item.INN = item.INN;
-                _item.Phone = item.Phone;
+                _item.Login = item.Login;
+                _item.Id = item.Id;
+
 
                 var result = _repository.Update(_item);
                 if (result)
@@ -63,14 +58,6 @@ namespace SaleOfProducts.Services
             }
 
             return "Item updated";
-
-            
-            
-            
-            
-            
-
-           
         }
     }
 }

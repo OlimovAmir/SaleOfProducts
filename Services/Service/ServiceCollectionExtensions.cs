@@ -1,6 +1,6 @@
 ﻿using SaleOfProducts.Repositories;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
     public static class ServiceCollectionExtensions
     {

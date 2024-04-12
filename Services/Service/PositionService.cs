@@ -1,21 +1,21 @@
-﻿using SaleOfProducts.Models;
+﻿using SaleOfProducts.Infrastructure;
+using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
-using System.Linq;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
-    public class IncomeItemService : IIncomeItemService
+    public class PositionService : IPositionService
     {
-        IPostgreSQLRepository<IncomeItem> _repository;
+        IPostgreSQLRepository<Position> _repository;
 
-        public IncomeItemService(IPostgreSQLRepository<IncomeItem> repository)
+        public PositionService(IPostgreSQLRepository<Position> repository)
         {
             _repository = repository;
         }
-        public string Create(IncomeItem item)
+        public string Create(Position item)
         {
-            if (string.IsNullOrEmpty(item.Name))
+            if (string.IsNullOrEmpty(item.Title))
             {
                 return "The name cannot be empty";
             }
@@ -35,22 +35,24 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IQueryable<IncomeItem> GetAll()
+        public IQueryable<Position> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public IncomeItem GetById(Guid id)
+        public Position GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
-        public string Update(Guid id, IncomeItem item)
+        public string Update(Guid id, Position item)
         {
             var _item = _repository.GetById(id);
             if (_item is not null)
             {
-                _item.Name = item.Name;
+
+                _item.Title = item.Title;
+                _item.Description = item.Description;
 
 
                 var result = _repository.Update(_item);

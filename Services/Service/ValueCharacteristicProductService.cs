@@ -1,21 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SaleOfProducts.Infrastructure;
-using SaleOfProducts.Models;
+﻿using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.Services
+namespace SaleOfProducts.Services.Service
 {
-    public class UnitService : IUnitService
+    public class ValueCharacteristicProductService : IValueCharacteristicProductService
     {
-        IPostgreSQLRepository<Unit> _repository;
+        IPostgreSQLRepository<ValueCharacteristicProduct> _repository;
 
-        public UnitService(IPostgreSQLRepository<Unit> repository)
+        public ValueCharacteristicProductService(IPostgreSQLRepository<ValueCharacteristicProduct> repository)
         {
             _repository = repository;
         }
-
-        public string Create(Unit item)
+        public string Create(ValueCharacteristicProduct item)
         {
             if (string.IsNullOrEmpty(item.Name))
             {
@@ -37,23 +34,23 @@ namespace SaleOfProducts.Services
                 return "Item not found";
         }
 
-        public IQueryable<Unit> GetAll()
+        public IQueryable<ValueCharacteristicProduct> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public Unit GetById(Guid id)
+        public ValueCharacteristicProduct GetById(Guid id)
         {
             return _repository.GetById(id);
         }
 
-        public string Update(Guid id, Unit item)
+        public string Update(Guid id, ValueCharacteristicProduct item)
         {
             var _item = _repository.GetById(id);
             if (_item is not null)
             {
                 _item.Name = item.Name;
-                
+
 
                 var result = _repository.Update(_item);
                 if (result)

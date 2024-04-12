@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.Models;
-using SaleOfProducts.Services;
 using SaleOfProducts.Services.IService;
+using SaleOfProducts.Services.Service;
 
 namespace SaleOfProducts.Controllers
 {
