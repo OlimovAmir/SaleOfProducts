@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.Models;
 using SaleOfProducts.Services.IService;
 
@@ -8,6 +9,7 @@ namespace SaleOfProducts.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UnitController : BaseController<Unit>
     {
         public UnitController(ILogger<UnitController> logger, IUnitService service) : base(logger, service)
