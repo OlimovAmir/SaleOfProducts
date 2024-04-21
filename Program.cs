@@ -89,10 +89,12 @@ namespace SaleOfProducts
             }
             app.UseCors("AllowLocalhost"); // Применяем CORS middleware
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
             app.MapControllers();
+            app.MapGet("MyMinAPI", (string name) => $"Hello {name}");
 
             app.Run();
         }
