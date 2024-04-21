@@ -51,6 +51,8 @@ namespace SaleOfProducts
             });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddEndpointsApiExplorer();
+
             builder.Services.AddScoped<ICashExpenseService, CashExpenseService>();
 
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
@@ -88,6 +90,7 @@ namespace SaleOfProducts
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowLocalhost"); // Применяем CORS middleware
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
