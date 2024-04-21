@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using SaleOfProducts.Auth;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
@@ -16,6 +17,8 @@ namespace SaleOfProducts
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddMyAuth();
 
             NpgsqlConnection.GlobalTypeMapper.EnableDynamicJson();
 
