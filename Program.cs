@@ -88,6 +88,7 @@ namespace SaleOfProducts
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowLocalhost"); // Применяем CORS middleware
+            app.UseHttpsRedirection();
 
             app.UseAuthentication();
             app.UseAuthorization();
