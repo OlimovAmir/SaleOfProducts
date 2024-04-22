@@ -79,7 +79,6 @@ namespace SaleOfProducts
             });
 
             builder.Services.AddScoped<ICashExpenseService, CashExpenseService>();
-
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IUnitService, UnitService>();
             builder.Services.AddScoped<IPositionService, PositionService>();
