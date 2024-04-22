@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Npgsql;
@@ -7,8 +5,6 @@ using SaleOfProducts.Auth;
 using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
-using SaleOfProducts.Services.IService;
-using SaleOfProducts.Services.Service;
 using System.Text.Json.Serialization;
 
 namespace SaleOfProducts
@@ -78,24 +74,12 @@ namespace SaleOfProducts
                 });
             });
 
-            builder.Services.AddScoped<ICashExpenseService, CashExpenseService>();
-            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
-            builder.Services.AddScoped<IUnitService, UnitService>();
-            builder.Services.AddScoped<IPositionService, PositionService>();
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<ISupplierService, SupplierService>();
-            builder.Services.AddScoped<ICashExpenseService, CashExpenseService>();
-            builder.Services.AddScoped<IExpenseItemService, ExpenseItemService>();
-            builder.Services.AddScoped<IIncomeItemService, IncomeItemService>();
-            builder.Services.AddScoped<ICharacteristicProductService, CharacteristicProductService>();
-            builder.Services.AddScoped<IGroupProductService, GroupProductService>();
-            builder.Services.AddScoped<INameCharacteristicProductService, NameCharacteristicProductService>();
-            builder.Services.AddScoped<IValueCharacteristicProductService, ValueCharacteristicProductService>();
+            
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-           
 
+            builder.Services.AddMyServicesProduct();
             builder.Services.AddScoped(typeof(IPostgreSQLRepository<>), typeof(PostgreSQLRepository<>));
 
             var app = builder.Build();

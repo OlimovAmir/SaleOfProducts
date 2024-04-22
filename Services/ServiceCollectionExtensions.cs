@@ -6,7 +6,7 @@ namespace SaleOfProducts.Services
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddMyServices(this IServiceCollection service)
+        public static void AddMyServicesProduct(this IServiceCollection service)
         {
 
             service.AddScoped<ICashExpenseService, CashExpenseService>();
