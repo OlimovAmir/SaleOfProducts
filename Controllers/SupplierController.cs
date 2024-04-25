@@ -57,9 +57,10 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpDelete("Delete")]
-        public string Delete([FromQuery] Guid id)
+        public async Task<IActionResult> DeleteUser(DeleteSupplierCommand deleteClient)
         {
-            return _service.Delete(id);
+            var result = await _mediator.Send(deleteClient);
+            return Ok(result);
         }
 
     }
