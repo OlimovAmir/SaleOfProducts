@@ -23,20 +23,22 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpGet("AllItems")]
-        public IEnumerable<Supplier> Get()
+        public async Task<ActionResult<List<Supplier>>> GetAllClients()
         {
-            return _service.GetAll();
+            var query = new GetAllSuppliersQuery();
+            var suppliers = await _mediator.Send(query);
+            return Ok(suppliers);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Supplier>> GetClientById(Guid id)
         {
             var query = new GetSupplierByIdQuery() { Id = id };
-            var client = await _mediator.Send(query);
-            if (client == null)
+            var supplier = await _mediator.Send(query);
+            if (supplier == null)
                 return NotFound();
 
-            return Ok(client);
+            return Ok(supplier);
         }
 
         [HttpPost("Create")]
