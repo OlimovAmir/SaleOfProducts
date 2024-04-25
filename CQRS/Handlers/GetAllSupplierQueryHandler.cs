@@ -19,8 +19,8 @@ namespace SaleOfProducts.CQRS.Handlers
 
         public async Task<List<Supplier>> Handle(GetAllSuppliersQuery request, CancellationToken cancellationToken)
         {
-            var clients = _service.GetAll().ToList();
-            return await Task.FromResult(clients);
+            var suppliers = _service.GetAll().ToList();
+            return await Task.FromResult(suppliers);
         }
     }
 }
