@@ -6,6 +6,9 @@ namespace SaleOfProducts.Mappings
 {
     public class SupplierMappings : Profile
     {
-
+        public SupplierMappings() 
+        {
+            CreateMap<CreateSupplierCommand, Supplier>();
+        }
     }
 }
