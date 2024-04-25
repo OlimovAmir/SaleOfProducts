@@ -49,9 +49,11 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] Supplier item)
+        public async Task<ActionResult<Supplier>> UpdateClient(Guid id, UpdateSupplierCommand command)
         {
-            return _service.Update(id, item);
+            command.Id = id;
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
 
         [HttpDelete("Delete")]
