@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
 using SaleOfProducts.CQRS.Commands;
+using SaleOfProducts.CQRS.Queries;
 using SaleOfProducts.Models;
 using SaleOfProducts.Services.IService;
 
@@ -27,10 +28,15 @@ namespace SaleOfProducts.Controllers
             return _service.GetAll();
         }
 
-        [HttpGet("GetItemById")]
-        public Supplier Get(Guid id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Supplier>> GetClientById(Guid id)
         {
-            return _service.GetById(id);
+            var query = new GetSupplierByIdQuery() { Id = id };
+            var client = await _mediator.Send(query);
+            if (client == null)
+                return NotFound();
+
+            return Ok(client);
         }
 
         [HttpPost("Create")]
