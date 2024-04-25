@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SaleOfProducts.CQRS.Commands
 {
-    public class DeleteSuppierCommand : IRequest<string>
+    public class DeleteSupplierCommand : IRequest<string>
     {
         [FromQuery]
         public Guid Id { get; set; }
