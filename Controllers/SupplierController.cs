@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Components.Forms;
+using Microsoft.AspNetCore.Mvc;
+using SaleOfProducts.CQRS.Commands;
 using SaleOfProducts.Models;
 using SaleOfProducts.Services.IService;
 
@@ -10,9 +13,12 @@ namespace SaleOfProducts.Controllers
     public class SupplierController : Controller
     {
         readonly ISupplierService _service;
-        public SupplierController(ISupplierService service)
+        private readonly IMediator _mediator;
+
+        public SupplierController(ISupplierService service, IMediator mediator)
         {
             _service = service;
+            _mediator = mediator;
         }
 
         [HttpGet("AllItems")]
@@ -28,9 +34,10 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost("Create")]
-        public string Post([FromBody] Supplier item)
+        public async Task<ActionResult<Supplier>> CreateClient(CreateSupplierCommand command)
         {
-            return _service.Create(item);
+            var supplier = await _mediator.Send(command);
+            return Ok(supplier);
         }
 
         [HttpPut("Update")]
