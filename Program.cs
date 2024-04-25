@@ -48,7 +48,8 @@ namespace SaleOfProducts
             });
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
+           
+
 
             builder.Services.AddSwaggerGen(c =>
             {
@@ -77,6 +78,8 @@ namespace SaleOfProducts
             
 
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddMyServicesProduct();
