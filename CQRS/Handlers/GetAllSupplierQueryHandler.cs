@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using SaleOfProducts.CQRS.Queries;
 using SaleOfProducts.Models;
 using SaleOfProducts.Services.IService;
 
