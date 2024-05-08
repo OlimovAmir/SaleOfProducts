@@ -1,29 +1,29 @@
 ﻿using SaleOfProducts.Models.BaseClassModels;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
+using System.Text.Json.Serialization;
 
 namespace SaleOfProducts.Models
 {
     public class Product : BaseEntity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string Name { get; set; }
-        public decimal Price { get; set; }
+        [Key]
+        //[Column("ProductId")]
+        [JsonIgnore]
+        public override Guid Id { get; set; }
+        public string Name { get; set; }    
+        public string Description { get; set; } = string.Empty;
 
-        // Property for linking to the Unit model
-        public Unit Unit { get; set; }
-
-        public double Quantity { get; set; }
-
-        // A foreign key for communication with the Unit model
-        public Guid UnitId { get; set; }
+        [JsonIgnore]
+        public Guid GroupId { get; set; }
+        public GroupProduct GroupProduct { get; set; }
 
         // Constructor
-        public Product(string name, decimal price, Unit unit, double quantity)
+        public Product(string name, string description)
         {
             Name = name;
-            Price = price;
-            Unit = unit;
-            UnitId = unit.Id; // Assuming you want to set the foreign key based on the Unit's Id
-            Quantity = quantity;
+            Description = description;           
         }
 
         public Product()
@@ -34,7 +34,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{Id} {Name} {Price} {UnitId} {Quantity}";
+            return $"{Id} {Name} {Description}";
         }
     }
 }

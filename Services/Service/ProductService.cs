@@ -40,19 +40,17 @@ namespace SaleOfProducts.Services.Service
             return _repository.GetAll();
         }
 
-        public IQueryable<Product> GetAllWithUnit()
-        {
-            IQueryable<Product> result = _repository.GetAll()
-                                            .Select(p => new Product
-                                            {
-                                                Id = p.Id,
-                                                Name = p.Name,
-                                                Unit = p.Unit,
-                                                Price = p.Price,
-                                                Quantity = p.Quantity,
-                                            });
-            return result;
-        }
+        //public IQueryable<Product> GetAllWithUnit()
+        //{
+        //    IQueryable<Product> result = _repository.GetAll()
+        //                                    .Select(p => new Product
+        //                                    {
+        //                                        Id = p.Id,
+        //                                        Name = p.Name,
+                                               
+        //                                    });
+        //    return result;
+        //}
 
         public Product GetById(Guid id)
         {
@@ -65,9 +63,7 @@ namespace SaleOfProducts.Services.Service
             if (_item is not null)
             {
                 _item.Name = item.Name;
-                _item.Unit = item.Unit;
-                _item.Price = item.Price;
-                _item.Quantity = item.Quantity;
+             
 
                 var result = _repository.Update(_item);
                 if (result)

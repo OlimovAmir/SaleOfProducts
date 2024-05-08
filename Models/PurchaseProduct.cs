@@ -1,9 +1,19 @@
-﻿namespace SaleOfProducts.Models
+﻿using MediatR;
+
+namespace SaleOfProducts.Models
 {
     public class PurchaseProduct
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
+        public decimal Price { get; set; } // цена
+        public double Quantity { get; set; } // количество
+
+        // Property for linking to the Unit model
+        public Unit Unit { get; set; } // еденица измерения        
+
+        // A foreign key for communication with the Unit model
+        public Guid UnitId { get; set; }
 
         // Property for linking to the Product model
         public Product Product { get; set; }
@@ -21,7 +31,7 @@
         
 
         // Constructor
-        public PurchaseProduct(DateTime purchaseDate, Product product, Supplier supplier)
+        public PurchaseProduct(DateTime purchaseDate, decimal price, Unit unit, Product product, Supplier supplier)
         {
             PurchaseDate = purchaseDate;
 
@@ -31,7 +41,10 @@
             Supplier = supplier;
             SupplierId = supplier.Id; // Assuming you want to set the foreign key based on the Customer's Id
 
-            
+            Unit = unit;
+            UnitId = unit.Id; // Assuming you want to set the foreign key based on the Unit's Id
+
+
         }
 
         public PurchaseProduct()

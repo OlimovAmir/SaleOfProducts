@@ -42,9 +42,8 @@ namespace SaleOfProducts.Services
 
         public IQueryable<GroupProduct> GetAllWithProduct()
         {
-            return _repository.GetAll()
-                .Include(p => p.GroupProductCharacteristics)
-                .ThenInclude(pc => pc.NameCharacteristicProduct);
+            return _repository.GetAll();
+               
         }
 
         public GroupProduct GetById(Guid id)

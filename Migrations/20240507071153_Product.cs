@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SaleOfProducts.Migrations
 {
     /// <inheritdoc />
-    public partial class ProductMigration : Migration
+    public partial class Product : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,25 +17,25 @@ namespace SaleOfProducts.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
-                    UnitId = table.Column<Guid>(type: "uuid", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    GroupId = table.Column<Guid>(type: "uuid", nullable: false),
+                    GroupProductId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Products_Units_UnitId",
-                        column: x => x.UnitId,
-                        principalTable: "Units",
+                        name: "FK_Products_GroupProducts_GroupProductId",
+                        column: x => x.GroupProductId,
+                        principalTable: "GroupProducts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_UnitId",
+                name: "IX_Products_GroupProductId",
                 table: "Products",
-                column: "UnitId");
+                column: "GroupProductId");
         }
 
         /// <inheritdoc />

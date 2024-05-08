@@ -51,13 +51,16 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<Position>()
                 .HasKey(u => u.Id); // Указание первичного ключа для сущности Position
 
-            modelBuilder.Entity<Product>()
-                .HasKey(e => e.Id); // Указание первичного ключа для Product
+            modelBuilder.Entity<GroupProduct>()
+              .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
             modelBuilder.Entity<Product>()
-                .HasOne(e => e.Unit)
-                .WithMany()
-                .HasForeignKey(e => e.UnitId);
+                .HasKey(e => e.Id); // Указание первичного ключа для Product
+            modelBuilder.Entity<Product>()
+        .HasOne(p => p.GroupProduct)
+        .WithMany(g => g.Products)
+        .HasForeignKey(p => p.GroupId);
+
 
             modelBuilder.Entity<Supplier>()
                .HasKey(e => e.Id); // Указание первичного ключа для Supplier
@@ -91,8 +94,7 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<CharacteristicProduct>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
-            modelBuilder.Entity<GroupProduct>()
-               .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
+           
 
 
 
@@ -115,10 +117,7 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
               .HasKey(pt => new { pt.GroupProductId, pt.NameCharacteristicProductId });
 
-            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-             .HasOne(gpc => gpc.GroupProduct)
-             .WithMany(gp => gp.GroupProductCharacteristics)
-             .HasForeignKey(gpc => gpc.GroupProductId);
+           
 
             modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
                 .HasOne(gpc => gpc.NameCharacteristicProduct)

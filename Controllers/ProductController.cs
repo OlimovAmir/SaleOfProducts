@@ -18,7 +18,7 @@ namespace SaleOfProducts.Controllers
         [HttpGet("AllItems")]
         public IEnumerable<Product> Get()
         {
-            return _service.GetAllWithUnit();
+            return _service.GetAll();
         }
 
         [HttpGet("GetItemById")]
@@ -28,7 +28,7 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost("Create")]
-        public string Post([FromBody] Product item)
+        public string Post([FromBody][FromQuery] Product item)
         {
             return _service.Create(item);
         }

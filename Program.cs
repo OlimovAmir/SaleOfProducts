@@ -41,7 +41,7 @@ namespace SaleOfProducts
                 options.AddPolicy("AllowLocalhost",
                     builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000") // Разрешение запроса от фронтенд домен
+                        builder.WithOrigins("http://localhost:7121", "https://localhost:7121", "http://localhost:3000") // Разрешение запроса от фронтенд домен
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });
@@ -101,6 +101,8 @@ namespace SaleOfProducts
                 app.UseSwaggerUI();
             }
             app.UseCors("AllowLocalhost"); // Применяем CORS middleware
+            app.UseRouting();
+
 
             app.UseHttpsRedirection();
 
