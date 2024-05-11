@@ -18,7 +18,7 @@ namespace SaleOfProducts.Services
             service.AddScoped<ICashExpenseService, CashExpenseService>();
             service.AddScoped<IExpenseItemService, ExpenseItemService>();
             service.AddScoped<IIncomeItemService, IncomeItemService>();
-            service.AddScoped<ICharacteristicProductService, CharacteristicProductService>();
+            
             service.AddScoped<IGroupProductService, GroupProductService>();
             service.AddScoped<INameCharacteristicProductService, NameCharacteristicProductService>();
             service.AddScoped<IValueCharacteristicProductService, ValueCharacteristicProductService>();

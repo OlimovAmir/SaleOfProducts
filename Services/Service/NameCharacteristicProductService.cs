@@ -55,7 +55,7 @@ namespace SaleOfProducts.Services.Service
                                             {
 
                                                 Name = p.Name,
-                                                GroupProductCharacteristics = p.GroupProductCharacteristics,
+                                                
 
                                             });
             return result;

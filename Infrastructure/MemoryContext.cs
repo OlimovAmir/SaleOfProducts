@@ -26,16 +26,14 @@ namespace SaleOfProducts.Infrastructure
         public DbSet<IncomeItem> IncomeItems { get; set; }
         public DbSet<CashIncome> CashIncomes { get; set; }
 
-        public DbSet<CharacteristicProduct> CharacteristicProducts { get; set; }
         public DbSet<GroupProduct> GroupProducts { get; set; }
         public DbSet<NameCharacteristicProduct> NameCharacteristicProducts { get; set; }
-        public DbSet<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
+        
 
-        public DbSet<GroupProductNameCharacteristicProduct> GroupProductNameCharacteristicProduct { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<BaseEntity>();
-                       
+
             modelBuilder.Entity<Employee>()
                 .HasKey(e => e.Id); // Указание первичного ключа для Employee
 
@@ -51,15 +49,10 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<Position>()
                 .HasKey(u => u.Id); // Указание первичного ключа для сущности Position
 
-            modelBuilder.Entity<GroupProduct>()
-              .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
+           
 
             modelBuilder.Entity<Product>()
-                .HasKey(e => e.Id); // Указание первичного ключа для Product
-            modelBuilder.Entity<Product>()
-        .HasOne(p => p.GroupProduct)
-        .WithMany(g => g.Products)
-        .HasForeignKey(p => p.GroupId);
+                .HasKey(e => e.Id); // Указание первичного ключа для Product           
 
 
             modelBuilder.Entity<Supplier>()
@@ -90,43 +83,25 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<CashIncome>()
             .HasMany(c => c.IncomeItems)
             .WithMany(); // Устанавливаем связь многие ко многим
-
-            modelBuilder.Entity<CharacteristicProduct>()
-               .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
-
            
-
-
-
-            modelBuilder.Entity<ValueCharacteristicProduct>()
-               .HasKey(p => p.Id);
-            // Определение связи один к одному между ValueCharacteristicProduct и NameCharacteristicProduct
-            modelBuilder.Entity<ValueCharacteristicProduct>()
-                .HasOne(p => p.NameCharacteristicProduct)
-                .WithOne()
-                .HasForeignKey<ValueCharacteristicProduct>(p => p.NameCharacteristicProductId);
 
 
             //--------------------------------------------------------------------------------------
-            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-              .HasKey(p => p.Id);
+
+            modelBuilder.Entity<GroupProduct>()
+             .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
             modelBuilder.Entity<NameCharacteristicProduct>()
-               .HasKey(p => p.Id);
+                           .HasKey(p => p.Id);
 
-            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-              .HasKey(pt => new { pt.GroupProductId, pt.NameCharacteristicProductId });
+            modelBuilder.Entity<NameCharacteristicProduct>()
+            .HasKey(ncp => ncp.NameCharacteristicProductId);
 
-           
+            modelBuilder.Entity<NameCharacteristicProduct>()
+                .HasMany(ncp => ncp.GroupProducts)
+                .WithMany(p => p.NameCharacteristicProducts)
+                .UsingEntity(j => j.ToTable("Product_NameCharacteristicProduct"));
 
-            modelBuilder.Entity<GroupProductNameCharacteristicProduct>()
-                .HasOne(gpc => gpc.NameCharacteristicProduct)
-                .WithMany(ncp => ncp.GroupProductCharacteristics)
-                .HasForeignKey(gpc => gpc.NameCharacteristicProductId);
-
-
-
-            //-----------------------------------------------------------------
 
 
 
