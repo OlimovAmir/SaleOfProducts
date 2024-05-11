@@ -22,10 +22,9 @@ namespace SaleOfProducts.Models
 
 
 
-        public GroupProduct(string name, Guid id)
+        public GroupProduct(string name)
         {
             Name = name;            
-            Id = id;
         }
 
         public GroupProduct() 
