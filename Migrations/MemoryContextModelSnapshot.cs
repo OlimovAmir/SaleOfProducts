@@ -52,7 +52,20 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("CashIncomeIncomeItem");
                 });
 
-            
+            modelBuilder.Entity("GroupProductNameCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("GroupProductsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("NameCharacteristicProductsNameCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("GroupProductsId", "NameCharacteristicProductsNameCharacteristicProductId");
+
+                    b.HasIndex("NameCharacteristicProductsNameCharacteristicProductId");
+
+                    b.ToTable("Product_NameCharacteristicProduct", (string)null);
+                });
 
             modelBuilder.Entity("SaleOfProducts.Models.CashExpense", b =>
                 {
@@ -185,7 +198,24 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("ExpenseItems");
                 });
 
-             modelBuilder.Entity("SaleOfProducts.Models.IncomeItem", b =>
+            modelBuilder.Entity("SaleOfProducts.Models.GroupProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("ProductId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupProducts");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.IncomeItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,7 +230,24 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("IncomeItems");
                 });
 
-            
+            modelBuilder.Entity("SaleOfProducts.Models.NameCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("NameCharacteristicProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("NameCharacteristicProductId");
+
+                    b.ToTable("NameCharacteristicProducts");
+                });
 
             modelBuilder.Entity("SaleOfProducts.Models.Position", b =>
                 {
@@ -344,7 +391,20 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
                 });
 
-            
+            modelBuilder.Entity("GroupProductNameCharacteristicProduct", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.GroupProduct", null)
+                        .WithMany()
+                        .HasForeignKey("GroupProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.NameCharacteristicProduct", null)
+                        .WithMany()
+                        .HasForeignKey("NameCharacteristicProductsNameCharacteristicProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
 
             modelBuilder.Entity("SaleOfProducts.Models.Employee", b =>
                 {

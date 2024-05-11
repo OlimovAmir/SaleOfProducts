@@ -12,15 +12,15 @@ using SaleOfProducts.Infrastructure;
 namespace SaleOfProducts.Migrations
 {
     [DbContext(typeof(MemoryContext))]
-    [Migration("20240222121608_CashIncomeMigration")]
-    partial class CashIncomeMigration
+    [Migration("20240511104329_version1")]
+    partial class version1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -53,6 +53,21 @@ namespace SaleOfProducts.Migrations
                     b.HasIndex("IncomeItemsId");
 
                     b.ToTable("CashIncomeIncomeItem");
+                });
+
+            modelBuilder.Entity("GroupProductNameCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("GroupProductsId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("NameCharacteristicProductsNameCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("GroupProductsId", "NameCharacteristicProductsNameCharacteristicProductId");
+
+                    b.HasIndex("NameCharacteristicProductsNameCharacteristicProductId");
+
+                    b.ToTable("Product_NameCharacteristicProduct", (string)null);
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.CashExpense", b =>
@@ -186,6 +201,23 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("ExpenseItems");
                 });
 
+            modelBuilder.Entity("SaleOfProducts.Models.GroupProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("ProductId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GroupProducts");
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.IncomeItem", b =>
                 {
                     b.Property<Guid>("Id")
@@ -199,6 +231,25 @@ namespace SaleOfProducts.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IncomeItems");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.NameCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("NameCharacteristicProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("NameCharacteristicProductId");
+
+                    b.ToTable("NameCharacteristicProducts");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Position", b =>
@@ -226,22 +277,23 @@ namespace SaleOfProducts.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("GroupId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GroupProductId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
-
-                    b.Property<double>("Quantity")
-                        .HasColumnType("double precision");
-
-                    b.Property<Guid>("UnitId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UnitId");
+                    b.HasIndex("GroupProductId");
 
                     b.ToTable("Products");
                 });
@@ -342,6 +394,21 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("GroupProductNameCharacteristicProduct", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.GroupProduct", null)
+                        .WithMany()
+                        .HasForeignKey("GroupProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.NameCharacteristicProduct", null)
+                        .WithMany()
+                        .HasForeignKey("NameCharacteristicProductsNameCharacteristicProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.Employee", b =>
                 {
                     b.HasOne("SaleOfProducts.Models.Position", "Position")
@@ -355,13 +422,13 @@ namespace SaleOfProducts.Migrations
 
             modelBuilder.Entity("SaleOfProducts.Models.Product", b =>
                 {
-                    b.HasOne("SaleOfProducts.Models.Unit", "Unit")
+                    b.HasOne("SaleOfProducts.Models.GroupProduct", "GroupProduct")
                         .WithMany()
-                        .HasForeignKey("UnitId")
+                        .HasForeignKey("GroupProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Unit");
+                    b.Navigation("GroupProduct");
                 });
 #pragma warning restore 612, 618
         }
