@@ -40,10 +40,22 @@ namespace SaleOfProducts.Services
             return _repository.GetAll();
         }
 
-        public IQueryable<GroupProduct> GetAllWithProduct()
+        public IQueryable<object> GetAllWithCharacteristics()
         {
-            return _repository.GetAll();
-               
+            var result = _repository.GetAll()
+                .Include(p => p.NameCharacteristicProducts)
+                .Select(p => new
+                {
+                    Id = p.Id, // Устанавливаем идентификатор из базы данных
+                    Name = p.Name,
+                    NameCharacteristicProducts = p.NameCharacteristicProducts.Select(ncp => new
+                    {
+                        Name = ncp.Name,
+                    }).ToList()
+                });
+
+            return result;
+
         }
 
         public GroupProduct GetById(Guid id)
@@ -58,13 +70,29 @@ namespace SaleOfProducts.Services
             {
                 _item.Name = item.Name;
 
+                // Убедимся, что связующая таблица инициализирована
+                if (_item.NameCharacteristicProducts == null)
+                {
+                    _item.NameCharacteristicProducts = new List<NameCharacteristicProduct>();
+                }
+
+                // Проверяем, был ли передан новый объект в связующую таблицу
+                if (item.NameCharacteristicProducts != null && item.NameCharacteristicProducts.Any())
+                {
+                    // Добавляем каждый новый объект в связующую таблицу
+                    foreach (var characteristic in item.NameCharacteristicProducts)
+                    {
+                        _item.NameCharacteristicProducts.Add(characteristic);
+                    }
+                }
 
                 var result = _repository.Update(_item);
                 if (result)
                     return "Item updated";
             }
 
-            return "Item updated";
+            return "Item not found";
         }
+
     }
 }

@@ -21,10 +21,10 @@ namespace SaleOfProducts.Controllers
             return _service.GetAll();
         }
 
-        [HttpGet("AllItemsWithProduct")]
-        public IEnumerable<GroupProduct> GetAllWithProduct()
+        [HttpGet("AllItemsGetAllWithCharacteristics")]
+        public IEnumerable<object> GetAllWithCharacteristics()
         {
-            return _service.GetAllWithProduct();
+            return _service.GetAllWithCharacteristics();
         }
 
         [HttpGet("GetItemById")]

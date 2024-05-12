@@ -43,7 +43,8 @@ namespace SaleOfProducts
                     {
                         builder.WithOrigins("http://localhost:7121", "https://localhost:7121", "http://localhost:3000") // Разрешение запроса от фронтенд домен
                                .AllowAnyHeader()
-                               .AllowAnyMethod();
+                               .AllowAnyMethod()
+                               .AllowCredentials(); // Разрешение передачи учетных данных (например, куки)
                     });
             });
 
