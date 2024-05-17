@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using SaleOfProducts.Models.BaseClassModels;
 
 namespace SaleOfProducts.Models
 {
-    public class PurchaseProduct
+    public class PurchaseProduct : BaseEntity
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+       
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
         public decimal Price { get; set; } // цена
         public double Quantity { get; set; } // количество

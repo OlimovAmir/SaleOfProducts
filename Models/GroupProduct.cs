@@ -10,28 +10,21 @@ namespace SaleOfProducts.Models
     public class GroupProduct : BaseEntity
     {
         [Key]
-        [Column("GroupProductsId")]
-        
+        [Column("GroupProductsId")]        
         public override Guid Id { get; set; } // Добавляем идентификатор группы продуктов
 
         [Required(ErrorMessage = "Пожалуйста, введите название характеристики продукта")]
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Длина названия должна быть от 1 до 100 символов")]
         //[RegularExpression(@"^[A-Za-z0-9\s]+$", ErrorMessage = "Название должно содержать только буквы, цифры и пробелы")]
-        public string Name { get; set; }
-        
+        public string Name { get; set; }        
         public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
-
-
 
         public GroupProduct(string name)
         {
             Name = name;            
         }
 
-        public GroupProduct() 
-        {
-            
-        }
+        public GroupProduct() {   }
 
         public override string ToString()
         {

@@ -67,6 +67,11 @@ namespace SaleOfProducts.Repositories
                 return false;
             }
         }
+
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 
 

@@ -1,27 +1,31 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
+using AutoMapper;
+using System.Threading;
+using System.Threading.Tasks;
 using SaleOfProducts.CQRS.Commands;
 using SaleOfProducts.Models;
 using SaleOfProducts.Services.IService;
 
-namespace SaleOfProducts.CQRS.Handlers
+public class CreateSupplierCommandHandler : IRequestHandler<CreateSupplierCommand, Supplier>
 {
-    public class CreateSupplierCommandHandler : IRequestHandler<CreateSupplierCommand, Supplier>
+    private readonly ISupplierService _service;
+    private readonly IMapper _mapper;
+
+    public CreateSupplierCommandHandler(ISupplierService service, IMapper mapper)
     {
-        private ISupplierService _service;
-        private readonly IMapper _mapper;
+        _service = service;
+        _mapper = mapper;
+    }
 
-        public CreateSupplierCommandHandler(ISupplierService service, IMapper mapper)
-        {
-            _service = service;
-            _mapper = mapper;
-        }
+    public async Task<Supplier> Handle(CreateSupplierCommand request, CancellationToken cancellationToken)
+    {
+        // Преобразование запроса в модель Supplier
+        var supplier = _mapper.Map<Supplier>(request);
 
-        public Task<Supplier> Handle(CreateSupplierCommand request, CancellationToken cancellationToken)
-        {
-            var user = _mapper.Map<Supplier>(request);
-            _service.Create(user);
-            return Task.FromResult(user);
-        }
+        // Асинхронное создание поставщика
+        await _service.CreateAsync(supplier);
+
+        // Возврат созданного поставщика
+        return supplier;
     }
 }

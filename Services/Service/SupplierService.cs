@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
@@ -22,6 +23,7 @@ namespace SaleOfProducts.Services.Service
             else
             {
                 _repository.Create(item);
+                _repository.SaveChangesAsync().Wait();
                 return $"Created new item with this ID: {item.Id}";
             }
         }
@@ -57,20 +59,18 @@ namespace SaleOfProducts.Services.Service
                 _item.INN = item.INN;
                 _item.Phone = item.Phone;
 
-                var result = _repository.Update(_item);
-                if (result)
-                    return "Item updated";
+                _repository.Update(_item);
+                _repository.SaveChangesAsync().Wait();
+                return "Item updated";
             }
 
-            return "Item updated";
+            return "Item not found";
+        }
 
-
-
-
-
-
-
-
+        public async Task CreateAsync(Supplier supplier)
+        {
+            _repository.Create(supplier);
+            await _repository.SaveChangesAsync();
         }
     }
 }

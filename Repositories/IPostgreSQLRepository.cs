@@ -9,5 +9,6 @@ namespace SaleOfProducts.Repositories
         bool Create(T item);
         bool Update(T item);
         bool Delete(Guid id);
+        Task SaveChangesAsync();
     }
 }

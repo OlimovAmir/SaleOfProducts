@@ -20,43 +20,32 @@ namespace SaleOfProducts
             NpgsqlConnection.GlobalTypeMapper.EnableDynamicJson();
 
             builder.Services.AddDbContext<MemoryContext>(options =>
-            options.UseNpgsql(builder.Configuration.GetConnectionString("DbPostgres"))
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DbPostgres"))
+                       .LogTo(Console.WriteLine, LogLevel.Information)
+                       .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
-            //.UseLazyLoadingProxies()
-          .LogTo(Console.Write, LogLevel.Information)
-          .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+            builder.Services.AddLogging();
 
-            builder.Services.AddLogging(l =>
-            {
-                
-               
-            });
             // Add services to the container.
-
             builder.Services.AddControllers()
-            .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+                .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("AllowLocalhost",
-                    builder =>
-                    {
-                        builder.WithOrigins("http://localhost:7121", "https://localhost:7121", "http://localhost:3000") // Разрешение запроса от фронтенд домен
-                               .AllowAnyHeader()
-                               .AllowAnyMethod()
-                               .AllowCredentials(); // Разрешение передачи учетных данных (например, куки)
-                    });
+                options.AddPolicy("AllowLocalhost", builder =>
+                {
+                    builder.WithOrigins("http://localhost:7121", "https://localhost:7121", "http://localhost:3000", "https://localhost:7267")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .AllowCredentials();
+                });
             });
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-           
-
-
+            // Swagger configuration
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SaleOfProduct application APIs", Version = "v1" });
 
-                // Add the JWT Bearer authentication scheme
                 var securityScheme = new OpenApiSecurityScheme
                 {
                     Name = "Authorization",
@@ -69,47 +58,38 @@ namespace SaleOfProducts
                 };
                 c.AddSecurityDefinition("Bearer", securityScheme);
 
-                // Use the JWT Bearer authentication scheme globally
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                { securityScheme, new List<string>() }
+                {
+                    { securityScheme, new List<string>() }
                 });
             });
-
-            
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-            builder.Services.AddSwaggerGen();
-
             builder.Services.AddMyServicesProduct();
             builder.Services.AddScoped(typeof(IPostgreSQLRepository<>), typeof(PostgreSQLRepository<>));
 
             var app = builder.Build();
 
+            // Apply migrations at startup
             using (var scope = app.Services.CreateScope())
             {
-                var context = scope.ServiceProvider.GetService<MemoryContext>();
+                var context = scope.ServiceProvider.GetRequiredService<MemoryContext>();
                 context.Database.Migrate();
-
-               
             }
-            
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseCors("AllowLocalhost"); // Применяем CORS middleware
+
+            app.UseCors("AllowLocalhost"); // Apply CORS middleware
             app.UseRouting();
-
-
             app.UseHttpsRedirection();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
 
             app.MapControllers();
             app.MapGet("MyMinAPI", (string name) => $"Hello {name}");

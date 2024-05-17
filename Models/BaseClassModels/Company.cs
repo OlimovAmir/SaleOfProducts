@@ -3,8 +3,7 @@
 namespace SaleOfProducts.Models.BaseClassModels
 {
     public abstract class Company : BaseEntity
-    {
-        public Guid Id { get; set; } = Guid.NewGuid();
+    {        
 
         [Required]
         public string Name { get; set; }
