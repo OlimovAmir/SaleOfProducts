@@ -7,9 +7,9 @@ namespace SaleOfProducts.CQRS.Commands
     {
         public string Name { get; set; }
         public string Address { get; set; }
-        public SupplierStatus State { get; set; }
-        public SupplierStatus Status { get; set; }
-        public string INN { get; set; }
-        public string Phone { get; set; }
+        public SupplierStatus? State { get; set; } // Сделал поле nullable
+        public string Status { get; set; }
+        public int? INN { get; set; } // Сделал поле nullable
+        public int? Phone { get; set; } // Сделал поле nullable
     }
 }

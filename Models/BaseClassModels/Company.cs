@@ -5,16 +5,16 @@ namespace SaleOfProducts.Models.BaseClassModels
     public abstract class Company : BaseEntity
     {        
 
-        [Required]
+        
         public string Name { get; set; }
-        [Required]
+      
         public string Status { get; set; }
-        [Required]
+       
         public string Address { get; set; }
-        [Required]
-        public int Phone { get; set; }
-        [Required]
-        public int INN { get; set; }
+       
+        public int? Phone { get; set; }
+       
+        public int? INN { get; set; }
 
 
 
