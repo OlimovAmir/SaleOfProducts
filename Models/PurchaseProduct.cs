@@ -17,10 +17,10 @@ namespace SaleOfProducts.Models
         public Guid UnitId { get; set; }
 
         // Property for linking to the Product model
-        public Product Product { get; set; }
+        public GroupProduct GroupProduct { get; set; }
 
         // A foreign key for communication with the Product model
-        public Guid ProductId { get; set; }
+        public Guid GroupProductId { get; set; }
 
         // Property for linking to the Customer model
         public Supplier Supplier { get; set; }
@@ -29,15 +29,19 @@ namespace SaleOfProducts.Models
         public Guid SupplierId { get; set; }
 
         // Additional properties for sale information, such as quantity, etc.
-        
+
+
+        // Связанные записи ValueCharacteristicProduct для этой покупки
+        public ICollection<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
+
 
         // Constructor
-        public PurchaseProduct(DateTime purchaseDate, decimal price, Unit unit, Product product, Supplier supplier)
+        public PurchaseProduct(DateTime purchaseDate, decimal price, Unit unit, GroupProduct groupProduct, Supplier supplier)
         {
             PurchaseDate = purchaseDate;
 
-            Product = product;
-            ProductId = product.Id; // Assuming you want to set the foreign key based on the Product's Id
+            GroupProduct = groupProduct;
+            GroupProductId = groupProduct.Id; // Assuming you want to set the foreign key based on the Product's Id
 
             Supplier = supplier;
             SupplierId = supplier.Id; // Assuming you want to set the foreign key based on the Customer's Id
@@ -55,7 +59,7 @@ namespace SaleOfProducts.Models
 
         public override string ToString()
         {
-            return $"{Id} {PurchaseDate.ToShortDateString()} {ProductId} {SupplierId}";
+            return $"{Id} {PurchaseDate.ToShortDateString()} {GroupProductId} {SupplierId}";
         }
     }
 }

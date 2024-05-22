@@ -7,6 +7,8 @@ namespace SaleOfProducts.Models
         public Guid Id { get; }
         public string Name { get; set; }
 
+        public ICollection<PurchaseProduct> PurchaseProducts { get; set; }
+
 
         // Constructor
         public Unit(string name)
