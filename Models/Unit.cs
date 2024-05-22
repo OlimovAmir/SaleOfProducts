@@ -4,11 +4,9 @@ namespace SaleOfProducts.Models
 {
     public class Unit : BaseEntity
     {
-        public Guid Id { get; }
         public string Name { get; set; }
 
         public ICollection<PurchaseProduct> PurchaseProducts { get; set; }
-
 
         // Constructor
         public Unit(string name)
@@ -16,10 +14,7 @@ namespace SaleOfProducts.Models
             Name = name;
         }
 
-        public Unit()
-        {
-            
-        }
+        public Unit() { }
 
         public override string ToString()
         {
