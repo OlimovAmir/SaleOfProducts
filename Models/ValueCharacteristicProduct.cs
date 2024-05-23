@@ -7,19 +7,21 @@ namespace SaleOfProducts.Models
     {
         [JsonIgnore]
         public Guid ValueCharacteristicProductId { get; set; }
-        public string Name { get; set; }       
+        public string Name { get; set; }
 
         // Navigation property
-        public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
-
-        public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
+        public ICollection<NameValueCharacteristicProduct> NameValueCharacteristicProducts { get; set; }
 
         public ValueCharacteristicProduct(string name)
         {
-            Name = name;           
+            Name = name;
+            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
-        public ValueCharacteristicProduct() { }
+        public ValueCharacteristicProduct()
+        {
+            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+        }
 
         public override string ToString()
         {
