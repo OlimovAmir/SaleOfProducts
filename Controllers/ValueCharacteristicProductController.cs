@@ -8,6 +8,22 @@ namespace SaleOfProducts.Controllers
     {
         public ValueCharacteristicProductController(ILogger<ValueCharacteristicProductController> logger, IValueCharacteristicProductService service) : base(logger, service)
         {
+
+        }
+
+        [HttpPost]
+        public IActionResult Post(ValueCharacteristicProduct item)
+        {
+            if (item == null)
+            {
+                return BadRequest("Item is null");
+            }
+
+            item.Id = Guid.Parse(item.Name);
+
+            
+
+            return Ok("Item created successfully");
         }
     }
 }

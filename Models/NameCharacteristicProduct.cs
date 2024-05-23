@@ -6,6 +6,7 @@ namespace SaleOfProducts.Models
 {
     public class NameCharacteristicProduct : BaseEntity
     {
+        public override Guid Id { get; set; } = Guid.NewGuid();
         [JsonIgnore]
         public Guid NameCharacteristicProductId { get; set; }
 
@@ -21,7 +22,7 @@ namespace SaleOfProducts.Models
 
         public NameCharacteristicProduct()
         {
-            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+            
         }
 
     }

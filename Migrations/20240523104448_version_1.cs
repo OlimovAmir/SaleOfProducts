@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SaleOfProducts.Migrations
 {
     /// <inheritdoc />
-    public partial class version1 : Migration
+    public partial class version_1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,10 +48,10 @@ namespace SaleOfProducts.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     State = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: true),
                     Address = table.Column<string>(type: "text", nullable: false),
-                    Phone = table.Column<int>(type: "integer", nullable: false),
-                    INN = table.Column<int>(type: "integer", nullable: false)
+                    Phone = table.Column<int>(type: "integer", nullable: true),
+                    INN = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -74,12 +74,12 @@ namespace SaleOfProducts.Migrations
                 name: "GroupProducts",
                 columns: table => new
                 {
-                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    GroupProductsId = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupProducts", x => x.ProductId);
+                    table.PrimaryKey("PK_GroupProducts", x => x.GroupProductsId);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,8 +99,8 @@ namespace SaleOfProducts.Migrations
                 columns: table => new
                 {
                     NameCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Id = table.Column<Guid>(type: "uuid", nullable: false)
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,12 +125,12 @@ namespace SaleOfProducts.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    State = table.Column<int>(type: "integer", nullable: false),
+                    State = table.Column<int>(type: "integer", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    Status = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: true),
                     Address = table.Column<string>(type: "text", nullable: false),
-                    Phone = table.Column<int>(type: "integer", nullable: false),
-                    INN = table.Column<int>(type: "integer", nullable: false)
+                    Phone = table.Column<int>(type: "integer", nullable: true),
+                    INN = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -203,7 +203,7 @@ namespace SaleOfProducts.Migrations
                         name: "FK_Products_GroupProducts_GroupProductId",
                         column: x => x.GroupProductId,
                         principalTable: "GroupProducts",
-                        principalColumn: "ProductId",
+                        principalColumn: "GroupProductsId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -245,7 +245,7 @@ namespace SaleOfProducts.Migrations
                         name: "FK_Product_NameCharacteristicProduct_GroupProducts_GroupProduc~",
                         column: x => x.GroupProductsId,
                         principalTable: "GroupProducts",
-                        principalColumn: "ProductId",
+                        principalColumn: "GroupProductsId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Product_NameCharacteristicProduct_NameCharacteristicProduct~",
@@ -279,6 +279,84 @@ namespace SaleOfProducts.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "PurchaseProduct",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    PurchaseDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    UnitId = table.Column<Guid>(type: "uuid", nullable: false),
+                    GroupProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SupplierId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PurchaseProduct", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PurchaseProduct_GroupProducts_GroupProductId",
+                        column: x => x.GroupProductId,
+                        principalTable: "GroupProducts",
+                        principalColumn: "GroupProductsId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PurchaseProduct_Suppliers_SupplierId",
+                        column: x => x.SupplierId,
+                        principalTable: "Suppliers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PurchaseProduct_Units_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "Units",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ValueCharacteristicProducts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    ValueCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    PurchaseProductId = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ValueCharacteristicProducts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ValueCharacteristicProducts_PurchaseProduct_PurchaseProduct~",
+                        column: x => x.PurchaseProductId,
+                        principalTable: "PurchaseProduct",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NameValueCharacteristicProduct",
+                columns: table => new
+                {
+                    NameCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ValueCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NameValueCharacteristicProduct", x => new { x.NameCharacteristicProductId, x.ValueCharacteristicProductId });
+                    table.ForeignKey(
+                        name: "FK_NameValueCharacteristicProduct_NameCharacteristicProducts_N~",
+                        column: x => x.NameCharacteristicProductId,
+                        principalTable: "NameCharacteristicProducts",
+                        principalColumn: "NameCharacteristicProductId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_NameValueCharacteristicProduct_ValueCharacteristicProducts_~",
+                        column: x => x.ValueCharacteristicProductId,
+                        principalTable: "ValueCharacteristicProducts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CashExpenseExpenseItem_ExpenseItemsId",
                 table: "CashExpenseExpenseItem",
@@ -295,6 +373,11 @@ namespace SaleOfProducts.Migrations
                 column: "PositionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NameValueCharacteristicProduct_ValueCharacteristicProductId",
+                table: "NameValueCharacteristicProduct",
+                column: "ValueCharacteristicProductId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Product_NameCharacteristicProduct_NameCharacteristicProduct~",
                 table: "Product_NameCharacteristicProduct",
                 column: "NameCharacteristicProductsNameCharacteristicProductId");
@@ -303,6 +386,26 @@ namespace SaleOfProducts.Migrations
                 name: "IX_Products_GroupProductId",
                 table: "Products",
                 column: "GroupProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseProduct_GroupProductId",
+                table: "PurchaseProduct",
+                column: "GroupProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseProduct_SupplierId",
+                table: "PurchaseProduct",
+                column: "SupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PurchaseProduct_UnitId",
+                table: "PurchaseProduct",
+                column: "UnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ValueCharacteristicProducts_PurchaseProductId",
+                table: "ValueCharacteristicProducts",
+                column: "PurchaseProductId");
         }
 
         /// <inheritdoc />
@@ -321,16 +424,13 @@ namespace SaleOfProducts.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "NameValueCharacteristicProduct");
+
+            migrationBuilder.DropTable(
                 name: "Product_NameCharacteristicProduct");
 
             migrationBuilder.DropTable(
                 name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Suppliers");
-
-            migrationBuilder.DropTable(
-                name: "Units");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -351,10 +451,22 @@ namespace SaleOfProducts.Migrations
                 name: "Positions");
 
             migrationBuilder.DropTable(
+                name: "ValueCharacteristicProducts");
+
+            migrationBuilder.DropTable(
                 name: "NameCharacteristicProducts");
 
             migrationBuilder.DropTable(
+                name: "PurchaseProduct");
+
+            migrationBuilder.DropTable(
                 name: "GroupProducts");
+
+            migrationBuilder.DropTable(
+                name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "Units");
         }
     }
 }

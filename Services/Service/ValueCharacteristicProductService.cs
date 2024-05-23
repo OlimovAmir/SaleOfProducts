@@ -14,7 +14,11 @@ namespace SaleOfProducts.Services.Service
         }
         public string Create(ValueCharacteristicProduct item)
         {
-            if (string.IsNullOrEmpty(item.Name))
+            if (item == null)
+            {
+                return "Item is null";
+            }
+            else if (string.IsNullOrEmpty(item.Name))
             {
                 return "The name cannot be empty";
             }

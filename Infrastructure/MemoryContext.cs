@@ -111,17 +111,17 @@ namespace SaleOfProducts.Infrastructure
 
 
             modelBuilder.Entity<NameValueCharacteristicProduct>()
-                .HasKey(nv => new { nv.NameCharacteristicProductId, nv.ValueCharacteristicProductId });
+             .HasKey(nvcp => new { nvcp.NameCharacteristicProductId, nvcp.ValueCharacteristicProductId });
 
             modelBuilder.Entity<NameValueCharacteristicProduct>()
-                .HasOne(nv => nv.NameCharacteristicProduct)
-                .WithMany(nc => nc.NameValueCharacteristicProducts)
-                .HasForeignKey(nv => nv.NameCharacteristicProductId);
+                .HasOne(nvcp => nvcp.NameCharacteristicProduct)
+                .WithMany(ncp => ncp.NameValueCharacteristicProducts)
+                .HasForeignKey(nvcp => nvcp.NameCharacteristicProductId);
 
             modelBuilder.Entity<NameValueCharacteristicProduct>()
-                .HasOne(nv => nv.ValueCharacteristicProduct)
-                .WithMany(vc => vc.NameValueCharacteristicProducts)
-                .HasForeignKey(nv => nv.ValueCharacteristicProductId);
+                .HasOne(nvcp => nvcp.ValueCharacteristicProduct)
+                .WithMany(vcp => vcp.NameValueCharacteristicProducts)
+                .HasForeignKey(nvcp => nvcp.ValueCharacteristicProductId);
 
 
 

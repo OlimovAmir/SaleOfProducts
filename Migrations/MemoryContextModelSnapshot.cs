@@ -125,21 +125,20 @@ namespace SaleOfProducts.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("INN")
+                    b.Property<int?>("INN")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Phone")
+                    b.Property<int?>("Phone")
                         .HasColumnType("integer");
 
                     b.Property<int>("State")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -203,7 +202,7 @@ namespace SaleOfProducts.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("ProductId");
+                        .HasColumnName("GroupProductsId");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -247,6 +246,21 @@ namespace SaleOfProducts.Migrations
                     b.HasKey("NameCharacteristicProductId");
 
                     b.ToTable("NameCharacteristicProducts");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.NameValueCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("NameCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ValueCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("NameCharacteristicProductId", "ValueCharacteristicProductId");
+
+                    b.HasIndex("ValueCharacteristicProductId");
+
+                    b.ToTable("NameValueCharacteristicProduct");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Position", b =>
@@ -295,6 +309,41 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SaleOfProducts.Models.PurchaseProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("GroupProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("numeric");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("double precision");
+
+                    b.Property<Guid>("SupplierId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("UnitId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupProductId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("PurchaseProduct");
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.Supplier", b =>
                 {
                     b.Property<Guid>("Id")
@@ -305,21 +354,20 @@ namespace SaleOfProducts.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("INN")
+                    b.Property<int?>("INN")
                         .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Phone")
+                    b.Property<int?>("Phone")
                         .HasColumnType("integer");
 
-                    b.Property<int>("State")
+                    b.Property<int?>("State")
                         .HasColumnType("integer");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -359,6 +407,29 @@ namespace SaleOfProducts.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.ValueCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("PurchaseProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ValueCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PurchaseProductId");
+
+                    b.ToTable("ValueCharacteristicProducts");
                 });
 
             modelBuilder.Entity("CashExpenseExpenseItem", b =>
@@ -417,6 +488,25 @@ namespace SaleOfProducts.Migrations
                     b.Navigation("Position");
                 });
 
+            modelBuilder.Entity("SaleOfProducts.Models.NameValueCharacteristicProduct", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.NameCharacteristicProduct", "NameCharacteristicProduct")
+                        .WithMany("NameValueCharacteristicProducts")
+                        .HasForeignKey("NameCharacteristicProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.ValueCharacteristicProduct", "ValueCharacteristicProduct")
+                        .WithMany("NameValueCharacteristicProducts")
+                        .HasForeignKey("ValueCharacteristicProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NameCharacteristicProduct");
+
+                    b.Navigation("ValueCharacteristicProduct");
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.Product", b =>
                 {
                     b.HasOne("SaleOfProducts.Models.GroupProduct", "GroupProduct")
@@ -426,6 +516,65 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
 
                     b.Navigation("GroupProduct");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.PurchaseProduct", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.GroupProduct", "GroupProduct")
+                        .WithMany()
+                        .HasForeignKey("GroupProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.Supplier", "Supplier")
+                        .WithMany("PurchaseProducts")
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.Unit", "Unit")
+                        .WithMany("PurchaseProducts")
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GroupProduct");
+
+                    b.Navigation("Supplier");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.ValueCharacteristicProduct", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.PurchaseProduct", null)
+                        .WithMany("ValueCharacteristicProducts")
+                        .HasForeignKey("PurchaseProductId");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.NameCharacteristicProduct", b =>
+                {
+                    b.Navigation("NameValueCharacteristicProducts");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.PurchaseProduct", b =>
+                {
+                    b.Navigation("ValueCharacteristicProducts");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.Supplier", b =>
+                {
+                    b.Navigation("PurchaseProducts");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.Unit", b =>
+                {
+                    b.Navigation("PurchaseProducts");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.ValueCharacteristicProduct", b =>
+                {
+                    b.Navigation("NameValueCharacteristicProducts");
                 });
 #pragma warning restore 612, 618
         }

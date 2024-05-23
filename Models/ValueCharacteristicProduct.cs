@@ -5,6 +5,7 @@ namespace SaleOfProducts.Models
 {
     public class ValueCharacteristicProduct : BaseEntity
     {
+        public override Guid Id { get; set; }
         [JsonIgnore]
         public Guid ValueCharacteristicProductId { get; set; }
         public string Name { get; set; }
@@ -14,13 +15,12 @@ namespace SaleOfProducts.Models
 
         public ValueCharacteristicProduct(string name)
         {
-            Name = name;
-            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+            Name = name;            
         }
 
         public ValueCharacteristicProduct()
         {
-            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+            
         }
 
         public override string ToString()
