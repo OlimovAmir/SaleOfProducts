@@ -19,5 +19,8 @@ namespace SaleOfProducts.Models
         [JsonIgnore]
         public ICollection<GroupProduct>? GroupProducts { get; set; }
 
+        [JsonIgnore]
+        public ICollection<ValueCharacteristicProduct>? ValueCharacteristicProducts { get; set; }
+
     }
 }

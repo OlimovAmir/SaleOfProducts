@@ -1,31 +1,29 @@
 ﻿using SaleOfProducts.Models.BaseClassModels;
+using System.Text.Json.Serialization;
 
 namespace SaleOfProducts.Models
 {
     public class ValueCharacteristicProduct : BaseEntity
     {
-        public string Name { get; set; }
-        public Guid GroupProductId { get; set; }
-        // Foreign key
-        public Guid NameCharacteristicProductId { get; set; }
+        [JsonIgnore]
+        public Guid ValueCharacteristicProductId { get; set; }
+        public string Name { get; set; }       
+
         // Navigation property
         public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
-        public ValueCharacteristicProduct(string name, Guid nameCharacteristicProductId)
+        public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
+
+        public ValueCharacteristicProduct(string name)
         {
-            Name = name;
-            NameCharacteristicProductId = nameCharacteristicProductId;
-            
+            Name = name;           
         }
 
-        public ValueCharacteristicProduct()
-        {
-            
-        }
+        public ValueCharacteristicProduct() { }
 
         public override string ToString()
         {
-            return $"{Name} {NameCharacteristicProductId}";
+            return $"{Name}";
         }
     }
 }
