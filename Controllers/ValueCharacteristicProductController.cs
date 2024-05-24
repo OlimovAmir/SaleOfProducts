@@ -12,11 +12,11 @@ namespace SaleOfProducts.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(ValueCharacteristicProduct item)
+        public IActionResult Post([FromBody] ValueCharacteristicProduct item)
         {
             if (item == null)
             {
-                return BadRequest("Item is null");
+                return BadRequest("Item is null BadRequest !!!");
             }
 
             item.Id = Guid.Parse(item.Name);

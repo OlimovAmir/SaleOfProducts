@@ -6,6 +6,7 @@ using SaleOfProducts.Infrastructure;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 
 namespace SaleOfProducts
 {
@@ -28,7 +29,10 @@ namespace SaleOfProducts
 
             // Add services to the container.
             builder.Services.AddControllers()
-                .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+                .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             builder.Services.AddCors(options =>
             {
