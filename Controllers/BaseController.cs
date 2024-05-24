@@ -33,6 +33,7 @@ namespace SaleOfProducts.Controllers
             return _service.Create(item);
         }
 
+
         [HttpPut("Update")]
         public virtual string Put([FromQuery] Guid id, [FromBody] TEntity item)
         {

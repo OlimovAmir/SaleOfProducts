@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Models.BaseClassModels;
+﻿using SaleOfProducts.Models;
+using SaleOfProducts.Models.BaseClassModels;
 
 namespace SaleOfProducts.Services.IService
 {
@@ -12,6 +13,6 @@ namespace SaleOfProducts.Services.IService
 
         string Update(Guid id, TEntity item);
 
-        string Delete(Guid id);
+        string Delete(Guid id);        
     }
 }

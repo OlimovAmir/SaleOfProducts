@@ -4,26 +4,29 @@ using SaleOfProducts.Services.IService;
 
 namespace SaleOfProducts.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ValueCharacteristicProductController : BaseController<ValueCharacteristicProduct>
     {
+
         public ValueCharacteristicProductController(ILogger<ValueCharacteristicProductController> logger, IValueCharacteristicProductService service) : base(logger, service)
         {
 
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] ValueCharacteristicProduct item)
-        {
-            if (item == null)
-            {
-                return BadRequest("Item is null BadRequest !!!");
-            }
+        
 
-            item.Id = Guid.Parse(item.Name);
+        //[HttpPost("Create")]
+        //public IActionResult Create([FromBody] ValueCharacteristicProduct item)
+        //{
+        //    if (item == null)
+        //    {
+        //        Console.WriteLine("Item is null in controller");
+        //        return BadRequest("Item is null");
+        //    }
 
-            
-
-            return Ok("Item created successfully");
-        }
+        //    var result = _service.Create(item);
+        //    return Ok(result);
+        //}
     }
 }

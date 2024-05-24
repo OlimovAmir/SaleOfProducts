@@ -11,6 +11,7 @@ namespace SaleOfProducts.Models
         public string Name { get; set; }
 
         // Navigation property
+        [JsonIgnore]
         public ICollection<NameValueCharacteristicProduct> NameValueCharacteristicProducts { get; set; }
 
         public ValueCharacteristicProduct(string name)
@@ -20,7 +21,7 @@ namespace SaleOfProducts.Models
 
         public ValueCharacteristicProduct()
         {
-            
+            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
         public override string ToString()

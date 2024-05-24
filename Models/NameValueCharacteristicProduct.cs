@@ -2,7 +2,7 @@
 {
     public class NameValueCharacteristicProduct
     {
-        public Guid NameCharacteristicProductId { get; set; }
+        public Guid NameCharacteristicProductId { get; set; } = Guid.NewGuid();
         public NameCharacteristicProduct NameCharacteristicProduct { get; set; }
 
         public Guid ValueCharacteristicProductId { get; set; }

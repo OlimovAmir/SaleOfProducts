@@ -14,16 +14,21 @@ namespace SaleOfProducts.Services.Service
         }
         public string Create(ValueCharacteristicProduct item)
         {
+            
+
             if (item == null)
             {
-                return "Item is null";
+               
+                return "Item is null in file service";
             }
-            else if (string.IsNullOrEmpty(item.Name))
+            if (string.IsNullOrEmpty(item.Name))
             {
+                
                 return "The name cannot be empty";
             }
             else
             {
+                
                 _repository.Create(item);
                 return $"Created new item with this ID: {item.Id}";
             }

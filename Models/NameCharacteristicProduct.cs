@@ -22,7 +22,7 @@ namespace SaleOfProducts.Models
 
         public NameCharacteristicProduct()
         {
-            
+            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
     }
