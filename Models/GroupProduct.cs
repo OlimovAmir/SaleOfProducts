@@ -16,12 +16,18 @@ namespace SaleOfProducts.Models
         [Required(ErrorMessage = "Пожалуйста, введите название характеристики продукта")]
         [StringLength(100, MinimumLength = 1, ErrorMessage = "Длина названия должна быть от 1 до 100 символов")]
         //[RegularExpression(@"^[A-Za-z0-9\s]+$", ErrorMessage = "Название должно содержать только буквы, цифры и пробелы")]
-        public string Name { get; set; }        
+        public string Name { get; set; }
+
+        
         public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
+        [JsonIgnore]
+        public ICollection<NameValueCharacteristicProduct>? NameValueCharacteristicProducts { get; set; }
 
         public GroupProduct(string name)
         {
-            Name = name;            
+            Name = name;
+            // NameCharacteristicProducts = new List<NameCharacteristicProduct>();
+            // NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
         public GroupProduct() {   }

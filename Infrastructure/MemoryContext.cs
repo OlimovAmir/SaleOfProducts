@@ -107,11 +107,9 @@ namespace SaleOfProducts.Infrastructure
 
             // Настройка для связи NameCharacteristicProduct и ValueCharacteristicProduct
 
-
-
-
             modelBuilder.Entity<NameValueCharacteristicProduct>()
-             .HasKey(nvcp => new { nvcp.NameCharacteristicProductId, nvcp.ValueCharacteristicProductId });
+       .ToTable("NameValueCharacteristicProduct")
+       .HasKey(nvcp => new { nvcp.NameCharacteristicProductId, nvcp.ValueCharacteristicProductId });
 
             modelBuilder.Entity<NameValueCharacteristicProduct>()
                 .HasOne(nvcp => nvcp.NameCharacteristicProduct)
@@ -122,7 +120,6 @@ namespace SaleOfProducts.Infrastructure
                 .HasOne(nvcp => nvcp.ValueCharacteristicProduct)
                 .WithMany(vcp => vcp.NameValueCharacteristicProducts)
                 .HasForeignKey(nvcp => nvcp.ValueCharacteristicProductId);
-
 
 
             base.OnModelCreating(modelBuilder);

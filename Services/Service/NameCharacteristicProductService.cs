@@ -1,4 +1,5 @@
-﻿using SaleOfProducts.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SaleOfProducts.Models;
 using SaleOfProducts.Repositories;
 using SaleOfProducts.Services.IService;
 
@@ -48,16 +49,20 @@ namespace SaleOfProducts.Services.Service
             return _repository.GetAll();
         }
 
-        public IQueryable<NameCharacteristicProduct> GetAllWithCharacteristic()
+        public IQueryable<object> GetAllWithCharacteristic()
         {
-            IQueryable<NameCharacteristicProduct> result = _repository.GetAll()
-                                            .Select(p => new NameCharacteristicProduct
-                                            {
+            var result = _repository.GetAll()
+                .Include(p => p.ValueCharacteristicProducts)
+                .Select(p => new
+                {
+                    Id = p.Id, // Устанавливаем идентификатор из базы данных
+                    Name = p.Name,
+                    ValueCharacteristicProducts = p.ValueCharacteristicProducts.Select(ncp => new
+                    {
+                        Name = ncp.Name,
+                    }).ToList()
+                });
 
-                                                Name = p.Name,
-                                                
-
-                                            });
             return result;
         }
 

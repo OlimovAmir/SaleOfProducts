@@ -14,14 +14,18 @@ namespace SaleOfProducts.Models
         [JsonIgnore]
         public ICollection<NameValueCharacteristicProduct> NameValueCharacteristicProducts { get; set; }
 
+        [JsonIgnore]
+        public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
+
         public ValueCharacteristicProduct(string name)
         {
-            Name = name;            
+            Name = name;
+            //NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
         public ValueCharacteristicProduct()
         {
-            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+           // NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
         public override string ToString()

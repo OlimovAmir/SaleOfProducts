@@ -16,13 +16,14 @@ namespace SaleOfProducts.Models
 
         [JsonIgnore]
         public ICollection<GroupProduct>? GroupProducts { get; set; }
+        public ICollection<ValueCharacteristicProduct>? ValueCharacteristicProducts { get; set; }
 
         [JsonIgnore]
         public ICollection<NameValueCharacteristicProduct> NameValueCharacteristicProducts { get; set; }
 
         public NameCharacteristicProduct()
         {
-            NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+            //NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
     }

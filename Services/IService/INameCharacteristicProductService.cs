@@ -4,6 +4,6 @@ namespace SaleOfProducts.Services.IService
 {
     public interface INameCharacteristicProductService : IBaseService<NameCharacteristicProduct>
     {
-        IQueryable<NameCharacteristicProduct> GetAllWithCharacteristic(); // Добавленный метод
+        IQueryable<object> GetAllWithCharacteristic(); // Добавленный метод
     }
 }

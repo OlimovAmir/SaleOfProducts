@@ -65,33 +65,34 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, GroupProduct item)
         {
-            var _item = _repository.GetById(id);
-            if (_item is not null)
+            var existingItem = _repository.GetById(id);
+
+            if (existingItem == null)
             {
-                _item.Name = item.Name;
-
-                // Убедимся, что связующая таблица инициализирована
-                if (_item.NameCharacteristicProducts == null)
-                {
-                    _item.NameCharacteristicProducts = new List<NameCharacteristicProduct>();
-                }
-
-                // Проверяем, был ли передан новый объект в связующую таблицу
-                if (item.NameCharacteristicProducts != null && item.NameCharacteristicProducts.Any())
-                {
-                    // Добавляем каждый новый объект в связующую таблицу
-                    foreach (var characteristic in item.NameCharacteristicProducts)
-                    {
-                        _item.NameCharacteristicProducts.Add(characteristic);
-                    }
-                }
-
-                var result = _repository.Update(_item);
-                if (result)
-                    return "Item updated";
+                return "Item not found";
             }
 
-            return "Item not found";
+            existingItem.Name = item.Name;
+
+            // Очищаем и перезаписываем коллекцию NameCharacteristicProducts
+            existingItem.NameCharacteristicProducts?.Clear();
+            if (item.NameCharacteristicProducts != null && item.NameCharacteristicProducts.Any())
+            {
+                foreach (var characteristic in item.NameCharacteristicProducts)
+                {
+                    existingItem.NameCharacteristicProducts.Add(characteristic);
+                }
+            }
+
+            // Выполняем обновление сущности
+            if (_repository.Update(existingItem))
+            {
+                return "Item updated";
+            }
+            else
+            {
+                return "Failed to update item";
+            }
         }
 
     }
