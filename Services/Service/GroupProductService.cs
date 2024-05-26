@@ -65,35 +65,96 @@ namespace SaleOfProducts.Services
 
         public string Update(Guid id, GroupProduct item)
         {
+            Console.WriteLine("Starting update process...");
+
             var existingItem = _repository.GetById(id);
 
             if (existingItem == null)
             {
+                Console.WriteLine("Item not found.");
                 return "Item not found";
             }
 
+            Console.WriteLine("Existing item found.");
+
             existingItem.Name = item.Name;
 
+            // Инициализируем коллекцию, если она не инициализирована
+            if (existingItem.NameCharacteristicProducts == null)
+            {
+                existingItem.NameCharacteristicProducts = new List<NameCharacteristicProduct>();
+                Console.WriteLine("Initialized NameCharacteristicProducts collection.");
+            }
+
             // Очищаем и перезаписываем коллекцию NameCharacteristicProducts
-            existingItem.NameCharacteristicProducts?.Clear();
+            existingItem.NameCharacteristicProducts.Clear();
+            Console.WriteLine("Cleared existing NameCharacteristicProducts.");
+
             if (item.NameCharacteristicProducts != null && item.NameCharacteristicProducts.Any())
             {
                 foreach (var characteristic in item.NameCharacteristicProducts)
                 {
+                    Console.WriteLine($"Processing characteristic with Name: {characteristic.Name}");
+
+                    // Проверяем только обязательные поля
+                    if (string.IsNullOrEmpty(characteristic.Name))
+                    {
+                        Console.WriteLine("Characteristic name is required.");
+                        return "Failed to update item: NameCharacteristicProduct name is required.";
+                    }
+
+                    // Добавляем только обязательные проверки для ValueCharacteristicProducts
+                    if (characteristic.ValueCharacteristicProducts != null)
+                    {
+                        foreach (var valueCharacteristic in characteristic.ValueCharacteristicProducts)
+                        {
+                            Console.WriteLine($"Processing value characteristic with Name: {valueCharacteristic.Name}");
+
+                            if (string.IsNullOrEmpty(valueCharacteristic.Name))
+                            {
+                                Console.WriteLine("Value characteristic name is required.");
+                                return "Failed to update item: ValueCharacteristicProduct name is required.";
+                            }
+                        }
+                    }
+
                     existingItem.NameCharacteristicProducts.Add(characteristic);
+                    Console.WriteLine("Added characteristic to NameCharacteristicProducts.");
                 }
             }
 
             // Выполняем обновление сущности
-            if (_repository.Update(existingItem))
+            try
             {
-                return "Item updated";
+                if (_repository.Update(existingItem))
+                {
+                    Console.WriteLine("Item updated successfully.");
+                    return "Item updated";
+                }
+                else
+                {
+                    Console.WriteLine("Failed to update item in the repository.");
+                    return "Failed to update item";
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return "Failed to update item";
+                Console.WriteLine($"Error updating item: {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                    Console.WriteLine($"Inner Stack Trace: {ex.InnerException.StackTrace}");
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        Console.WriteLine($"Inner Inner Exception: {ex.InnerException.InnerException.Message}");
+                        Console.WriteLine($"Inner Inner Stack Trace: {ex.InnerException.InnerException.StackTrace}");
+                    }
+                }
+                return "Failed to update item due to an exception.";
             }
         }
+
 
     }
 }

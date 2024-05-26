@@ -12,11 +12,11 @@ namespace SaleOfProducts.Models
 
         // Navigation property
         [JsonIgnore]
-        public ICollection<NameValueCharacteristicProduct> NameValueCharacteristicProducts { get; set; }
+        public ICollection<NameValueCharacteristicProduct>? NameValueCharacteristicProducts { get; set; }
 
         [JsonIgnore]
         public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
-
+         
         public ValueCharacteristicProduct(string name)
         {
             Name = name;

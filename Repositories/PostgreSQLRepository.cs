@@ -60,10 +60,23 @@ namespace SaleOfProducts.Repositories
             {
                 _context.Update(item);
                 var result = _context.SaveChanges();
+                Console.WriteLine("Repository: Item updated successfully.");
                 return result > 0;
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine($"Repository: Error updating item. {ex.Message}");
+                Console.WriteLine($"Stack Trace: {ex.StackTrace}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                    Console.WriteLine($"Inner Stack Trace: {ex.InnerException.StackTrace}");
+                    if (ex.InnerException.InnerException != null)
+                    {
+                        Console.WriteLine($"Inner Inner Exception: {ex.InnerException.InnerException.Message}");
+                        Console.WriteLine($"Inner Inner Stack Trace: {ex.InnerException.InnerException.StackTrace}");
+                    }
+                }
                 return false;
             }
         }

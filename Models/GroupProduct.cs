@@ -26,8 +26,8 @@ namespace SaleOfProducts.Models
         public GroupProduct(string name)
         {
             Name = name;
-            // NameCharacteristicProducts = new List<NameCharacteristicProduct>();
-            // NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+            //NameCharacteristicProducts = new List<NameCharacteristicProduct>();
+            //NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
         }
 
         public GroupProduct() {   }

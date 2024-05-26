@@ -19,7 +19,7 @@ namespace SaleOfProducts.Models
         public ICollection<ValueCharacteristicProduct>? ValueCharacteristicProducts { get; set; }
 
         [JsonIgnore]
-        public ICollection<NameValueCharacteristicProduct> NameValueCharacteristicProducts { get; set; }
+        public ICollection<NameValueCharacteristicProduct>? NameValueCharacteristicProducts { get; set; }
 
         public NameCharacteristicProduct()
         {
