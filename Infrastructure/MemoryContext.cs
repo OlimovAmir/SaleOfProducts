@@ -107,19 +107,34 @@ namespace SaleOfProducts.Infrastructure
 
             // Настройка для связи NameCharacteristicProduct и ValueCharacteristicProduct
 
-            modelBuilder.Entity<NameValueCharacteristicProduct>()
-       .ToTable("NameValueCharacteristicProduct")
-       .HasKey(nvcp => new { nvcp.NameCharacteristicProductId, nvcp.ValueCharacteristicProductId });
 
-            modelBuilder.Entity<NameValueCharacteristicProduct>()
-                .HasOne(nvcp => nvcp.NameCharacteristicProduct)
-                .WithMany(ncp => ncp.NameValueCharacteristicProducts)
-                .HasForeignKey(nvcp => nvcp.NameCharacteristicProductId);
+            //     modelBuilder.Entity<NameValueCharacteristicProduct>()
+            //.ToTable("NameValueCharacteristicProduct")
+            //.HasKey(nvcp => new { nvcp.NameCharacteristicProductId, nvcp.ValueCharacteristicProductId });
 
-            modelBuilder.Entity<NameValueCharacteristicProduct>()
-                .HasOne(nvcp => nvcp.ValueCharacteristicProduct)
-                .WithMany(vcp => vcp.NameValueCharacteristicProducts)
-                .HasForeignKey(nvcp => nvcp.ValueCharacteristicProductId);
+            //     modelBuilder.Entity<NameValueCharacteristicProduct>()
+            //         .HasOne(nvcp => nvcp.NameCharacteristicProduct)
+            //         .WithMany(ncp => ncp.NameValueCharacteristicProducts)
+            //         .HasForeignKey(nvcp => nvcp.NameCharacteristicProductId);
+
+            //     modelBuilder.Entity<NameValueCharacteristicProduct>()
+            //         .HasOne(nvcp => nvcp.ValueCharacteristicProduct)
+            //         .WithMany(vcp => vcp.NameValueCharacteristicProducts)
+            //         .HasForeignKey(nvcp => nvcp.ValueCharacteristicProductId);
+
+
+            
+
+            
+
+            modelBuilder.Entity<ValueCharacteristicProduct>()
+            .HasKey(ncp => ncp.ValueCharacteristicProductId);
+
+            modelBuilder.Entity<ValueCharacteristicProduct>()
+                .HasMany(ncp => ncp.NameCharacteristicProducts)
+                .WithMany(p => p.ValueCharacteristicProducts)
+                .UsingEntity(j => j.ToTable("NameValueCharacteristicProduct"));
+
 
 
             base.OnModelCreating(modelBuilder);

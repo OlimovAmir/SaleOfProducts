@@ -10,9 +10,7 @@ namespace SaleOfProducts.Models
         public Guid ValueCharacteristicProductId { get; set; }
         public string Name { get; set; }
 
-        // Navigation property
-        [JsonIgnore]
-        public ICollection<NameValueCharacteristicProduct>? NameValueCharacteristicProducts { get; set; }
+        // Navigation property        
 
         [JsonIgnore]
         public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
@@ -20,12 +18,12 @@ namespace SaleOfProducts.Models
         public ValueCharacteristicProduct(string name)
         {
             Name = name;
-            //NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+           
         }
 
         public ValueCharacteristicProduct()
         {
-           // NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+           
         }
 
         public override string ToString()
