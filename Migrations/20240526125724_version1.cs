@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SaleOfProducts.Migrations
 {
     /// <inheritdoc />
-    public partial class version_1 : Migration
+    public partial class version1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -318,14 +318,14 @@ namespace SaleOfProducts.Migrations
                 name: "ValueCharacteristicProducts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ValueCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     PurchaseProductId = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ValueCharacteristicProducts", x => x.Id);
+                    table.PrimaryKey("PK_ValueCharacteristicProducts", x => x.ValueCharacteristicProductId);
                     table.ForeignKey(
                         name: "FK_ValueCharacteristicProducts_PurchaseProduct_PurchaseProduct~",
                         column: x => x.PurchaseProductId,
@@ -337,23 +337,23 @@ namespace SaleOfProducts.Migrations
                 name: "NameValueCharacteristicProduct",
                 columns: table => new
                 {
-                    NameCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false),
-                    ValueCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false)
+                    NameCharacteristicProductsNameCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ValueCharacteristicProductsValueCharacteristicProductId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_NameValueCharacteristicProduct", x => new { x.NameCharacteristicProductId, x.ValueCharacteristicProductId });
+                    table.PrimaryKey("PK_NameValueCharacteristicProduct", x => new { x.NameCharacteristicProductsNameCharacteristicProductId, x.ValueCharacteristicProductsValueCharacteristicProductId });
                     table.ForeignKey(
                         name: "FK_NameValueCharacteristicProduct_NameCharacteristicProducts_N~",
-                        column: x => x.NameCharacteristicProductId,
+                        column: x => x.NameCharacteristicProductsNameCharacteristicProductId,
                         principalTable: "NameCharacteristicProducts",
                         principalColumn: "NameCharacteristicProductId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_NameValueCharacteristicProduct_ValueCharacteristicProducts_~",
-                        column: x => x.ValueCharacteristicProductId,
+                        column: x => x.ValueCharacteristicProductsValueCharacteristicProductId,
                         principalTable: "ValueCharacteristicProducts",
-                        principalColumn: "Id",
+                        principalColumn: "ValueCharacteristicProductId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -373,9 +373,9 @@ namespace SaleOfProducts.Migrations
                 column: "PositionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_NameValueCharacteristicProduct_ValueCharacteristicProductId",
+                name: "IX_NameValueCharacteristicProduct_ValueCharacteristicProductsV~",
                 table: "NameValueCharacteristicProduct",
-                column: "ValueCharacteristicProductId");
+                column: "ValueCharacteristicProductsValueCharacteristicProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_NameCharacteristicProduct_NameCharacteristicProduct~",

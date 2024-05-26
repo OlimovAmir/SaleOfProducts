@@ -67,6 +67,21 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("Product_NameCharacteristicProduct", (string)null);
                 });
 
+            modelBuilder.Entity("NameCharacteristicProductValueCharacteristicProduct", b =>
+                {
+                    b.Property<Guid>("NameCharacteristicProductsNameCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ValueCharacteristicProductsValueCharacteristicProductId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("NameCharacteristicProductsNameCharacteristicProductId", "ValueCharacteristicProductsValueCharacteristicProductId");
+
+                    b.HasIndex("ValueCharacteristicProductsValueCharacteristicProductId");
+
+                    b.ToTable("NameValueCharacteristicProduct", (string)null);
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.CashExpense", b =>
                 {
                     b.Property<Guid>("Id")
@@ -248,21 +263,6 @@ namespace SaleOfProducts.Migrations
                     b.ToTable("NameCharacteristicProducts");
                 });
 
-            modelBuilder.Entity("SaleOfProducts.Models.NameValueCharacteristicProduct", b =>
-                {
-                    b.Property<Guid>("NameCharacteristicProductId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ValueCharacteristicProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("NameCharacteristicProductId", "ValueCharacteristicProductId");
-
-                    b.HasIndex("ValueCharacteristicProductId");
-
-                    b.ToTable("NameValueCharacteristicProduct");
-                });
-
             modelBuilder.Entity("SaleOfProducts.Models.Position", b =>
                 {
                     b.Property<Guid>("Id")
@@ -411,8 +411,11 @@ namespace SaleOfProducts.Migrations
 
             modelBuilder.Entity("SaleOfProducts.Models.ValueCharacteristicProduct", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ValueCharacteristicProductId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("Id")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
@@ -422,10 +425,7 @@ namespace SaleOfProducts.Migrations
                     b.Property<Guid?>("PurchaseProductId")
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ValueCharacteristicProductId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
+                    b.HasKey("ValueCharacteristicProductId");
 
                     b.HasIndex("PurchaseProductId");
 
@@ -477,6 +477,21 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("NameCharacteristicProductValueCharacteristicProduct", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.NameCharacteristicProduct", null)
+                        .WithMany()
+                        .HasForeignKey("NameCharacteristicProductsNameCharacteristicProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SaleOfProducts.Models.ValueCharacteristicProduct", null)
+                        .WithMany()
+                        .HasForeignKey("ValueCharacteristicProductsValueCharacteristicProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SaleOfProducts.Models.Employee", b =>
                 {
                     b.HasOne("SaleOfProducts.Models.Position", "Position")
@@ -486,25 +501,6 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
 
                     b.Navigation("Position");
-                });
-
-            modelBuilder.Entity("SaleOfProducts.Models.NameValueCharacteristicProduct", b =>
-                {
-                    b.HasOne("SaleOfProducts.Models.NameCharacteristicProduct", "NameCharacteristicProduct")
-                        .WithMany("NameValueCharacteristicProducts")
-                        .HasForeignKey("NameCharacteristicProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SaleOfProducts.Models.ValueCharacteristicProduct", "ValueCharacteristicProduct")
-                        .WithMany("NameValueCharacteristicProducts")
-                        .HasForeignKey("ValueCharacteristicProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NameCharacteristicProduct");
-
-                    b.Navigation("ValueCharacteristicProduct");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Product", b =>
@@ -552,11 +548,6 @@ namespace SaleOfProducts.Migrations
                         .HasForeignKey("PurchaseProductId");
                 });
 
-            modelBuilder.Entity("SaleOfProducts.Models.NameCharacteristicProduct", b =>
-                {
-                    b.Navigation("NameValueCharacteristicProducts");
-                });
-
             modelBuilder.Entity("SaleOfProducts.Models.PurchaseProduct", b =>
                 {
                     b.Navigation("ValueCharacteristicProducts");
@@ -570,11 +561,6 @@ namespace SaleOfProducts.Migrations
             modelBuilder.Entity("SaleOfProducts.Models.Unit", b =>
                 {
                     b.Navigation("PurchaseProducts");
-                });
-
-            modelBuilder.Entity("SaleOfProducts.Models.ValueCharacteristicProduct", b =>
-                {
-                    b.Navigation("NameValueCharacteristicProducts");
                 });
 #pragma warning restore 612, 618
         }

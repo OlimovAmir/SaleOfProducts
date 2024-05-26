@@ -19,15 +19,13 @@ namespace SaleOfProducts.Models
         public string Name { get; set; }
 
         
-        public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }
-        [JsonIgnore]
-        public ICollection<NameValueCharacteristicProduct>? NameValueCharacteristicProducts { get; set; }
+        public ICollection<NameCharacteristicProduct>? NameCharacteristicProducts { get; set; }       
 
         public GroupProduct(string name)
         {
             Name = name;
             //NameCharacteristicProducts = new List<NameCharacteristicProduct>();
-            //NameValueCharacteristicProducts = new List<NameValueCharacteristicProduct>();
+            
         }
 
         public GroupProduct() {   }
