@@ -21,24 +21,17 @@ namespace SaleOfProducts.Controllers
         }
 
         [EnableQuery]
-        [HttpGet] // Добавляем явное указание метода
+        [HttpGet]
         public IQueryable<GroupProduct> Get()
         {
-            return _service.GetAll().AsQueryable();
+            return _service.GetAllWithCharacteristics();
         }
 
         [EnableQuery]
-        [HttpGet("AllWithCharacteristics")] // Добавляем явное указание метода и маршрут
-        public IQueryable<object> GetAllWithCharacteristics()
-        {
-            return _service.GetAllWithCharacteristics().AsQueryable();
-        }
-
-        [EnableQuery]
-        [HttpGet("{key}")] // Добавляем явное указание метода и маршрут
+        [HttpGet("{key}")]
         public SingleResult<GroupProduct> Get([FromODataUri] Guid key)
         {
-            var result = _service.GetAll().Where(g => g.Id == key);
+            var result = _service.GetAllWithCharacteristics().Where(g => g.Id == key);
             return SingleResult.Create(result);
         }
     }

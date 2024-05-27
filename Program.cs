@@ -8,9 +8,9 @@ using SaleOfProducts.Services;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using Microsoft.AspNetCore.OData;
-using SaleOfProducts.Models;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
+using SaleOfProducts.Models;
 
 namespace SaleOfProducts
 {
@@ -114,7 +114,24 @@ namespace SaleOfProducts
         private static IEdmModel GetEdmModel()
         {
             var odataBuilder = new ODataConventionModelBuilder();
-            odataBuilder.EntitySet<GroupProduct>("GroupProducts");
+
+            // Configure GroupProduct entity
+            var groupProduct = odataBuilder.EntitySet<GroupProduct>("GroupProducts").EntityType;
+            groupProduct.HasKey(gp => gp.Id);
+            groupProduct.Property(gp => gp.Name);
+            groupProduct.HasMany(gp => gp.NameCharacteristicProducts);
+
+            // Configure NameCharacteristicProduct entity
+            var nameCharacteristicProduct = odataBuilder.EntitySet<NameCharacteristicProduct>("NameCharacteristicProducts").EntityType;
+            nameCharacteristicProduct.HasKey(ncp => ncp.Id);
+            nameCharacteristicProduct.Property(ncp => ncp.Name);
+            nameCharacteristicProduct.HasMany(ncp => ncp.ValueCharacteristicProducts);
+
+            // Configure ValueCharacteristicProduct entity
+            var valueCharacteristicProduct = odataBuilder.EntitySet<ValueCharacteristicProduct>("ValueCharacteristicProducts").EntityType;
+            valueCharacteristicProduct.HasKey(vcp => vcp.Id);
+            valueCharacteristicProduct.Property(vcp => vcp.Name);
+
             return odataBuilder.GetEdmModel();
         }
     }
