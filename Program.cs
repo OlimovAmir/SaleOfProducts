@@ -93,7 +93,10 @@ namespace SaleOfProducts
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "SaleOfProduct application APIs v1");
+                });
             }
 
             app.UseCors("AllowLocalhost"); // Apply CORS middleware
