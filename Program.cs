@@ -7,6 +7,10 @@ using SaleOfProducts.Repositories;
 using SaleOfProducts.Services;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Microsoft.AspNetCore.OData;
+using SaleOfProducts.Models;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 
 namespace SaleOfProducts
 {
@@ -31,8 +35,11 @@ namespace SaleOfProducts
             builder.Services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles)
                 .AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-                );
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
+                .AddOData(opt =>
+                {
+                    opt.AddRouteComponents("odata", GetEdmModel()).Select().Expand().Filter().OrderBy().Count().SetMaxTop(100);
+                });
 
             builder.Services.AddCors(options =>
             {
@@ -99,6 +106,13 @@ namespace SaleOfProducts
             app.MapGet("MyMinAPI", (string name) => $"Hello {name}");
 
             app.Run();
+        }
+
+        private static IEdmModel GetEdmModel()
+        {
+            var odataBuilder = new ODataConventionModelBuilder();
+            odataBuilder.EntitySet<GroupProduct>("GroupProducts");
+            return odataBuilder.GetEdmModel();
         }
     }
 }
