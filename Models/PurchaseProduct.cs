@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SaleOfProducts.Models.BaseClassModels;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SaleOfProducts.Models
 {
@@ -18,6 +19,9 @@ namespace SaleOfProducts.Models
 
         // Property for linking to the Product model
         public GroupProduct GroupProduct { get; set; }
+
+        [Column(TypeName = "jsonb")]
+        public string PropertyGroup { get; set; }
 
         // A foreign key for communication with the Product model
         public Guid GroupProductId { get; set; }
