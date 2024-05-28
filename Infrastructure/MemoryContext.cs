@@ -31,6 +31,8 @@ namespace SaleOfProducts.Infrastructure
 
         public DbSet<ValueCharacteristicProduct> ValueCharacteristicProducts { get; set; }
 
+        public DbSet<PurchaseProduct> PurchaseProducts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -134,6 +136,11 @@ namespace SaleOfProducts.Infrastructure
                 .HasMany(ncp => ncp.NameCharacteristicProducts)
                 .WithMany(p => p.ValueCharacteristicProducts)
                 .UsingEntity(j => j.ToTable("NameValueCharacteristicProduct"));
+
+
+            // Таблица PurchaseProducts
+
+
 
 
 
