@@ -42,28 +42,17 @@ namespace SaleOfProducts.Services
 
         public IQueryable<GroupProduct> GetAllWithCharacteristics()
         {
-            //var result = _repository.GetAll()
-            //    .Include(p => p.NameCharacteristicProducts)
-            //    .Select(p => new
-            //    {
-            //        Id = p.Id, // Устанавливаем идентификатор из базы данных
-            //        Name = p.Name,
-            //        NameCharacteristicProducts = p.NameCharacteristicProducts.Select(ncp => new
-            //        {
-            //            Name = ncp.Name,
-            //        }).ToList()
-            //    });
-
-            //return result;
             return _repository.GetAll()
-        .Include(p => p.NameCharacteristicProducts)
-        .ThenInclude(ncp => ncp.ValueCharacteristicProducts);
-
+                .Include(p => p.NameCharacteristicProducts)
+                .ThenInclude(ncp => ncp.ValueCharacteristicProducts);
         }
 
         public GroupProduct GetById(Guid id)
         {
-            return _repository.GetById(id);
+            return _repository.GetAll()
+                .Include(p => p.NameCharacteristicProducts)
+                .ThenInclude(ncp => ncp.ValueCharacteristicProducts)
+                .FirstOrDefault(p => p.Id == id);
         }
 
         public string Update(Guid id, GroupProduct item)
