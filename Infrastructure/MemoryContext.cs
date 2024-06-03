@@ -78,16 +78,21 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<ExpenseItem>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
+
+            // Конфигурация для отношений один ко многим между CashIncome и IncomeItem
             modelBuilder.Entity<IncomeItem>()
              .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
 
             modelBuilder.Entity<CashIncome>()
                .HasKey(p => p.Id); // Указываем, что Id является первичным ключом
 
+            
             modelBuilder.Entity<CashIncome>()
-            .HasMany(c => c.IncomeItems)
-            .WithMany(); // Устанавливаем связь многие ко многим
-           
+                .HasMany(ci => ci.IncomeItems)
+                .WithOne(ii => ii.CashIncome)
+                .HasForeignKey(ii => ii.CashIncomeId)
+                .OnDelete(DeleteBehavior.Cascade); // Опционально, задаёт каскадное удаление
+
 
 
             //--------------------------------------------------------------------------------------
