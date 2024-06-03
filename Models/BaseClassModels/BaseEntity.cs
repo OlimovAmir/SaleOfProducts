@@ -1,7 +1,10 @@
-﻿namespace SaleOfProducts.Models.BaseClassModels
+﻿using System.Text.Json.Serialization;
+
+namespace SaleOfProducts.Models.BaseClassModels
 {
     public abstract class BaseEntity
     {
+        [JsonIgnore]
         public virtual Guid Id { get; set; }
 
         public BaseEntity()
