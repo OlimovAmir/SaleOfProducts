@@ -14,10 +14,7 @@ namespace SaleOfProducts.Models
             Name = name;
         }
 
-        public ExpenseItem()
-        {
-
-        }
+        public ExpenseItem() { }
 
         public override string ToString()
         {

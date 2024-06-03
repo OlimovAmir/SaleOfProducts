@@ -17,9 +17,9 @@ namespace SaleOfProducts.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     ExpenseItemId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Amount = table.Column<double>(type: "double precision", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Amount = table.Column<double>(type: "double precision", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,10 +31,11 @@ namespace SaleOfProducts.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    ExpenseItemId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Amount = table.Column<double>(type: "double precision", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: false)
+                    FromWhom = table.Column<string>(type: "text", nullable: true),
+                    ExpenseItemId = table.Column<Guid>(type: "uuid", nullable: true),
+                    TransactionDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Amount = table.Column<double>(type: "double precision", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,18 +81,6 @@ namespace SaleOfProducts.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GroupProducts", x => x.GroupProductsId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "IncomeItems",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IncomeItems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -163,6 +152,25 @@ namespace SaleOfProducts.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "IncomeItems",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    CashIncomeId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IncomeItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_IncomeItems_CashIncomes_CashIncomeId",
+                        column: x => x.CashIncomeId,
+                        principalTable: "CashIncomes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CashExpenseExpenseItem",
                 columns: table => new
                 {
@@ -204,30 +212,6 @@ namespace SaleOfProducts.Migrations
                         column: x => x.GroupProductId,
                         principalTable: "GroupProducts",
                         principalColumn: "GroupProductsId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CashIncomeIncomeItem",
-                columns: table => new
-                {
-                    CashIncomeId = table.Column<Guid>(type: "uuid", nullable: false),
-                    IncomeItemsId = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CashIncomeIncomeItem", x => new { x.CashIncomeId, x.IncomeItemsId });
-                    table.ForeignKey(
-                        name: "FK_CashIncomeIncomeItem_CashIncomes_CashIncomeId",
-                        column: x => x.CashIncomeId,
-                        principalTable: "CashIncomes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CashIncomeIncomeItem_IncomeItems_IncomeItemsId",
-                        column: x => x.IncomeItemsId,
-                        principalTable: "IncomeItems",
-                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -280,7 +264,7 @@ namespace SaleOfProducts.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PurchaseProduct",
+                name: "PurchaseProducts",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -288,26 +272,27 @@ namespace SaleOfProducts.Migrations
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     UnitId = table.Column<Guid>(type: "uuid", nullable: false),
+                    PropertyGroup = table.Column<string>(type: "jsonb", nullable: false),
                     GroupProductId = table.Column<Guid>(type: "uuid", nullable: false),
                     SupplierId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PurchaseProduct", x => x.Id);
+                    table.PrimaryKey("PK_PurchaseProducts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PurchaseProduct_GroupProducts_GroupProductId",
+                        name: "FK_PurchaseProducts_GroupProducts_GroupProductId",
                         column: x => x.GroupProductId,
                         principalTable: "GroupProducts",
                         principalColumn: "GroupProductsId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PurchaseProduct_Suppliers_SupplierId",
+                        name: "FK_PurchaseProducts_Suppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "Suppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PurchaseProduct_Units_UnitId",
+                        name: "FK_PurchaseProducts_Units_UnitId",
                         column: x => x.UnitId,
                         principalTable: "Units",
                         principalColumn: "Id",
@@ -327,9 +312,9 @@ namespace SaleOfProducts.Migrations
                 {
                     table.PrimaryKey("PK_ValueCharacteristicProducts", x => x.ValueCharacteristicProductId);
                     table.ForeignKey(
-                        name: "FK_ValueCharacteristicProducts_PurchaseProduct_PurchaseProduct~",
+                        name: "FK_ValueCharacteristicProducts_PurchaseProducts_PurchaseProduc~",
                         column: x => x.PurchaseProductId,
-                        principalTable: "PurchaseProduct",
+                        principalTable: "PurchaseProducts",
                         principalColumn: "Id");
                 });
 
@@ -363,14 +348,14 @@ namespace SaleOfProducts.Migrations
                 column: "ExpenseItemsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CashIncomeIncomeItem_IncomeItemsId",
-                table: "CashIncomeIncomeItem",
-                column: "IncomeItemsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Employees_PositionId",
                 table: "Employees",
                 column: "PositionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IncomeItems_CashIncomeId",
+                table: "IncomeItems",
+                column: "CashIncomeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_NameValueCharacteristicProduct_ValueCharacteristicProductsV~",
@@ -388,18 +373,18 @@ namespace SaleOfProducts.Migrations
                 column: "GroupProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchaseProduct_GroupProductId",
-                table: "PurchaseProduct",
+                name: "IX_PurchaseProducts_GroupProductId",
+                table: "PurchaseProducts",
                 column: "GroupProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchaseProduct_SupplierId",
-                table: "PurchaseProduct",
+                name: "IX_PurchaseProducts_SupplierId",
+                table: "PurchaseProducts",
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PurchaseProduct_UnitId",
-                table: "PurchaseProduct",
+                name: "IX_PurchaseProducts_UnitId",
+                table: "PurchaseProducts",
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
@@ -415,13 +400,13 @@ namespace SaleOfProducts.Migrations
                 name: "CashExpenseExpenseItem");
 
             migrationBuilder.DropTable(
-                name: "CashIncomeIncomeItem");
-
-            migrationBuilder.DropTable(
                 name: "Customers");
 
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "IncomeItems");
 
             migrationBuilder.DropTable(
                 name: "NameValueCharacteristicProduct");
@@ -442,13 +427,10 @@ namespace SaleOfProducts.Migrations
                 name: "ExpenseItems");
 
             migrationBuilder.DropTable(
-                name: "CashIncomes");
-
-            migrationBuilder.DropTable(
-                name: "IncomeItems");
-
-            migrationBuilder.DropTable(
                 name: "Positions");
+
+            migrationBuilder.DropTable(
+                name: "CashIncomes");
 
             migrationBuilder.DropTable(
                 name: "ValueCharacteristicProducts");
@@ -457,7 +439,7 @@ namespace SaleOfProducts.Migrations
                 name: "NameCharacteristicProducts");
 
             migrationBuilder.DropTable(
-                name: "PurchaseProduct");
+                name: "PurchaseProducts");
 
             migrationBuilder.DropTable(
                 name: "GroupProducts");

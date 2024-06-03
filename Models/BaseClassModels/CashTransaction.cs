@@ -7,6 +7,9 @@
         public double? Amount { get; set; }
         public string? Description { get; set; }
 
+        // Конструктор по умолчанию
+        public CashTransaction() { }
+
         // Конструктор
         public CashTransaction(double amount, string description)
         {

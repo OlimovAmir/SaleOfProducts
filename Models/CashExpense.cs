@@ -14,6 +14,11 @@ namespace SaleOfProducts.Models
             ExpenseItems = new List<ExpenseItem>();
         }
 
+        public CashExpense()
+        {
+            
+        }
+
         public override string ToString()
         {
             return $"{base.ToString()}, Categories: {string.Join(", ", ExpenseItems.Select(e => e.Name))}";

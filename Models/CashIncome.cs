@@ -14,7 +14,13 @@ namespace SaleOfProducts.Models
         // Конструктор
         public CashIncome(double amount, string description) : base(amount, description)
         {
-            IncomeItems = new List<IncomeItem>();
+            
+        }
+
+        // Конструктор по умолчанию
+        public CashIncome()
+        {
+            
         }
 
         public override string ToString()

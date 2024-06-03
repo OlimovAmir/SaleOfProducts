@@ -50,13 +50,8 @@
         // Метод для вывода общего баланса (разницы между приходами и расходами)
         public void DisplayBalance()
         {
-            double totalIncome = IncomeRecords.Sum(record => record.Amount);
-            double totalExpense = ExpenseRecords.Sum(record => record.Amount);
-            double balance = totalIncome - totalExpense;
-
-            Console.WriteLine($"Total Income: {totalIncome}");
-            Console.WriteLine($"Total Expense: {totalExpense}");
-            Console.WriteLine($"Balance: {balance}");
+           
+           
         }
     }
 }

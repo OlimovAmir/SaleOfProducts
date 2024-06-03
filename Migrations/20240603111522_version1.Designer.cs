@@ -12,7 +12,7 @@ using SaleOfProducts.Infrastructure;
 namespace SaleOfProducts.Migrations
 {
     [DbContext(typeof(MemoryContext))]
-    [Migration("20240526125724_version1")]
+    [Migration("20240603111522_version1")]
     partial class version1
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace SaleOfProducts.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -38,21 +38,6 @@ namespace SaleOfProducts.Migrations
                     b.HasIndex("ExpenseItemsId");
 
                     b.ToTable("CashExpenseExpenseItem");
-                });
-
-            modelBuilder.Entity("CashIncomeIncomeItem", b =>
-                {
-                    b.Property<Guid>("CashIncomeId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("IncomeItemsId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("CashIncomeId", "IncomeItemsId");
-
-                    b.HasIndex("IncomeItemsId");
-
-                    b.ToTable("CashIncomeIncomeItem");
                 });
 
             modelBuilder.Entity("GroupProductNameCharacteristicProduct", b =>
@@ -91,17 +76,16 @@ namespace SaleOfProducts.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<double>("Amount")
+                    b.Property<double?>("Amount")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Guid>("ExpenseItemId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("TransactionDate")
+                    b.Property<DateTime?>("TransactionDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -115,17 +99,19 @@ namespace SaleOfProducts.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<double>("Amount")
+                    b.Property<double?>("Amount")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid>("ExpenseItemId")
+                    b.Property<Guid?>("ExpenseItemId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("TransactionDate")
+                    b.Property<string>("FromWhom")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("TransactionDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -238,11 +224,16 @@ namespace SaleOfProducts.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("CashIncomeId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CashIncomeId");
 
                     b.ToTable("IncomeItems");
                 });
@@ -324,6 +315,10 @@ namespace SaleOfProducts.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
+                    b.Property<string>("PropertyGroup")
+                        .IsRequired()
+                        .HasColumnType("jsonb");
+
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -344,7 +339,7 @@ namespace SaleOfProducts.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("PurchaseProduct");
+                    b.ToTable("PurchaseProducts");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Supplier", b =>
@@ -450,21 +445,6 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CashIncomeIncomeItem", b =>
-                {
-                    b.HasOne("SaleOfProducts.Models.CashIncome", null)
-                        .WithMany()
-                        .HasForeignKey("CashIncomeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SaleOfProducts.Models.IncomeItem", null)
-                        .WithMany()
-                        .HasForeignKey("IncomeItemsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GroupProductNameCharacteristicProduct", b =>
                 {
                     b.HasOne("SaleOfProducts.Models.GroupProduct", null)
@@ -504,6 +484,17 @@ namespace SaleOfProducts.Migrations
                         .IsRequired();
 
                     b.Navigation("Position");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.IncomeItem", b =>
+                {
+                    b.HasOne("SaleOfProducts.Models.CashIncome", "CashIncome")
+                        .WithMany("IncomeItems")
+                        .HasForeignKey("CashIncomeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CashIncome");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.Product", b =>
@@ -549,6 +540,11 @@ namespace SaleOfProducts.Migrations
                     b.HasOne("SaleOfProducts.Models.PurchaseProduct", null)
                         .WithMany("ValueCharacteristicProducts")
                         .HasForeignKey("PurchaseProductId");
+                });
+
+            modelBuilder.Entity("SaleOfProducts.Models.CashIncome", b =>
+                {
+                    b.Navigation("IncomeItems");
                 });
 
             modelBuilder.Entity("SaleOfProducts.Models.PurchaseProduct", b =>
