@@ -8,21 +8,33 @@ namespace SaleOfProducts.Services
     public class CashIncomeService : ICashIncomeService
     {
         IPostgreSQLRepository<CashIncome> _repository;
+        private readonly ILogger<CashIncome> _logger;
 
-        public CashIncomeService(IPostgreSQLRepository<CashIncome> repository)
+        public CashIncomeService(IPostgreSQLRepository<CashIncome> repository, ILogger<CashIncome> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
         public string Create(CashIncome item)
         {
             if (string.IsNullOrEmpty(item.Description))
             {
+                _logger.LogWarning("Attempted to create a CashIncome with an empty description.");
                 return "The name cannot be empty";
             }
             else
             {
-                _repository.Create(item);
-                return $"Created new item with this ID: {item.Id}";
+                try
+                {
+                    _repository.Create(item);
+                    _logger.LogInformation($"Created new item with this ID: {item.Id}");
+                    return $"Created new item with this ID: {item.Id}";
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "An error occurred while creating a new CashIncome item.");
+                    return "An error occurred while creating the item.";
+                }
             }
         }
 
