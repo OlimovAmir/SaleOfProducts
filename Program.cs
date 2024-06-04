@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using SaleOfProducts.Models;
+using Microsoft.Extensions.Logging;
 
 namespace SaleOfProducts
 {
@@ -19,6 +20,13 @@ namespace SaleOfProducts
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Host.ConfigureLogging(logging =>
+            {
+                logging.ClearProviders();
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Information);
+            });
 
             builder.Services.AddMyAuth();
 

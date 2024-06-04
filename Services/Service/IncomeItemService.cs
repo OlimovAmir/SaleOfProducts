@@ -9,6 +9,7 @@ namespace SaleOfProducts.Services.Service
     {
         IPostgreSQLRepository<IncomeItem> _repository;
 
+
         public IncomeItemService(IPostgreSQLRepository<IncomeItem> repository)
         {
             _repository = repository;

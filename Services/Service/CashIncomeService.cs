@@ -17,23 +17,25 @@ namespace SaleOfProducts.Services
         }
         public string Create(CashIncome item)
         {
+            _logger.LogInformation("Starting creation of a new CashIncome item.");
+
             if (string.IsNullOrEmpty(item.Description))
             {
-                _logger.LogWarning("Attempted to create a CashIncome with an empty description.");
-                return "The name cannot be empty";
+                _logger.LogWarning("Failed to create CashIncome item: Description is empty.");
+                return "The description cannot be empty";
             }
             else
             {
                 try
                 {
                     _repository.Create(item);
-                    _logger.LogInformation($"Created new item with this ID: {item.Id}");
+                    _logger.LogInformation($"Successfully created new CashIncome item with ID: {item.Id}");
                     return $"Created new item with this ID: {item.Id}";
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "An error occurred while creating a new CashIncome item.");
-                    return "An error occurred while creating the item.";
+                    _logger.LogError(ex, "Failed to create CashIncome item.");
+                    throw;
                 }
             }
         }
