@@ -6,7 +6,7 @@ namespace SaleOfProducts.Models
     {
 
         public string? FromWhom { get; set; }
-        public Guid? ExpenseItemId { get; set; } // Идентификатор должности
+        public Guid? CashIncomeId { get; set; } // Идентификатор должности
         public ICollection<IncomeItem>? IncomeItems { get; set; } // Ссылка на список групп расходов
 
 
