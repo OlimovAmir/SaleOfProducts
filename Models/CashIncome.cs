@@ -7,9 +7,7 @@ namespace SaleOfProducts.Models
 
         public string? FromWhom { get; set; }
         public Guid? CashIncomeId { get; set; } // Идентификатор должности
-        public ICollection<IncomeItem>? IncomeItems { get; set; } // Ссылка на список групп расходов
-
-
+        public ICollection<IncomeItem>? IncomeItems { get; set; } // Ссылка на список групп прихода
 
         // Конструктор
         public CashIncome(double amount, string description) : base(amount, description)
@@ -20,7 +18,7 @@ namespace SaleOfProducts.Models
         // Конструктор по умолчанию
         public CashIncome()
         {
-            
+            IncomeItems = new List<IncomeItem>();
         }
 
         public override string ToString()

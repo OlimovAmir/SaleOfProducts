@@ -109,28 +109,7 @@ namespace SaleOfProducts.Infrastructure
             modelBuilder.Entity<NameCharacteristicProduct>()
                 .HasMany(ncp => ncp.GroupProducts)
                 .WithMany(p => p.NameCharacteristicProducts)
-                .UsingEntity(j => j.ToTable("Product_NameCharacteristicProduct"));
-
-
-            // Настройка для связи NameCharacteristicProduct и ValueCharacteristicProduct
-
-
-            //     modelBuilder.Entity<NameValueCharacteristicProduct>()
-            //.ToTable("NameValueCharacteristicProduct")
-            //.HasKey(nvcp => new { nvcp.NameCharacteristicProductId, nvcp.ValueCharacteristicProductId });
-
-            //     modelBuilder.Entity<NameValueCharacteristicProduct>()
-            //         .HasOne(nvcp => nvcp.NameCharacteristicProduct)
-            //         .WithMany(ncp => ncp.NameValueCharacteristicProducts)
-            //         .HasForeignKey(nvcp => nvcp.NameCharacteristicProductId);
-
-            //     modelBuilder.Entity<NameValueCharacteristicProduct>()
-            //         .HasOne(nvcp => nvcp.ValueCharacteristicProduct)
-            //         .WithMany(vcp => vcp.NameValueCharacteristicProducts)
-            //         .HasForeignKey(nvcp => nvcp.ValueCharacteristicProductId);
-
-
-            
+                .UsingEntity(j => j.ToTable("Product_NameCharacteristicProduct"));            
 
             
 
