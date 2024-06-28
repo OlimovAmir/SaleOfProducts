@@ -11,11 +11,15 @@ namespace SaleOfProducts.Models
         public Guid? CashIncomeId { get; set; } // Внешний ключ на CashIncome
         [JsonIgnore]
         public CashIncome? CashIncome { get; set; } // Навигационное свойство на CashIncome
+
+
         // Constructor
         public IncomeItem(string name)
         {
             Name = name;
         }
+
+
 
         public IncomeItem() { }
 
