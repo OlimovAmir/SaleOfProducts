@@ -25,7 +25,7 @@ namespace SaleOfProducts.Services.Service
                 return "The name cannot be empty";
             }
 
-            if (item.CashIncomeId == Guid.Empty)
+            if (item.Id == Guid.Empty)
             {
                 _logger.LogWarning("Failed to create IncomeItem: CashIncomeId is empty.");
                 return "The CashIncomeId cannot be empty";
