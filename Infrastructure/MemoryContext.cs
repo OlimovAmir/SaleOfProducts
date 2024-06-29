@@ -84,13 +84,13 @@ namespace SaleOfProducts.Infrastructure
              .HasKey(e => e.Id); // Указание первичного ключа для IncomeItem
 
             modelBuilder.Entity<CashIncome>()
-          .HasKey(ci => ci.CashIncomeId); // Установка первичного ключа
+          .HasKey(ci => ci.Id); // Установка первичного ключа
 
 
             modelBuilder.Entity<IncomeItem>()
-            .HasOne(ii => ii.CashIncome)
-            .WithMany(ci => ci.IncomeItems)
-            .HasForeignKey(ii => ii.CashIncomeId);
+            .HasMany(i => i.CashIncomes)
+            .WithOne(ci => ci.IncomeItem)
+            .HasForeignKey(ci => ci.IncomeItemId);
 
 
 

@@ -6,12 +6,17 @@ namespace SaleOfProducts.Models
     {
 
         public string? FromWhom { get; set; }
-        public Guid? CashIncomeId { get; set; } // Идентификатор должности
+        public Guid IncomeItemId { get; set; }
+        public IncomeItem IncomeItem { get; set; }
+
         public ICollection<IncomeItem>? IncomeItems { get; set; } // Ссылка на список групп прихода
 
         // Конструктор
         public CashIncome(double amount, string description) : base(amount, description)
         {
+            Id = Guid.NewGuid();
+            Amount = amount;
+            Description = description;
             IncomeItems = new List<IncomeItem>();
         }
 
@@ -20,6 +25,7 @@ namespace SaleOfProducts.Models
         // Конструктор по умолчанию
         public CashIncome()
         {
+            Id = Guid.NewGuid();
             IncomeItems = new List<IncomeItem>();
         }
 

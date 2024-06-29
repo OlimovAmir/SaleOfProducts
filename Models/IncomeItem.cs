@@ -7,21 +7,18 @@ namespace SaleOfProducts.Models
     {        
         public string Name { get; set; }
 
-        [JsonIgnore]
-        public Guid? CashIncomeId { get; set; } // Внешний ключ на CashIncome
-        [JsonIgnore]
-        public CashIncome? CashIncome { get; set; } // Навигационное свойство на CashIncome
-
+        public ICollection<CashIncome> CashIncomes { get; set; } = new List<CashIncome>();
 
         // Constructor
         public IncomeItem(string name)
         {
+            
             Name = name;
         }
 
 
 
-        public IncomeItem() { }
+        public IncomeItem() {  }
 
         public override string ToString()
         {

@@ -7,7 +7,7 @@ namespace SaleOfProducts.Services
 {
     public class CashIncomeService : ICashIncomeService
     {
-        IPostgreSQLRepository<CashIncome> _repository;
+        IPostgreSQLRepository<CashIncome> _repository;        
         private readonly ILogger<CashIncome> _logger;
 
         public CashIncomeService(IPostgreSQLRepository<CashIncome> repository, ILogger<CashIncome> logger)
