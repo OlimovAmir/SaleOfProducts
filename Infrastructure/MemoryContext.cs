@@ -92,8 +92,6 @@ namespace SaleOfProducts.Infrastructure
             .WithOne(ci => ci.IncomeItem)
             .HasForeignKey(ci => ci.IncomeItemId);
 
-
-
             //--------------------------------------------------------------------------------------
 
             modelBuilder.Entity<GroupProduct>()

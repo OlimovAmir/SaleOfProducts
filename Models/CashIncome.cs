@@ -4,7 +4,7 @@ namespace SaleOfProducts.Models
 {
     public class CashIncome : CashTransaction
     {
-
+        public override Guid Id { get; set; } = Guid.NewGuid();
         public string? FromWhom { get; set; }
         public Guid IncomeItemId { get; set; }
         public IncomeItem IncomeItem { get; set; }

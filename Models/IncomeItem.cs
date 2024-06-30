@@ -4,7 +4,8 @@ using System.Text.Json.Serialization;
 namespace SaleOfProducts.Models
 {
     public class IncomeItem : BaseEntity
-    {        
+    {
+        public override Guid Id { get; set; } = Guid.NewGuid();
         public string Name { get; set; }
 
         public ICollection<CashIncome> CashIncomes { get; set; } = new List<CashIncome>();
