@@ -6,6 +6,6 @@
         public double Amount { get; set; }
         public string Description { get; set; }
         public string FromWhom { get; set; }
-        public string IncomeItemName { get; set; }
+        public Guid incomeItemId { get; set; }
     }
 }
