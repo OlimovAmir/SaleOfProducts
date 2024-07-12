@@ -19,6 +19,18 @@ namespace SaleOfProducts
     {
         public static void Main(string[] args)
         {
+            try {
+               // int a = "34";
+                
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex);
+                
+            }
+            finally{
+
+            }
+            
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Host.ConfigureLogging(logging =>

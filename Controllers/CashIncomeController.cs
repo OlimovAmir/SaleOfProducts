@@ -30,14 +30,14 @@ namespace SaleOfProducts.Controllers
         {
             return _service.GetById(id);
         }
-
-        [HttpPost("Create")]
+        /*
+        [HttpPost("Create")]/*
         public IActionResult Post([FromBody] CashIncomeCreateDto dto)
         {
             // Найти или создать IncomeItem
-            var incomeItem = _incomeItemRepository.GetAll()
-                .FirstOrDefault(i => i.Name == dto.IncomeItemName);
-
+            //var incomeItem = _incomeItemRepository.GetAll()
+            //    .FirstOrDefault(i => i.Name == dto.IncomeItemName);
+            /*
             if (incomeItem == null)
             {
                 incomeItem = new IncomeItem { Name = dto.IncomeItemName };
@@ -56,19 +56,9 @@ namespace SaleOfProducts.Controllers
             };
 
             var result = _service.Create(cashIncome);
-            return Ok(result);
+            return Ok(result);*/
         }
-
-        [HttpPut("Update")]
-        public string Put([FromQuery] Guid id, [FromBody] CashIncome item)
-        {
-            return _service.Update(id, item);
-        }
-
-        [HttpDelete("Delete")]
-        public string Delete([FromQuery] Guid id)
-        {
-            return _service.Delete(id);
-        }
-    }
+        
+        
+    
 }
